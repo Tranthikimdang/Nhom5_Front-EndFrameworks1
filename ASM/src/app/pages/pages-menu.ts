@@ -10,6 +10,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'home-outline',
     link: '/pages/dashboard',
   },
+<<<<<<< HEAD
   {
     title: 'Products',
     icon: 'home-outline',
@@ -40,4 +41,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'home-outline',
     link: '/pages/statistics',
   },
+=======
+>>>>>>> main
 ];
