@@ -9,35 +9,36 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Dashboard',
     icon: 'home-outline',
     link: '/pages/dashboard',
+},
+  {
+      title: 'Products',
+      icon: 'cube-outline',
+      link: '/pages/products',
   },
   {
-    title: 'Products',
-    icon: 'home-outline',
-    link: '/pages/products',
+      title: 'Categories',
+      icon: 'layers-outline',
+      link: '/pages/categories',
   },
   {
-    title: 'Categories',
-    icon: 'home-outline',
-    link: '/pages/categories',
+      title: 'Users',
+      icon: 'people-outline',
+      link: '/pages/users',
   },
   {
-    title: 'Users',
-    icon: 'person-outline',
-    link: '/pages/users',
+      title: 'Orders',
+      icon: 'clipboard-outline',
+      link: '/pages/orders',
   },
   {
-    title: 'Orders',
-    icon: 'home-outline',
-    link: '/pages/orders',
+      title: 'Comments',
+      icon: 'message-square',
+      link: '/pages/comments',
   },
   {
-    title: 'Comments',
-    icon: 'home-outline',
-    link: '/pages/comments',
-  },
-  {
-    title: 'Statistics',
-    icon: 'home-outline',
-    link: '/pages/statistics',
-  },
+      title: 'Statistics',
+      icon: 'bar-chart-outline',
+      link: '/pages/statistics',
+  }
+
 ];
