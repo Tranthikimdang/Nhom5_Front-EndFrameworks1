@@ -6,6 +6,12 @@ import {PagesComponent} from './pages.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {PagesRoutingModule} from './pages-routing.module';
 import {PaginatorModule} from "../@theme/components/paginator/paginator.module";
+import { ProductsComponent } from './products/products.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { UsersComponent } from './users/users.component';
+import { OrdersComponent } from './orders/orders.component';
+import { CommentsComponent } from './comments/comments.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 @NgModule({
   imports: [
@@ -17,6 +23,12 @@ import {PaginatorModule} from "../@theme/components/paginator/paginator.module";
   ],
   declarations: [
     PagesComponent,
+    ProductsComponent,
+    CategoriesComponent,
+    UsersComponent,
+    OrdersComponent,
+    CommentsComponent,
+    StatisticsComponent,
   ],
   providers: []
 })
