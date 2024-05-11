@@ -17,7 +17,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Categories',
-    icon: 'home-outline',
+    icon: 'cate-outline',
     link: '/pages/categories',
   },
   {
