@@ -28,7 +28,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
     UsersComponent,
     OrdersComponent,
     CommentsComponent,
-    StatisticsComponent,
+    StatisticsComponent
   ],
   providers: []
 })
