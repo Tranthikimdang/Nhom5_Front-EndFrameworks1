@@ -10,7 +10,7 @@ import { ProductsComponent } from './products/products.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { UsersComponent } from './users/users.component';
 import { OrdersComponent } from './orders/orders.component';
-import { CommentsComponent } from './comments/comments.component';
+import { CommentsHistoryModule } from './comments-history/comments-history.module';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { CommentsModule } from './comments/comments.module';
 
@@ -22,6 +22,7 @@ import { CommentsModule } from './comments/comments.module';
     NbMenuModule,
     PaginatorModule,
     CommentsModule,
+    CommentsHistoryModule,
   ],
   declarations: [
     PagesComponent,

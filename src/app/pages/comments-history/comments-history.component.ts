@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Icomments } from '../../entities/comments';
-import { Router } from '@angular/router';
 @Component({
-  selector: 'app-comments',
-  templateUrl: './comments.component.html',
-  styleUrls: ['./comments.component.scss'],
+  selector: 'app-comments-history',
+  templateUrl: './comments-history.component.html',
+  styleUrls: ['./comments-history.component.scss'],
 })
-export class CommentsComponent implements OnInit {
-  [x: string]: any;
+export class CommentsHistoryComponent implements OnInit {
   defaultComments: Icomments[] = [
     {
       commentsId: 1,
@@ -63,18 +61,10 @@ export class CommentsComponent implements OnInit {
   comments: Icomments[] = [];
   filterValue = '';
 
-  constructor(
-    private router: Router,
-    ) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.comments = this.defaultComments;
-  }
-  navigateToDestination(): void {
-    console.log("hello");
-    
-    // Chuyển tới route mong muốn
-    this.router.navigateByUrl('pages/comments-history');
   }
 
   filter() {
