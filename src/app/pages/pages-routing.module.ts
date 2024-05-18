@@ -54,7 +54,7 @@ const routes: Routes = [
       {
         path: 'statistics',
         component: StatisticsComponent,
-        data: { breadcrumb: 'users' },
+        data: { breadcrumb: 'statistics' },
       },
     ],
   },
