@@ -34,6 +34,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
       title: 'Comments',
       icon: 'message-square',
       link: '/pages/comments',
+    //   children:[
+    //     {
+    //         title: 'comments-history',
+    //         icon: 'clipboard-outline',
+    //         link: '/pages/comments-history',
+    //     },
+    //   ]
   },
   {
       title: 'Statistics',
