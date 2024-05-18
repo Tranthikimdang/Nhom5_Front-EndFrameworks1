@@ -30,16 +30,8 @@ import { CommentsModule } from './comments/comments.module';
     CategoriesComponent,
     UsersComponent,
     OrdersComponent,
-
     // CommentsComponent,
     StatisticsComponent,
-
-    CommentsComponent,
-    StatisticsComponent
-
-    // CommentsComponent,
-    StatisticsComponent,
-
   ],
   providers: [],
 })

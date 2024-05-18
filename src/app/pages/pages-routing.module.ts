@@ -13,56 +13,6 @@ import { CommentsHistoryComponent } from './comments-history/comments-history.co
 
 
 
-const routes: Routes = [
-  {
-    path: '',
-    component: PagesComponent,
-    children: [
-      {
-        path: 'dashboard',
-        component: DashboardComponent,
-        data: { breadcrumb: 'Dashboard' },
-      },
-      {
-        path: 'products',
-        component: ProductsComponent,
-        data: { breadcrumb: 'products' },
-      },
-      {
-        path: 'categories',
-        component: CategoriesComponent,
-        data: { breadcrumb: 'categories' },
-      },
-      {
-        path: 'users',
-        component: UsersComponent,
-        data: { breadcrumb: 'users' },
-      },
-      {
-        path: 'orders',
-        component: OrdersComponent,
-        data: { breadcrumb: 'orders' },
-      },
-      {
-        path: 'comments',
-        component: CommentsComponent,
-        data: { breadcrumb: 'comments' },
-      },
-      {
-        path: 'comments-history',
-        component: CommentsHistoryComponent,
-        data: { breadcrumb: 'comments-history' },
-      },
-      {
-        path: 'statistics',
-        component: StatisticsComponent,
-        data: { breadcrumb: 'statistics' },
-      },
-    ],
-  },
-];
-
-
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
@@ -96,6 +46,11 @@ const routes: Routes = [{
       path: 'comments',
       component: CommentsComponent,
       data: {breadcrumb: 'comments'},
+    },
+    {
+      path: 'comments-history',
+      component: CommentsHistoryComponent,
+      data: { breadcrumb: 'comments-history' },
     },
     {
       path: 'statistics',
