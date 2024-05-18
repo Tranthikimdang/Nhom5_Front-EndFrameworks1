@@ -40,290 +40,45 @@
           </th>
           <th>Code</th>
           <th>Images</th>
-          <th>Product</th>
-          <th>Progress</th>
-          <th>Amount</th>
-          <th>Edit</th>
+          <th>Client</th>
+          <th>Mail</th>
+          <th>Date</th>
+          <th>Order</th>
+          <th>Payment</th>
+          <th>Delivery</th>
+          <th>Operation</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor='let o of orders'>
           <td>
             <div class="form-check">
             <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
             </div>
           </td>
-          <td>1</td>
+          <td>{{o.code}}</td>
           <td class="py-1">
-            <img src="https://anhquanbakery.com/uploads/product/full_v2ah7y94-1274-hamburger-thit-nuong.jpg" alt="image" width="70px">
+            <img src="{{o.image}}" alt="image" width="70px">
           </td>
-          <td>Herman Beck</td>
-          <td>$ 77.99</td>
-          <td>July 1, 2015</td>
+          <td>{{o.client}}</td>
+          <td>{{o.mailUser}}</td>
+          <td>{{o.date}}</td>
+          <td>{{o.order}}</td>
+          <td><button type="button" class="btn btn-warning btn-sm">{{o.payment}}</button></td>
+          <td>{{o.delivery}}</td>
           <td>
-            <button type="button" class="btn btn-outline-secondary" style="margin-right: 10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            <button type="button" class="btn btn-outline-primary" style="margin-right: 10px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
               </svg>
+              Edit
             </button>
-            <button type="button" class="btn btn-outline-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+            <button type="button" class="btn btn-outline-danger">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
               </svg>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="form-check">
-            <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
-            </div>
-          </td>
-          <td>2</td>
-          <td class="py-1">
-            <img src="https://anhquanbakery.com/uploads/product/full_duak5m29-1272-banh-mi-ca-rim.jpg" alt="image" width="70px">
-          </td>
-          <td>Messsy Adam</td>
-          <td>$245.30</td>
-          <td>July 1, 2015</td>
-          <td>
-            <button type="button" class="btn btn-outline-secondary" style="margin-right: 10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-              </svg>
-            </button>
-            <button type="button" class="btn btn-outline-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-              </svg>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="form-check">
-            <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
-            </div>
-          </td>
-          <td>3</td>
-          <td class="py-1">
-            <img src="https://anhquanbakery.com/uploads/product/full_0ajcogvh-935-bong-lan-trung-muoi-ga-cay-vuong.png" alt="image" width="70px">
-          </td>
-          <td>John Richards</td>
-          <td>$138.00</td>
-          <td>Apr 12, 2015</td>
-          <td>
-            <button type="button" class="btn btn-outline-secondary" style="margin-right: 10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-              </svg>
-            </button>
-            <button type="button" class="btn btn-outline-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-              </svg>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="form-check">
-            <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
-            </div>
-          </td>
-          <td>4</td>
-          <td class="py-1">
-            <img src="https://anhquanbakery.com/uploads/product/full_q1iryasp-1271-banh-mi-cha-bong-dam-bong.jpg" alt="image" width="70px">
-          </td>
-          <td>Peter Meggik</td>
-          <td>$ 77.99</td>
-          <td>May 15, 2015</td>
-          <td>
-            <button type="button" class="btn btn-outline-secondary" style="margin-right: 10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-              </svg>
-            </button>
-            <button type="button" class="btn btn-outline-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-              </svg>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="form-check">
-            <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
-            </div>
-          </td>
-          <td>5</td>
-          <td class="py-1">
-            <img src="https://anhquanbakery.com/uploads/product/full_bm8ewt13-1270-banh-mi-op-la-2-trung.jpg" alt="image" width="70px">
-          </td>
-          <td>Edward</td>
-          <td>$ 160.25</td>
-          <td>May 03, 2015</td>
-          <td>
-            <button type="button" class="btn btn-outline-secondary" style="margin-right: 10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-              </svg>
-            </button>
-            <button type="button" class="btn btn-outline-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-              </svg>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="form-check">
-            <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
-            </div>
-          </td>
-          <td>6</td>
-          <td class="py-1">
-            <img src="https://anhquanbakery.com/uploads/product/full_bm8ewt13-1270-banh-mi-op-la-2-trung.jpg" alt="image" width="70px">
-          </td>
-          <td>John Doe</td>
-          <td>$ 123.21</td>
-          <td>April 05, 2015</td>
-          <td>
-            <button type="button" class="btn btn-outline-secondary" style="margin-right: 10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-              </svg>
-            </button>
-            <button type="button" class="btn btn-outline-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-              </svg>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="form-check">
-            <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
-            </div>
-          </td>
-          <td>7</td>
-          <td class="py-1">
-            <img src="https://anhquanbakery.com/uploads/product/full_bm8ewt13-1270-banh-mi-op-la-2-trung.jpg" alt="image" width="70px">
-          </td>
-          <td>Henry Tom</td>
-          <td>$ 150.00</td>
-          <td>June 16, 2015</td>
-          <td>
-            <button type="button" class="btn btn-outline-secondary" style="margin-right: 10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-              </svg>
-            </button>
-            <button type="button" class="btn btn-outline-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-              </svg>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="form-check">
-            <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
-            </div>
-          </td>
-          <td>1</td>
-          <td class="py-1">
-            <img src="https://anhquanbakery.com/uploads/product/full_v2ah7y94-1274-hamburger-thit-nuong.jpg" alt="image" width="70px">
-          </td>
-          <td>Herman Beck</td>
-          <td>$ 77.99</td>
-          <td>July 1, 2015</td>
-          <td>
-            <button type="button" class="btn btn-outline-secondary" style="margin-right: 10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-              </svg>
-            </button>
-            <button type="button" class="btn btn-outline-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-              </svg>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="form-check">
-            <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
-            </div>
-          </td>
-          <td>2</td>
-          <td class="py-1">
-            <img src="https://anhquanbakery.com/uploads/product/full_duak5m29-1272-banh-mi-ca-rim.jpg" alt="image" width="70px">
-          </td>
-          <td>Messsy Adam</td>
-          <td>$245.30</td>
-          <td>July 1, 2015</td>
-          <td>
-            <button type="button" class="btn btn-outline-secondary" style="margin-right: 10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-              </svg>
-            </button>
-            <button type="button" class="btn btn-outline-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-              </svg>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="form-check">
-            <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
-            </div>
-          </td>
-          <td>3</td>
-          <td class="py-1">
-            <img src="https://anhquanbakery.com/uploads/product/full_0ajcogvh-935-bong-lan-trung-muoi-ga-cay-vuong.png" alt="image" width="70px">
-          </td>
-          <td>John Richards</td>
-          <td>$138.00</td>
-          <td>Apr 12, 2015</td>
-          <td>
-            <button type="button" class="btn btn-outline-secondary" style="margin-right: 10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-              </svg>
-            </button>
-            <button type="button" class="btn btn-outline-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-              </svg>
+              Delete
             </button>
           </td>
         </tr>
