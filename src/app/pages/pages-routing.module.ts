@@ -11,7 +11,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CommentsHistoryComponent } from './comments-history/comments-history.component';
 
-<<<<<<< HEAD
+
+
 const routes: Routes = [
   {
     path: '',
@@ -55,12 +56,12 @@ const routes: Routes = [
       {
         path: 'statistics',
         component: StatisticsComponent,
-        data: { breadcrumb: 'users' },
+        data: { breadcrumb: 'statistics' },
       },
     ],
   },
 ];
-=======
+
 
 const routes: Routes = [{
   path: '',
@@ -103,7 +104,6 @@ const routes: Routes = [{
     },
   ],
 }];
->>>>>>> main
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
