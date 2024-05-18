@@ -30,8 +30,13 @@ import { CommentsModule } from './comments/comments.module';
     CategoriesComponent,
     UsersComponent,
     OrdersComponent,
+<<<<<<< HEAD
     // CommentsComponent,
     StatisticsComponent,
+=======
+    CommentsComponent,
+    StatisticsComponent
+>>>>>>> main
   ],
   providers: [],
 })

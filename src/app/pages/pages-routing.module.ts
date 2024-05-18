@@ -11,6 +11,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CommentsHistoryComponent } from './comments-history/comments-history.component';
 
+<<<<<<< HEAD
 const routes: Routes = [
   {
     path: '',
@@ -59,6 +60,50 @@ const routes: Routes = [
     ],
   },
 ];
+=======
+
+const routes: Routes = [{
+  path: '',
+  component: PagesComponent,
+  children: [
+    {
+      path: 'dashboard',
+      component: DashboardComponent,
+      data: {breadcrumb: 'Dashboard'},
+    },
+    {
+      path: 'products',
+      component: ProductsComponent,
+      data: {breadcrumb: 'products'},
+    },
+    {
+      path: 'categories',
+      component: CategoriesComponent,
+      data: {breadcrumb: 'categories'},
+    },
+    {
+      path: 'users',
+      component: UsersComponent,
+      data: {breadcrumb: 'users'},
+    },
+    {
+      path: 'orders',
+      component: OrdersComponent,
+      data: {breadcrumb: 'orders'},
+    },
+    {
+      path: 'comments',
+      component: CommentsComponent,
+      data: {breadcrumb: 'comments'},
+    },
+    {
+      path: 'statistics',
+      component: StatisticsComponent,
+      data: {breadcrumb: 'statistics'},
+    },
+  ],
+}];
+>>>>>>> main
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
