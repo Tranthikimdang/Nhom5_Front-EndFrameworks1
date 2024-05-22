@@ -37,8 +37,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      // this.auth.login(this.loginForm.value)
-      //   .pipe(
       this.spinner.show();
       this.auth.login(this.loginForm.value).pipe().subscribe(
         {
@@ -46,6 +44,9 @@ export class LoginComponent implements OnInit {
           error: this.handleLoginFailed.bind(this),
           complete: () => {
             this.spinner.hide();
+          }
+        }
+      )
     }
   }
 
