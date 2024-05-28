@@ -13,6 +13,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { CommentsHistoryModule } from './comments-history/comments-history.module';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { CommentsModule } from './comments/comments.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { CommentsModule } from './comments/comments.module';
     PaginatorModule,
     CommentsModule,
     CommentsHistoryModule,
+    FormsModule
   ],
   declarations: [
     PagesComponent,

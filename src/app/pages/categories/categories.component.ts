@@ -1,16 +1,12 @@
 import { Component ,OnInit } from '@angular/core';
 import {Category} from './categories'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  constructor() { }
-
-  ngOnInit(){
-    this.renderCategories();
-  }
 
   categories : Category[] =[
     {
@@ -31,10 +27,35 @@ export class CategoriesComponent implements OnInit {
       "cateName": "Nước ngọt",
     }
   ]
-  cateoryHtml: string = ''; 
+  
+  cate: Category[] = [];
+  filterValue = '';
 
-  renderCategories() {
+  constructor(
+    private router: Router,
+    ) {}
 
+  ngOnInit(): void {
+    this.cate = this.categories;
+  }
+  navigateToDestination(): void {
+    this.router.navigateByUrl('pages/categories');
+  }
+
+  filter() {
+    // Kiểm tra filter trống
+    if (!this.filterValue) {
+      this.categories = this.cate;      // Hiển thị lại danh sách gốc
+      return;
+    }
+
+    // Lọc sản phẩm
+    const filterText = this.filterValue.toLowerCase();
+    console.log(filterText);
+
+    this.categories = this.cate.filter((ca) =>
+      ca.cateName.toLowerCase().includes(filterText)
+    );
   }
 
 }
