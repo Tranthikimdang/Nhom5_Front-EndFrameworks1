@@ -1,17 +1,13 @@
 import { Component , OnInit } from '@angular/core';
-import {User} from './user'
+import { User } from './user'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
-  constructor() { }
-
-  ngOnInit(){
-    this.renderUsers();
-  }
+export class UsersComponent implements OnInit { 
 
   users : User[] =[
     {
@@ -38,10 +34,36 @@ export class UsersComponent implements OnInit {
       "email": "ai@fpt.edu.vn",
       "address" : "Can Tho"
     }
-  ]
-  userHtml: string = ''; 
+  ] 
 
-  renderUsers() {
+  userss: User[] = [];
+  filterValue = '';
 
+  constructor(
+    private router: Router,
+    ) {}
+
+  ngOnInit(): void {
+    this.userss = this.users;
+  }
+  navigateToDestination(): void {
+    this.router.navigateByUrl('pages/users');
+  }
+
+  filter() {
+
+    // Kiểm tra filter trống
+    if (!this.filterValue) {
+      this.users = this.userss; // Hiển thị lại danh sách gốc
+      return;
+    }
+
+    // Lọc sản phẩm
+    const filterText = this.filterValue.toLowerCase();
+    console.log(filterText);
+
+    this.users = this.userss.filter((u) =>
+      u.userName.toLowerCase().includes(filterText)
+    );
   }
 }
