@@ -34,18 +34,28 @@ export const MENU_ITEMS: NbMenuItem[] = [
       title: 'Comments',
       icon: 'message-square',
       link: '/pages/comments',
-    //   children:[
-    //     {
-    //         title: 'comments-history',
-    //         icon: 'clipboard-outline',
-    //         link: '/pages/comments-history',
-    //     },
-    //   ]
   },
   {
       title: 'Statistics',
       icon: 'bar-chart-outline',
       link: '/pages/statistics',
-  }
+  },
+  {
+    title: 'Authentication',
+    icon: 'calendar-outline',
+    children:[
+            {
+                title: 'Profile',
+                icon: 'book-outline',
+                link: '/',
+            },
+            {
+              title: 'Log out',
+              icon: 'repeat-outline',
+              link: '/',
+          },
+          
+          ]
+}
 
 ];

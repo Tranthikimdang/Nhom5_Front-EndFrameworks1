@@ -10,7 +10,6 @@ export class ProductsComponent implements OnInit{
   products: Product[] = [
     {
       productID: 1,
-      productCode: "C001",
       productType: "Beverage",
       productName: "Coca Cola",
       imageURL: "https://tea-3.lozi.vn/v1/ship/resized/losupply-ninh-thuan-thanh-pho-phan-rang-thap-cham-ninh-thuan-1648800066330548890-nuoc-ngot-coca-cola-lon-320ml-0-1658896003?w=480&type=o",
@@ -21,7 +20,6 @@ export class ProductsComponent implements OnInit{
   },
   {
       productID: 2,
-      productCode: "C002",
       productType: "Snack",
       productName: "Potato Chips",
       imageURL: "https://m.media-amazon.com/images/I/813axPlVxBL._SX679_.jpg",
@@ -32,7 +30,6 @@ export class ProductsComponent implements OnInit{
   },
   {
       productID: 3,
-      productCode: "C003",
       productType: "Dairy",
       productName: "Milk",
       imageURL: "https://gutafood.vn/wp-content/uploads/2020/09/sua-tuoi-tiet-trung-nguyen-kem-meadow-fresh-hop-1-lit-2-247x296.jpg",
@@ -43,7 +40,6 @@ export class ProductsComponent implements OnInit{
   },
   {
       productID: 4,
-      productCode: "C004",
       productType: "Bakery",
       productName: "Bread",
       imageURL: "https://i5.walmartimages.com/seo/Nature-s-Own-Butterbread-Sliced-White-Bread-Loaf-20-oz_8dcbd46b-895e-4b52-ba78-e9c3ca8d9f7e.8aa84b73b45fed02b8a8433d3cc5d824.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF",
@@ -54,7 +50,6 @@ export class ProductsComponent implements OnInit{
   },
   {
       productID: 5,
-      productCode: "C005",
       productType: "Frozen Food",
       productName: "Pizza",
       imageURL: "https://thucphamsieuthi.vn/wp-content/uploads/2021/08/banh-pizza-hai-san-dong-lanh.jpg",
@@ -65,7 +60,6 @@ export class ProductsComponent implements OnInit{
   },
   {
       productID: 6,
-      productCode: "C006",
       productType: "Beverage",
       productName: "Orange Juice",
       imageURL: "https://target.scene7.com/is/image/Target/GUEST_2b7f75ea-fbb8-4767-8b1f-6bb809bfe214?wid=1200&hei=1200&qlt=80&fmt=webp",
@@ -76,7 +70,6 @@ export class ProductsComponent implements OnInit{
   },
   {
       productID: 7,
-      productCode: "C007",
       productType: "Snack",
       productName: "Chocolate Bar",
       imageURL: "https://i5.walmartimages.com/seo/Hershey-s-Milk-Chocolate-XL-Candy-Bar-4-4-oz-16-Pieces_068168f9-5e33-4024-86f1-e9f33017b34e.56a0ac3569d24c7b0920d18881b88888.jpeg",
@@ -87,7 +80,6 @@ export class ProductsComponent implements OnInit{
   },
   {
       productID: 8,
-      productCode: "C008",
       productType: "Household",
       productName: "Detergent",
       imageURL: "https://primomart.ph/cdn/shop/products/image_20cb6cf2-c65d-4cbe-afd4-a9c87bb9c797_504x504.jpg?v=1590477093",

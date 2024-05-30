@@ -1,5 +1,5 @@
 import { Component ,OnInit } from '@angular/core';
-import {Category} from './categories'
+import {Category} from '../entities/categories'
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
