@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Icomments } from '../../entities/comments';
+import { Icomments } from '../entities/comments';
 @Component({
   selector: 'app-comments-history',
   templateUrl: './comments-history.component.html',

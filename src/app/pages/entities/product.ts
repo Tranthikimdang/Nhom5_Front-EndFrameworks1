@@ -1,6 +1,5 @@
 export interface Product {
     productID: number;
-    productCode: string;
     productType: string;
     productName: string;
     imageURL: string;

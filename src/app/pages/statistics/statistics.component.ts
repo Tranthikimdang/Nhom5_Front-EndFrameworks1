@@ -3,35 +3,33 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss']
+  styleUrls: ['./statistics.component.scss'],
 })
 export class StatisticsComponent {
   Statistics_Revenue = [
     {
-      cate: 'Nước trái cây',
-      revenue: '30000000',
-      ratio: '2%'
+      categoryCode: '1',
+      categoryName: 'Snack',
+      quantity: '5',
+      highestPrice: '20',
+      lowestPrice: '5',
+      averagePrice: '12',
     },
     {
-      cate: 'Đồ ăn vặt',
-      revenue: '30000000',
-      ratio: '5%'
-    },
-  ]
-
-  Statistics_Client = [
-    {
-      cate: 'Nước trái cây',
-      Customers_number: '30000000',
-      Age: '13-20',
-      Ratio: '5%'
+      categoryCode: '2',
+      categoryName: 'Snack',
+      quantity: '10',
+      highestPrice: '25',
+      lowestPrice: '5',
+      averagePrice: '15',
     },
     {
-      cate: 'Nước giải khát',
-      Customers_number: '378',
-      Age: '13-25',
-      Ratio: '10%'
+      categoryCode: '3',
+      categoryName: 'Snack',
+      quantity: '10',
+      highestPrice: '30',
+      lowestPrice: '7',
+      averagePrice: '18',
     },
-    
-  ]
+  ];
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Icomments } from '../../entities/comments';
+import { Icomments } from '../entities/comments';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-comments',
@@ -71,8 +71,6 @@ export class CommentsComponent implements OnInit {
     this.comments = this.defaultComments;
   }
   navigateToDestination(): void {
-    console.log("hello");
-    
     // Chuyển tới route mong muốn
     this.router.navigateByUrl('pages/comments-history');
   }
