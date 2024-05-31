@@ -17,6 +17,7 @@ import { CreateComponent } from './unit/create/create.component';
 import { EditComponent } from './unit/edit/edit.component';
 import { DeteleComponent } from './unit/detele/detele.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CreateComponent,
     EditComponent,
     DeteleComponent,
+    ProfileComponent,
   ],
   providers: [],
 })
