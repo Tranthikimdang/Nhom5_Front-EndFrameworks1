@@ -10,6 +10,10 @@ import { CommentsComponent } from './comments/comments.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CommentsHistoryComponent } from './comments-history/comments-history.component';
+import { CreateUserComponent } from './unit/user/create-user/create.component';
+import { UpdateUserComponent } from './unit/user/update-user/update.component';
+import { CreateCateComponent } from './unit/category/create-cate/create-cate.component';
+import { UpdateCateComponent } from './unit/category/update-cate/update-cate.component';
 
 
 
@@ -33,9 +37,29 @@ const routes: Routes = [{
       data: {breadcrumb: 'categories'},
     },
     {
+      path: 'add-cate',
+      component: CreateCateComponent,
+      data: {breadcrumb: 'add-cate'},
+    },
+    {
+      path: 'edit-cate',
+      component: UpdateCateComponent,
+      data: {breadcrumb: 'edit-cate'},
+    },
+    {
       path: 'users',
       component: UsersComponent,
       data: {breadcrumb: 'users'},
+    },
+    {
+      path: 'add-user',
+      component: CreateUserComponent,
+      data: {breadcrumb: 'add-user'},
+    },
+    {
+      path: 'edit-user',
+      component: UpdateUserComponent,
+      data: {breadcrumb: 'edit-user'},
     },
     {
       path: 'orders',
@@ -57,6 +81,7 @@ const routes: Routes = [{
       component: StatisticsComponent,
       data: {breadcrumb: 'statistics'},
     },
+    
   ],
 }];
 

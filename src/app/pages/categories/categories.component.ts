@@ -1,17 +1,13 @@
 import { Component ,OnInit } from '@angular/core';
 import {Category} from '../entities/categories'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  constructor() { }
-
-  ngOnInit(){
-    this.renderCategories();
-  }
-
+ 
   categories : Category[] =[
     {
       "cateId": 1,
@@ -30,11 +26,42 @@ export class CategoriesComponent implements OnInit {
       "cateId": 4,
       "cateName": "Nước ngọt",
     }
-  ]
-  cateoryHtml: string = ''; 
+  ] 
+  cate : Category[] = [];
+  filterValue = '';
 
-  renderCategories() {
+  constructor(private router: Router) {}
 
+
+  ngOnInit(): void {
+    this.cate = this.categories;
+  }
+  navigateToDestination(): void {
+    this.router.navigateByUrl('pages/categories');
   }
 
+  filter() {
+    console.log(this.filterValue);
+
+    if (!this.filterValue) {
+      this.categories = this.cate;
+      return;
+    }
+
+    const filterText = this.filterValue.toLowerCase();
+    console.log(filterText);
+
+    this.categories = this.cate.filter((u) =>
+      u.cateName.toLowerCase().includes(filterText)
+    );
+  }
+
+  navigateToAddCate() {
+    this.router.navigate(['/pages/add-cate']); 
+  }
+
+  navigateToEditCate() {
+    this.router.navigate(['/pages/edit-cate']); 
+  }
+  
 }

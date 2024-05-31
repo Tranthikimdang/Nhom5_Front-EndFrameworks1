@@ -3,7 +3,7 @@
     <div class="row mb-2 col-form-label">
       <nav class="navbar navbar-light bg-light">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+          <input type="text" class="form-control" placeholder="Search..." aria-label="" aria-describedby="button-addon2" [(ngModel)]='filterValue' (input)='filter()'>
           <div class="input-group-append" style="margin-right: 10px;">
             <button class="btn btn-primary" type="button" id="button-addon2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -12,7 +12,7 @@
             </button>
           </div>
           <div class="input-group-append">
-            <button type="button" class="btn btn-outline-primary">
+            <button (click)="navigateToAddUser()" type="button" class="btn btn-outline-primary">
               Add
             </button>
           </div>
@@ -44,7 +44,7 @@
                 {{ user.address }}
               </td>
               <td>
-                <button type="button" class="btn btn-outline-primary" style="margin-right: 10px;">
+                <button (click)="navigateToEditUser()" type="button" class="btn btn-outline-primary" style="margin-right: 10px;">
                   Edit
                 </button>
                 <button type="button" class="btn btn-outline-danger">
