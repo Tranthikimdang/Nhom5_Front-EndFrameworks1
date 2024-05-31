@@ -1,14 +1,16 @@
-import {RouterModule, Routes} from '@angular/router';
-import {NgModule} from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 
-import {PagesComponent} from './pages.component';
-import {DashboardComponent} from "./dashboard/dashboard.component";
-import {ProductsComponent} from './products/products.component';
-import {UsersComponent} from './users/users.component';
-import {OrdersComponent} from './orders/orders.component';
-import {CommentsComponent} from './comments/comments.component';
-import {StatisticsComponent} from './statistics/statistics.component';
-import {CategoriesComponent} from './categories/categories.component';
+import { PagesComponent } from './pages.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProductsComponent } from './products/products.component';
+import { UsersComponent } from './users/users.component';
+import { OrdersComponent } from './orders/orders.component';
+import { CommentsComponent } from './comments/comments.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CommentsHistoryComponent } from './comments-history/comments-history.component';
+
 
 
 const routes: Routes = [{
@@ -46,6 +48,11 @@ const routes: Routes = [{
       data: {breadcrumb: 'comments'},
     },
     {
+      path: 'comments-history',
+      component: CommentsHistoryComponent,
+      data: { breadcrumb: 'comments-history' },
+    },
+    {
       path: 'statistics',
       component: StatisticsComponent,
       data: {breadcrumb: 'statistics'},
@@ -57,5 +64,4 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PagesRoutingModule {
-}
+export class PagesRoutingModule {}

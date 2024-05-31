@@ -1,11 +1,8 @@
 export interface Order {
     orderID: number;
-    code: string;
-    image: string;
     client: string;
-    mailUser: string;
+    quantity: number;
     date: string;
-    order: string;
+    valueOrder: string;
     payment: string;
-    delivery: string;
 }

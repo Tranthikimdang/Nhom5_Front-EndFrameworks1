@@ -39,6 +39,23 @@ export const MENU_ITEMS: NbMenuItem[] = [
       title: 'Statistics',
       icon: 'bar-chart-outline',
       link: '/pages/statistics',
-  }
+  },
+  {
+    title: 'Authentication',
+    icon: 'calendar-outline',
+    children:[
+            {
+                title: 'Profile',
+                icon: 'book-outline',
+                link: '/',
+            },
+            {
+              title: 'Log out',
+              icon: 'repeat-outline',
+              link: '/',
+          },
+          
+          ]
+}
 
 ];
