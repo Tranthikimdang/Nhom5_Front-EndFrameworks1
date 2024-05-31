@@ -18,7 +18,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateUserComponent } from './unit/user/create-user/create.component';
 import { UpdateUserComponent } from './unit/user/update-user/update.component';
 import { DeleteComponent } from './unit/user/delete-user/delete.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteCateComponent } from './unit/category/delete-cate/delete-cate.component';
 import { UpdateCateComponent } from './unit/category/update-cate/update-cate.component';
 import { CreateCateComponent } from './unit/category/create-cate/create-cate.component';
@@ -32,7 +32,9 @@ import { CreateCateComponent } from './unit/category/create-cate/create-cate.com
     PaginatorModule,
     CommentsModule,
     CommentsHistoryModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
+
   ],
   declarations: [
     PagesComponent,
