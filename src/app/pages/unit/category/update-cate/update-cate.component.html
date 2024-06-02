@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">Edit Category</h5>
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" [formGroup]="editForm">
+      <div class="form-group mb-3">
+        <label for="userName">Name</label>
+        <input type="text" class="form-control" id="userName" name="userName" formControlName="name">
+        <span class="text-danger"
+          *ngIf="editForm.controls.name.invalid && (editForm.controls.name.dirty || editForm.controls.name.touched)">
+          <span *ngIf="editForm.controls.name.errors?.required">Vui lòng nhập name</span>
+          <span *ngIf="editForm.controls.name.errors?.minlength">Name không quá ngắn (tối thiểu 2 kí tự)</span>
+        </span>
+      </div>
+      <div class="input-group-append ">
+        <button type="button" class="btn btn-outline-primary " style="margin-right: 10px;">
+          Edit
+        </button>
+        <button type="button" class="btn btn-outline-secondary" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

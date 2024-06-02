@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeteleComponent } from './detele.component';
+import { UpdateCateComponent } from './update-cate.component';
 
-describe('DeteleComponent', () => {
-  let component: DeteleComponent;
-  let fixture: ComponentFixture<DeteleComponent>;
+describe('UpdateCateComponent', () => {
+  let component: UpdateCateComponent;
+  let fixture: ComponentFixture<UpdateCateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeteleComponent ]
+      declarations: [ UpdateCateComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DeteleComponent);
+    fixture = TestBed.createComponent(UpdateCateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

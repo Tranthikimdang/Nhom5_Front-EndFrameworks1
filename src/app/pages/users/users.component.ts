@@ -1,5 +1,6 @@
 import { Component , OnInit } from '@angular/core';
 import {User} from '../entities/user'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -7,11 +8,6 @@ import {User} from '../entities/user'
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  constructor() { }
-
-  ngOnInit(){
-    this.renderUsers();
-  }
 
   users : User[] =[
     {
@@ -39,9 +35,41 @@ export class UsersComponent implements OnInit {
       "address" : "Can Tho"
     }
   ]
-  userHtml: string = ''; 
 
-  renderUsers() {
+  user : User[] = [];
+  filterValue = '';
 
+  constructor(private router: Router) {}
+
+
+  ngOnInit(): void {
+    this.user = this.users;
+  }
+  navigateToDestination(): void {
+    this.router.navigateByUrl('pages/users');
+  }
+
+  filter() {
+    console.log(this.filterValue);
+
+    if (!this.filterValue) {
+      this.users = this.user;
+      return;
+    }
+
+    const filterText = this.filterValue.toLowerCase();
+    console.log(filterText);
+
+    this.users = this.user.filter((u) =>
+      u.userName.toLowerCase().includes(filterText)
+    );
+  }
+
+  navigateToAddUser() {
+    this.router.navigate(['/pages/add-user']); 
+  }
+
+  navigateToEditUser() {
+    this.router.navigate(['/pages/edit-user']); 
   }
 }
