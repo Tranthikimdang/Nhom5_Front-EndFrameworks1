@@ -10,6 +10,8 @@ import { CommentsComponent } from './comments/comments.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CommentsHistoryComponent } from './comments-history/comments-history.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CreateProductComponent } from './products/create-product/create-product.component';
 
 
 
@@ -26,6 +28,18 @@ const routes: Routes = [{
       path: 'products',
       component: ProductsComponent,
       data: {breadcrumb: 'products'},
+      children : [
+        {
+          path: 'create-product',
+          component: CreateProductComponent,
+          data: {breadcrumb: 'create-product'},
+        },
+        {
+          path: 'edit-product/:id',
+          component: CreateProductComponent,
+          data: {breadcrumb: 'edit-product'},
+        },
+      ]
     },
     {
       path: 'categories',
@@ -56,6 +70,11 @@ const routes: Routes = [{
       path: 'statistics',
       component: StatisticsComponent,
       data: {breadcrumb: 'statistics'},
+    },
+    {
+      path: 'profile',
+      component: ProfileComponent,
+      data: {breadcrumb: 'profile'},
     },
   ],
 }];

@@ -11,12 +11,14 @@
               </svg>
             </button>
           </div>
-          <div class="input-group-append">
-            <button type="button" class="btn btn-outline-primary">
-              
-              Add
-            </button>
-          </div>
+          <a href="/create-product">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-primary">
+                Add
+              </button>
+            </div>
+          </a>
+
         </div>
       </nav>
       <div class="table-responsive">
@@ -28,7 +30,6 @@
               <th>Product</th>
               <th>Images</th>
               <th>Price</th>
-              <th>Views</th>
               <th>Date</th>
               <th>Quantity</th>
               <th>Action</th>
@@ -43,7 +44,6 @@
                 <img src="{{p.imageURL}}" alt="image" width="70px">
               </td>
               <td>&dollar;{{p.price}}</td>
-              <td>{{p.view}}</td>
               <td>{{p.expiryDate}}</td>
               <td>{{p.quantity}}</td>
               <td>
