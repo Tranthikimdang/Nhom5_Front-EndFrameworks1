@@ -45,7 +45,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'calendar-outline',
     children:[
             {
-                title: 'Profile',
+                title: 'profile',
                 icon: 'book-outline',
                 link: '/pages/profile',
             },
