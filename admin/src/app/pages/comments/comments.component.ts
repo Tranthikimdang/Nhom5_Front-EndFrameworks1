@@ -136,7 +136,7 @@ export class CommentsComponent implements OnInit {
       const commentsEmail = comment.commentsEmail.trim().toLowerCase();
       const productName = comment.productName.trim().toLowerCase();
       const commentsContent = comment.commentsContent.trim().toLowerCase();
-      
+
       return userName.includes(filterText) ||
              commentsEmail.includes(filterText) ||
              productName.includes(filterText) ||

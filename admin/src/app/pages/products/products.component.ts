@@ -1,96 +1,161 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../entities/product';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProductService } from 'app/@core/services/apis/product.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit{
-  products: Product[] = [
-    {
-      productID: 1,
-      productType: "Beverage",
-      productName: "Coca Cola",
-      imageURL: "https://tea-3.lozi.vn/v1/ship/resized/losupply-ninh-thuan-thanh-pho-phan-rang-thap-cham-ninh-thuan-1648800066330548890-nuoc-ngot-coca-cola-lon-320ml-0-1658896003?w=480&type=o",
-      price: 1.50,
-      view: 1500,
-      expiryDate: "2024-12-31",
-      quantity: 100
-  },
-  {
-      productID: 2,
-      productType: "Snack",
-      productName: "Potato Chips",
-      imageURL: "https://m.media-amazon.com/images/I/813axPlVxBL._SX679_.jpg",
-      price: 2.00,
-      view: 800,
-      expiryDate: "2024-06-30",
-      quantity: 50
-  },
-  {
-      productID: 3,
-      productType: "Dairy",
-      productName: "Milk",
-      imageURL: "https://gutafood.vn/wp-content/uploads/2020/09/sua-tuoi-tiet-trung-nguyen-kem-meadow-fresh-hop-1-lit-2-247x296.jpg",
-      price: 1.20,
-      view: 500,
-      expiryDate: "2024-05-20",
-      quantity: 30
-  },
-  {
-      productID: 4,
-      productType: "Bakery",
-      productName: "Bread",
-      imageURL: "https://i5.walmartimages.com/seo/Nature-s-Own-Butterbread-Sliced-White-Bread-Loaf-20-oz_8dcbd46b-895e-4b52-ba78-e9c3ca8d9f7e.8aa84b73b45fed02b8a8433d3cc5d824.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF",
-      price: 1.00,
-      view: 400,
-      expiryDate: "2024-05-15",
-      quantity: 20
-  },
-  {
-      productID: 5,
-      productType: "Frozen Food",
-      productName: "Pizza",
-      imageURL: "https://thucphamsieuthi.vn/wp-content/uploads/2021/08/banh-pizza-hai-san-dong-lanh.jpg",
-      price: 5.00,
-      view: 600,
-      expiryDate: "2025-01-01",
-      quantity: 15
-  },
-  {
-      productID: 6,
-      productType: "Beverage",
-      productName: "Orange Juice",
-      imageURL: "https://target.scene7.com/is/image/Target/GUEST_2b7f75ea-fbb8-4767-8b1f-6bb809bfe214?wid=1200&hei=1200&qlt=80&fmt=webp",
-      price: 2.50,
-      view: 700,
-      expiryDate: "2024-07-15",
-      quantity: 40
-  },
-  {
-      productID: 7,
-      productType: "Snack",
-      productName: "Chocolate Bar",
-      imageURL: "https://i5.walmartimages.com/seo/Hershey-s-Milk-Chocolate-XL-Candy-Bar-4-4-oz-16-Pieces_068168f9-5e33-4024-86f1-e9f33017b34e.56a0ac3569d24c7b0920d18881b88888.jpeg",
-      price: 1.00,
-      view: 900,
-      expiryDate: "2024-11-11",
-      quantity: 60
-  },
-  {
-      productID: 8,
-      productType: "Household",
-      productName: "Detergent",
-      imageURL: "https://primomart.ph/cdn/shop/products/image_20cb6cf2-c65d-4cbe-afd4-a9c87bb9c797_504x504.jpg?v=1590477093",
-      price: 3.00,
-      view: 300,
-      expiryDate: "2025-12-31",
-      quantity: 25
+  products: Product[] = [];
+  filterValue = '';
+  title : string;
+  dataProduct: any;
+  isDeleteDialogOpen = false;
+  isDialogOpen = false;
+  formData: FormGroup;
+  editProductId: any = null;
+  isEdit = false;
+  confirmationMessage: string;
+  originalProduct : Product[];
+
+  constructor(private formBuilder : FormBuilder, private productService : ProductService) {
+    this.formData = this.formBuilder.group({
+      productType: ['', Validators.required],
+      productName: ['', Validators.required],
+      imageURL: ['', Validators.required],
+      price: ['', Validators.required],
+      expiryDate: ['', Validators.required],
+      quantity: ['', Validators.required],
+    })
   }
-  ];
-  constructor() { }
   ngOnInit() {
   }
 
+  loadProduct() {
+    this.productService.getAllProducts().subscribe({
+      next: (res : any) => {
+        const { data, status } = res;
+        if (status ==='success') {
+          this.products = data.products;
+          this.originalProduct = data.products; // Lưu trữ các sản phẩm ban đầu
+        }
+      },
+      error: (err) => {
+        console.error('Error loading products', err);
+      },
+    });
+  }
+
+  openDialog() {
+    this.isDialogOpen = true;
+  }
+
+  openDialogDelete(product: Product) {
+    if (product) {
+      this.isDeleteDialogOpen = true;
+      this.dataProduct = product;
+      this.title = 'Confirm Delete';
+      this.confirmationMessage = `Bạn có chắc chắn muốn xóa sản phẩm ${product.productName}?`;
+    }
+  }
+
+  closeDialog() {
+    this.isDialogOpen = false;
+    this.isEdit = false;
+    this.editProductId = null;
+    this.formData.reset();
+  }
+
+  addProduct() : void {
+    if (this.formData.valid) {
+      if (!this.isEdit) {
+        const newProduct: Product = {
+          productType: this.formData.value.productType,
+          productName: this.formData.value.productName,
+          imageURL: this.formData.value.imageURL,
+          price: this.formData.value.price,
+          expiryDate: this.formData.value.expiryDate,
+          quantity: this.formData.value.quantity,
+          productID: 0,
+        }
+        this.productService.createProduct(newProduct).subscribe({
+          next: () => {
+            this.isDialogOpen = false;
+            this.loadProduct();
+          },
+          error: (err) => {
+            console.error('Error adding product', err);
+          },
+        });
+      } else {
+        if (this.editProductId) {
+          const editProduct : Product = {
+            productType: this.formData.value.productType,
+            productName: this.formData.value.productName,
+            imageURL: this.formData.value.imageURL,
+            price: this.formData.value.price,
+            expiryDate: this.formData.value.expiryDate,
+            quantity: this.formData.value.quantity,
+            productID: this.editProductId,
+          }
+          this.productService.updateProduct(editProduct).subscribe({
+            next: () => {
+              this.isDialogOpen = false;
+              this.loadProduct();
+            },
+            error: (err) => {
+              console.error('Error edit product', err);
+            },
+          });
+        }
+      }
+      this.closeDialog();
+    } else {
+      console.error('Form data invalid');
+    }
+  }
+
+  filter() {
+    if (!this.originalProduct) {
+      return;
+    }
+
+    const filterText = this.filterValue.trim().toLowerCase();
+    if (filterText === '') {
+      this.products = this.originalProduct;
+      return;
+    }
+    this.products = this.originalProduct.filter(product => {
+      const productType = product.productType.trim().toLowerCase();
+      const productName = product.productName.trim().toLowerCase();
+      return productType.includes(filterText) ||
+            productName.includes(filterText);
+    });
+  }
+
+  trackByProduct (index : number , product : Product) : number {
+    return product.productID;
+  }
+
+  handleDelete() {
+    if (this.dataProduct && this.dataProduct.productID) {
+      this.isDeleteDialogOpen = false;
+      this.productService.deleteProduct(this.dataProduct.productID).subscribe({
+        next: () => {
+          this.isDeleteDialogOpen = false;
+          this.dataProduct = {};
+          this.loadProduct();
+        },
+        error: (err : any) => {
+          console.error('Error deleting product', err);
+        },
+      });
+    }
+  }
+
+  close() {
+    this.isDeleteDialogOpen = false;
+  }
 }

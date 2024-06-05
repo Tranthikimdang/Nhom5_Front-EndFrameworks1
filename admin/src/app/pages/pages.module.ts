@@ -12,15 +12,9 @@ import { OrdersComponent } from './orders/orders.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { CommentsModule } from './comments/comments.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
-import { ProfileComponent } from './profile/profile.component';
-import { CreateProductComponent } from './products/create-product/create-product.component';
-import { UpdateProductComponent } from './products/update-product/update-product.component';
-
 import { DialogComponent } from './dialog/dialog.component';
 import { CommentsComponent } from './comments/comments.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 
 @NgModule({
   imports: [
@@ -42,17 +36,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommentsComponent,
     StatisticsComponent,
     DashboardComponent,
-
-    UnitComponent,
-    CreateComponent,
-    EditComponent,
-    DeteleComponent,
-    ProfileComponent,
-    CreateProductComponent,
-    UpdateProductComponent,
-
     DialogComponent,
-
   ],
   providers: [],
 })

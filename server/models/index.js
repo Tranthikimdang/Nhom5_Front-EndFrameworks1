@@ -1,9 +1,11 @@
 const sequelize = require('../config/db');
 const Comment = require('./commentModel');
+const Product = require('./productModel')
 
 const db = {
   sequelize,
-  Comment
+  Comment,
+  Product
 };
 
 // Đồng bộ các model với cơ sở dữ liệu

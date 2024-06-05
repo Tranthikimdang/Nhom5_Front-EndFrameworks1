@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const commentRoute = require('./routes/commentRoutes');
+const productRoute = require('./routes/productRoutes')
 const { sequelize } = require('./models');
 const cors = require('cors');
 const app = express();
@@ -22,6 +23,8 @@ app.use(cors());
 // }));
 
 app.use('/api/', commentRoute);
+
+app.use('/api/product', productRoute);
 
 app.listen(port, async () => {
   await sequelize.sync();
