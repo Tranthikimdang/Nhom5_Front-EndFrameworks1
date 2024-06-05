@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit {
       "userId": 1,
       "userName": "Dang Dinh Khiem",
       "email": "khiemddpc05680@fpt.edu.vn",
-      "address" : "Bac Lieu"
+      "address" : "Bac Lieu",
     },
     {
       "userId": 2,

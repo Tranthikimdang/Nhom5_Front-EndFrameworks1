@@ -17,6 +17,7 @@ import {LOCALSTORAGE_KEY} from "../../config";
 })
 export class AuthService extends ApiService {
 
+
   private loginInfo: ILogin;
   private alertMessages: IAlertMessage;
   private jwtHelperService = new JwtHelperService();
@@ -35,6 +36,10 @@ export class AuthService extends ApiService {
       password: form.password,
     });
   }
+
+  // checkUserExists(email: string): Observable<boolean> {
+  //   // return this._http.get<boolean>(`${API_BASE_URL + API_ENDPOINT.auth.checkUserExists}?email=${email.trim()}`);
+  // }
 
 
   requirePassword(form: ILogin): Observable<any> {

@@ -47,7 +47,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
             {
                 title: 'Profile',
                 icon: 'book-outline',
-                link: '/',
+                link: '/pages/profile',
             },
             {
               title: 'Log out',
