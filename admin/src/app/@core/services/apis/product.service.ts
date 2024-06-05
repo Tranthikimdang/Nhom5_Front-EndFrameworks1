@@ -18,8 +18,8 @@ export class ProductService extends ApiService{
     return this.get(API_BASE_URL + API_ENDPOINT.product.get);
   }
 
-  createProduct(product: Product): Observable<any> {
-    return this.post(API_BASE_URL + API_ENDPOINT.product.create, product)
+  createProduct(products: Product): Observable<any> {
+    return this.post(API_BASE_URL + API_ENDPOINT.product.create, products)
   }
 
   updateProduct(product: Product): Observable<any> {
