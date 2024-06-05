@@ -15,7 +15,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { CommentsComponent } from './comments/comments.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   imports: [
@@ -38,7 +37,6 @@ import { ProfileComponent } from './profile/profile.component';
     StatisticsComponent,
     DashboardComponent,
     DialogComponent,
-    ProfileComponent,
   ],
   providers: [],
 })
