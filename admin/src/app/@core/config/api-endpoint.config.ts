@@ -15,4 +15,16 @@ export const API_ENDPOINT: IAPIEndpoint = {
     update: '/comment',
     delete: '/comment',
   },
+  user: {
+    get: '/users',
+    create: '/user',
+    update: '/user',
+    delete: '/user',
+  },
+  category: {
+    get: '/categories',
+    create: '/category',
+    update: '/category',
+    delete: '/category',
+  },
 };

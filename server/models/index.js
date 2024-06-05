@@ -1,9 +1,13 @@
 const sequelize = require('../config/db');
 const Comment = require('./commentModel');
+const User = require('./userModel');
+const Category = require('./categoryModel');
 
 const db = {
   sequelize,
-  Comment
+  Comment,
+  User,
+  Category
 };
 
 // Đồng bộ các model với cơ sở dữ liệu
