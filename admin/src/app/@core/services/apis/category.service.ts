@@ -22,7 +22,8 @@ export class CategoryService extends ApiService {
     return this.post(API_BASE_URL + API_ENDPOINT.category.create, category);
   }
   updateCategory(category: Category): Observable<any> {
-    return this.put(API_BASE_URL + API_ENDPOINT.category.update, category);
+    const updateUrl = `${API_BASE_URL}${API_ENDPOINT.category.update}/${category.cateId}`;
+    return this.put(updateUrl, category);
   }
   deleteCategory(id: string): Observable<any> {
     const deleteUrl = `${API_BASE_URL}${API_ENDPOINT.category.delete}/${id}`;
