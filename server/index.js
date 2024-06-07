@@ -24,7 +24,7 @@ app.use(cors());
 
 app.use('/api/', commentRoute);
 
-app.use('/api/product', productRoute);
+app.use('/api/', productRoute);
 
 app.listen(port, async () => {
   await sequelize.sync();
