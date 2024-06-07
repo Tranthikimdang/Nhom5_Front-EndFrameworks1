@@ -14,6 +14,10 @@ export class ProductService extends ApiService{
   constructor(private _http: HttpClient) {
     super(_http);
   }
+
+  getProductsByCategory(cateId: number): Observable<any> {
+    return this._http.get<any>(`${API_BASE_URL}${API_ENDPOINT.product.get}?cateID=${cateId}`);
+  }
   getAllProducts(): Observable<any> {
     return this.get(API_BASE_URL + API_ENDPOINT.product.get);
   }

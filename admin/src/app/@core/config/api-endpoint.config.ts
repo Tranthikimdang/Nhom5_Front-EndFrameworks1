@@ -8,6 +8,7 @@ export const API_ENDPOINT: IAPIEndpoint = {
     base: API_BASE_URL + '/' + 'auth',
     login: '/auth/login',
     logout: '/auth/logout',
+    checkUserExists: '/checkUserExists'
   },
   comment: {
     get: '/comments',
@@ -32,5 +33,8 @@ export const API_ENDPOINT: IAPIEndpoint = {
     create: '/product',
     update: '/product',
     delete: '/product',
+  },
+  login: {
+    get: `${API_BASE_URL}/login`
   }
 };

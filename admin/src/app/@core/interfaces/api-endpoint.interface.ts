@@ -4,4 +4,5 @@ export interface IAPIEndpoint {
   comment: any;
   user:any;
   category:any;
+  login: any
 }

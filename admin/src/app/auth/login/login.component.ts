@@ -6,7 +6,7 @@ import {AuthService} from "../../@core/services/apis";
 import {LocalStorageService} from "../../@core/services/common";
 import {LOCALSTORAGE_KEY, ROUTER_CONFIG} from "../../@core/config";
 import {IAlertMessage} from "../../@theme/components/alert/ngx-alerts.component";
-import { finalize } from "rxjs";
+import { finalize, switchMap } from "rxjs";
 
 @Component({
   selector: 'ngx-login',
@@ -54,8 +54,11 @@ export class LoginComponent implements OnInit {
 
   // onSubmit() {
   //   if (this.loginForm.valid) {
-  //     this.spinner.show();
-  //     this.auth.checkUserExists(this.loginForm.value.email).pipe(
+  //     this.spinner.show(); // Show spinner when form is submitted
+  
+  //     const email = this.loginForm.value.email;
+  
+  //     this.auth.checkUserExists(email).pipe(
   //       switchMap((userExists: boolean) => {
   //         if (userExists) {
   //           return this.auth.login(this.loginForm.value);
@@ -64,11 +67,15 @@ export class LoginComponent implements OnInit {
   //         }
   //       }),
   //       finalize(() => {
-  //         this.spinner.hide();
+  //         this.spinner.hide(); // Hide spinner after login attempt
   //       })
   //     ).subscribe({
-  //       next: this.handleLoginSuccess.bind(this),
-  //       error: this.handleLoginFailed.bind(this),
+  //       next: (res) => {
+  //         this.handleLoginSuccess(res);
+  //       },
+  //       error: (error) => {
+  //         this.handleLoginFailed();
+  //       }
   //     });
   //   }
   // }
