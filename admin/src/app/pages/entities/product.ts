@@ -4,7 +4,6 @@ export interface Product {
     productName: string;
     imageURL: string;
     price: number;
-    view: number;
     expiryDate: string;
     quantity: number;
 }

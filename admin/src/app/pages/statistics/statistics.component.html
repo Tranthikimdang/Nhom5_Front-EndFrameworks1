@@ -15,34 +15,35 @@
         <div class="col-7"></div>
       </nav>
       <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Category code</th>
-            <th>Category name</th>
-            <th>Quantity</th>
-            <th>Highest price</th>
-            <th>Lowest price</th>
-            <th>Average price</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of Statistics_Revenue">
-            
-            <td>{{item.categoryName}}</td>
-            <td>{{item.categoryCode}}</td>
-            <td>{{item.quantity}}</td>
-            <td>&dollar;{{item.highestPrice}}</td>
-            <td>&dollar;{{item.lowestPrice}}</td>
-            <td>&dollar;{{item.averagePrice}}</td>
-            <td>
-              <button type="button" class="btn btn-outline-success" style="margin-right: 10px;">
-                View
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Category code</th>
+              <th>Category name</th>
+              <th>Quantity</th>
+              <th>Highest price</th>
+              <th>Lowest price</th>
+              <th>Average price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of statisticsData">
+              <td>{{ item.categoryCode }}</td>
+              <td>{{ item.categoryName }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>&dollar;{{ item.highestPrice }}</td>
+              <td>&dollar;{{ item.lowestPrice }}</td>
+              <td>&dollar;{{ item.averagePrice }}</td>
+              <td>
+                <button type="button" class="btn btn-outline-success" style="margin-right: 10px;">
+                  View
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-     
+  </div>
+</div>
