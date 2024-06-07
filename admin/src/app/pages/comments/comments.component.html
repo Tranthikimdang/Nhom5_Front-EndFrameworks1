@@ -42,7 +42,7 @@
                 <img [src]="comment.imageUrl" alt="{{comment.productName}}" width="80px" />
               </td>
               <td>{{comment.commentsContent}}</td>
-              <td>{{comment.commentsDate}}</td>
+              <td>{{comment.createdAt}}</td>
               <td>
                 <button type="button" class="btn btn-outline-danger" (click)="openDialogDelete(comment)">
                   Delete
