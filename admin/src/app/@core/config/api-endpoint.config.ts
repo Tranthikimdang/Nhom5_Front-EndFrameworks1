@@ -21,4 +21,10 @@ export const API_ENDPOINT: IAPIEndpoint = {
     update: '/product',
     delete: '/product',
   },
+  order: {
+    get: '/orders',
+    create: '/order',
+    update: '/order',
+    delete: '/order',
+  }
 };

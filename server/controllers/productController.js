@@ -7,7 +7,7 @@ exports.getAllProduct = async (req, res) => {
             status:'success',
             results:products.length,
             data:{
-                products
+                products,
             }
         });
     } catch (err) {
@@ -29,7 +29,7 @@ exports.createProduct = async (req , res) => {
         res.status(201).json({
             status:'success',
             data:{
-                product:newProduct
+                product : newProduct
             }
         });
     } catch (err) {
@@ -70,7 +70,7 @@ exports.updateProduct = async (req , res) => {
             }
         });
     } catch (err) { 
-        console.error("lỗi khi cập nhâtj sản phẩm", err);
+        console.error("lỗi khi cập nhật sản phẩm", err);
         res.status(500).send({
             status:'error',
             message:err.message || 'Some error occurred while updating the product.'
