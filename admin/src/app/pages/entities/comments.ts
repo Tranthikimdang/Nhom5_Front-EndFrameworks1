@@ -3,7 +3,8 @@ export interface Icomments {
   userName: string;
   commentsEmail: string;
   productName: string;
-  imageUrl: string;
+  imageUrl?: string;
+  imageFile?: File; // Tệp ảnh được tải lên
   commentsContent: string;
   commentsDate?: string;
 }

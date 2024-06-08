@@ -34,6 +34,7 @@ async function getProductsByCategory(cateId) {
       throw error;
     }
   }
+  
 const Products = sequelize.define('Products', {
   productID: {
     type: DataTypes.INTEGER,

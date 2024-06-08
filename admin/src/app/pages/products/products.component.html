@@ -62,14 +62,18 @@
 <div class="dialog-backdrop d-flex align-items-center justify-content-center" *ngIf="isDeleteDialogOpen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);">
   <div class="dialog p-4 bg-white rounded shadow-lg" style="max-width: 500px; width: 100%;">
     <div class="dialog-header mb-3">
-        <h5 class="modal-title">{{ title }}</h5>
+      <h5 class="modal-title">
+        {{ title }}
+      </h5>
     </div>
     <div class="dialog-body">
-      <p>{{ confirmationMessage }}</p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="button" class="btn btn-primary me-md-2" (click)="handleDelete()">Yes</button>
-            <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-        </div>
+      <p>
+        {{ confirmationMessage }}
+      </p>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="button" class="btn btn-primary me-md-2" (click)="handleDelete()">Yes</button>
+        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+      </div>
     </div>
   </div>
 </div>
@@ -103,6 +107,9 @@
             Giá sản phẩm không được để trống.
           </div>
         </div>
+      </div>
+        <div class="col-md-6">
+        
         <div class="mb-3 form-group" [class.has-error]="formData.get('quantity').invalid && (formData.get('quantity').dirty || formData.get('quantity').touched)">
           <label for="quantity" class="form-label">Số lượng:</label>
           <input type="number" class="form-control" id="quantity" placeholder="Số lượng" formControlName="quantity">
@@ -131,4 +138,3 @@
     </div>
   </form>
 </app-dialog>
-
