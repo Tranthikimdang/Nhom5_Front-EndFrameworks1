@@ -127,7 +127,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  trackByProduct(index: number, product: Product): number {
+  trackByProduct(index: number, product: any): number {
     return product.productID;
   }
 

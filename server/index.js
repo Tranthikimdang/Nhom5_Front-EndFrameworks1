@@ -6,6 +6,8 @@ const categoryRoute = require('./routes/categoryRoutes');
 const loginRoute = require('./routes/loginRouter');
 const productRoutes = require('./routes/productRoutes');
 const { sequelize } = require('./models');
+// const Products = require('./models/productModel');
+// const Category = require('./models/categoryModel');
 const cors = require('cors');
 const app = express();
 const port = 3000;
@@ -74,6 +76,23 @@ app.post('/api/auth/login', (req, res) => {
   // Xử lý đăng nhập
   const loginSuccess = true; // Giả sử đăng nhập thành công
   res.json({ success: loginSuccess });
+});
+
+// lấy dữ liệu sản phẩm cùng với tên danh mục.
+app.get('/products', async (req, res) => {
+  try {
+    const products = await Products.findAll({
+      include: [{
+        model: Category,
+        attributes: ['categoryName'] // Chỉ lấy tên danh mục
+      }]
+    });
+
+    res.json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
 });
 
 app.listen(port, async () => {

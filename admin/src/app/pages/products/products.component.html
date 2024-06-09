@@ -33,14 +33,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor='let p of products ; trackBy : trackByProduct'>
+            <tr *ngFor="let p of products; trackBy: trackByProduct">
               <td>{{p.productID}}</td>
               <td>{{p.productType}}</td>
               <td>{{p.productName}}</td>
               <td class="py-1">
                 <img src="{{p.imageURL}}" alt="image" width="70px">
               </td>
-              <td>&dollar;{{p.price}}</td>
+              <td>&dollar;{{p.productPrice}}</td>
               <td>{{p.expiryDate}}</td>
               <td>{{p.quantity}}</td>
               <td>
