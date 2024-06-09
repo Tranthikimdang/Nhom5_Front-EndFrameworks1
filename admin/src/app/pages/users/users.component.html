@@ -41,6 +41,9 @@
               <td>{{user.userPhone}}</td>
               <td>{{user.userAddress}}</td>
               <td>
+                <button type="button" class="btn btn-outline-warning" style="margin-right: 3px;" (click)="editUser(user)">
+                  Edit
+                </button>
                 <button type="button" class="btn btn-outline-danger" (click)="openDialogDelete(user)">
                   Delete
                 </button>
@@ -71,7 +74,7 @@
 </div>
 
 <!-- Thêm -->
-<app-dialog [isOpen]="isDialogOpen" title="Thêm" (closeModal)="closeDialog()">
+<app-dialog [isOpen]="isDialogOpen" [title]="isEdit ? 'Edit' : 'Add'" (closeModal)="closeDialog()">
   <form [formGroup]="formData" (ngSubmit)="addUser()">
     <div class="row">
       <div class="col-md-6">
