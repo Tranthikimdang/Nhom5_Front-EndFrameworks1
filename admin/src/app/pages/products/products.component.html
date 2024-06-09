@@ -3,7 +3,7 @@
     <div class="row mb-2 col-form-label">
       <nav class="navbar navbar-light bg-light">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+          <input type="text" class="form-control" placeholder="Search..." aria-label="" aria-describedby="button-addon2" [(ngModel)]='filterValue' (input)='filter()'>
           <div class="input-group-append" style="margin-right: 10px;">
             <button class="btn btn-primary" type="button" id="button-addon2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -38,7 +38,7 @@
               <td>{{p.productType}}</td>
               <td>{{p.productName}}</td>
               <td class="py-1">
-                <img src="{{p.imageURL}}" alt="image" width="70px">
+                <img src="{{p.productImage}}" alt="image" width="70px">
               </td>
               <td>&dollar;{{p.productPrice}}</td>
               <td>{{p.expiryDate}}</td>

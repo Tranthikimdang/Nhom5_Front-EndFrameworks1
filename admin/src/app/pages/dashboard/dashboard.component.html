@@ -228,7 +228,7 @@
       <h4 class="card-title">Best Selling Products</h4>
       <nav class="navbar navbar-light bg-light">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+          <input type="text" class="form-control" placeholder="Search..." aria-label="" aria-describedby="button-addon2" [(ngModel)]='filterValue' (input)='filter()'>
           <div class="input-group-append" style="margin-right: 10px;">
             <button class="btn btn-primary" type="button" id="button-addon2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -243,7 +243,7 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Product</th>
+              <th>Image</th>
               <th>Name</th>
               <th>Price</th>
               <th>Qty</th>
@@ -267,5 +267,3 @@
     </div>
   </div>
 </div>
-
-
