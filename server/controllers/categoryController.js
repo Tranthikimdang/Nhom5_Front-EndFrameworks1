@@ -34,9 +34,7 @@ exports.createCategory = async (req, res) => {
 exports.updateCategory = async (req, res) => {
   try {
     const { id } = req.params; 
-    const { cateName } = req.body; // 
-    
-    console.log(id);
+    const { cateName } = req.body;
 
     const category = await Category.findByPk(id);
 
@@ -50,12 +48,13 @@ exports.updateCategory = async (req, res) => {
 
     await category.save();
 
-    res.status(200).json({ status: "success", data: { Category } });
+    res.status(200).json({ status: "success", data: category });
   } catch (err) {
     console.error("Lỗi khi cập nhật category:", err);
     res.status(500).json({ status: "error", message: "Lỗi máy chủ nội bộ" });
   }
 };
+
 
 exports.deleteCategory = async (req, res) => {
     try {
