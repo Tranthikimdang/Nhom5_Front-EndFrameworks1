@@ -1,8 +1,6 @@
 export interface IAPIEndpoint {
-  product: any;
   auth: any;
   comment: any;
-  user:any;
-  category:any;
-  login: any
+  product : any;
+  order : any;
 }

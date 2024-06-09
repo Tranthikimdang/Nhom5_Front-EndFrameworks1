@@ -31,6 +31,7 @@ export class ProductsComponent implements OnInit{
     })
   }
   ngOnInit() {
+    this.loadProduct();
   }
 
   loadProduct() {

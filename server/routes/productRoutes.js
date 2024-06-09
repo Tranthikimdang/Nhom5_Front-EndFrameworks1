@@ -3,7 +3,7 @@ const router = express.Router();
 const productController = require('../controllers/productController');
 const Product = require('../models/productModel');
 
-router.get('/products', productController.getAllProduct);
+router.get('/product', productController.getAllProduct);
 
 router.post('/product', productController.createProduct);
 
