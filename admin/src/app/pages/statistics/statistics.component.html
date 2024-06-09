@@ -18,7 +18,6 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Category code</th>
               <th>Category name</th>
               <th>Quantity</th>
               <th>Highest price</th>
@@ -29,7 +28,6 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of statisticsData">
-              <td>{{ item.categoryCode }}</td>
               <td>{{ item.categoryName }}</td>
               <td>{{ item.quantity }}</td>
               <td>&dollar;{{ item.highestPrice }}</td>

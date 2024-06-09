@@ -32,7 +32,6 @@ export class StatisticsComponent implements OnInit {
   }
   
   
-  
   calculateStatistics(): void {
     this.categories.forEach(category => {
       this.productService.getProductsByCategory(category.cateId).subscribe(
@@ -44,7 +43,7 @@ export class StatisticsComponent implements OnInit {
             const highestPrice = Math.max(...products.map(product => product.productPrice));
             const lowestPrice = Math.min(...products.map(product => product.productPrice));
             const averagePrice = products.reduce((sum, product) => sum + product.productPrice, 0) / quantity;
-  
+
             const statsItem = {
               categoryName: category.cateName,
               quantity,
@@ -52,7 +51,7 @@ export class StatisticsComponent implements OnInit {
               lowestPrice,
               averagePrice
             };
-  
+
             this.statisticsData.push(statsItem);
           } else {
             console.error(`API response for category ${category.cateId} does not contain a valid product list:`, response);
@@ -64,6 +63,7 @@ export class StatisticsComponent implements OnInit {
       );
     });
   }
+  
   
   
 }
