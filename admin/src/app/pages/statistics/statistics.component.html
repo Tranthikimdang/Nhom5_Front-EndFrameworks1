@@ -3,7 +3,7 @@
     <div class="row mb-2 col-form-label">
       <nav class="navbar navbar-light bg-light">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+          <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchTerm" (input)="filterData()">
           <div class="input-group-append">
             <button class="btn btn-primary" type="button" id="button-addon2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -12,7 +12,6 @@
             </button>
           </div>
         </div>
-        <div class="col-7"></div>
       </nav>
       <div class="table-responsive">
         <table class="table table-striped">
@@ -28,7 +27,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of statisticsData">
+            <tr *ngFor="let item of filteredStatisticsData">
               <td>{{ item.categoryCode }}</td>
               <td>{{ item.categoryName }}</td>
               <td>{{ item.quantity }}</td>
