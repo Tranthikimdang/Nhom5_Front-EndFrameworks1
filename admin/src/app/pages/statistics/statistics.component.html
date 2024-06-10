@@ -31,9 +31,9 @@
               <td>{{ i + 1 }}</td>
               <td>{{ item.categoryName }}</td>
               <td>{{ item.quantity }}</td>
-              <td>&dollar;{{ item.highestPrice }}</td>
-              <td>&dollar;{{ item.lowestPrice }}</td>
-              <td>&dollar;{{ item.averagePrice }}</td>
+              <td>{{ item.highestPrice }}</td>
+              <td>{{ item.lowestPrice }}</td>
+              <td>{{ item.averagePrice }}</td>
               <td>
                 <button [routerLink]="['/pages/statistics-detail', item.categoryCode]" class="btn btn-outline-success" style="margin-right: 10px;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">

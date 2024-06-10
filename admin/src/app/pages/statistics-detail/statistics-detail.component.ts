@@ -36,13 +36,4 @@ export class StatisticsDetailComponent implements AfterViewInit {
     );
   }
 }
-  // renderPieChart(): void {
-  //   if (!this.products || !this.products.data || !Array.isArray(this.products.data.products)) {
-  //     console.error('Invalid data format:', this.products);
-  //     return;
-  //   }
-  
-  //   const products = this.products.data.products;
 
-  //   const labels = products.map(product => product.name);
-  //  
