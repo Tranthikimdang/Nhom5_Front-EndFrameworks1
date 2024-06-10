@@ -27,17 +27,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of filteredStatisticsData">
-              <td>{{ item.categoryCode }}</td>
+            <tr *ngFor="let item of filteredStatisticsData; let i=index">
+              <td>{{ i + 1 }}</td>
               <td>{{ item.categoryName }}</td>
               <td>{{ item.quantity }}</td>
               <td>&dollar;{{ item.highestPrice }}</td>
               <td>&dollar;{{ item.lowestPrice }}</td>
               <td>&dollar;{{ item.averagePrice }}</td>
               <td>
-                <button type="button" class="btn btn-outline-success" style="margin-right: 10px;">
-                  View
-                </button>
+                <button [routerLink]="['/pages/statistics-detail', item.categoryCode]" class="btn btn-outline-success" style="margin-right: 10px;">View</button>
               </td>
             </tr>
           </tbody>

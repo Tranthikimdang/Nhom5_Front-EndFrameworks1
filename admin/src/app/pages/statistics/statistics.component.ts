@@ -19,7 +19,7 @@ export class StatisticsComponent implements OnInit {
   ngOnInit(): void {
     this.categoryService.getCategory().subscribe(
       response => {
-        console.log('API Response:', response);
+        console.log('API Response:', response.data);
         if (response && response.categories && response.categories.length > 0) {
           this.categories = response.categories;
           this.calculateStatistics();
@@ -34,38 +34,49 @@ export class StatisticsComponent implements OnInit {
   }
 
   calculateStatistics(): void {
+    this.statisticsData = []; // Xóa dữ liệu cũ trước khi thêm dữ liệu mới
+  
     this.categories.forEach(category => {
       this.productService.getProductsByCategory(category.cateId).subscribe(
-        response => {
+        (response: any) => {
           console.log(`Products API Response for category ${category.cateId}:`, response);
-          const products = response.data.products; // Adjusted to match the structure of the API response
-          if (Array.isArray(products)) {
-            const quantity = products.length;
+          const products = response.data.products;
+  
+          if (Array.isArray(products) && products.length > 0) {
+            // Tính tổng số lượng sản phẩm trong danh mục
+            const totalQuantity = products.reduce((sum, product) => sum + product.quantity, 0);
+            
+            // Tính giá cao nhất, thấp nhất của danh mục
             const highestPrice = Math.max(...products.map(product => product.productPrice));
             const lowestPrice = Math.min(...products.map(product => product.productPrice));
-            const averagePrice = products.reduce((sum, product) => sum + product.productPrice, 0) / quantity;
-
+  
+            // Tính giá trung bình của danh mục
+            const averagePrice = products.reduce((sum, product) => sum + product.productPrice, 0) / products.length;
+  
             const statsItem = {
               categoryCode: category.cateId,
               categoryName: category.cateName,
-              quantity,
+              quantity: totalQuantity, // Sử dụng tổng số lượng sản phẩm
               highestPrice,
               lowestPrice,
               averagePrice
             };
-
+  
             this.statisticsData.push(statsItem);
             this.filteredStatisticsData = this.statisticsData; // Khởi tạo dữ liệu lọc ban đầu
           } else {
             console.error(`API response for category ${category.cateId} does not contain a valid product list:`, response);
           }
         },
-        error => {
+        (error: any) => {
           console.error(`Error fetching products for category ${category.cateId}:`, error);
         }
       );
     });
   }
+  
+  
+  
 
   filterData(): void {
     this.filteredStatisticsData = this.statisticsData.filter(item =>
