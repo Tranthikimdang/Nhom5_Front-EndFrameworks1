@@ -14,17 +14,23 @@ export class ProductService extends ApiService {
     super(_http);
   }
 
+  getProductsByPage(page: number, pageSize: number): Observable<any> {
+    return this._http
+      .get<any>(`${API_BASE_URL}/products?page=${page}&pageSize=${pageSize}`)
+      .pipe(catchError(this.handleError));
+  }
+
   // getProductsByCategory(cateId: number): Observable<any> {
-    
+
   //   return this._http.get<any>(
   //     `${API_BASE_URL}/products/category/${cateId}`
   //   );
   // }
 
   getProductsByCategory(cateId: number): Observable<any> {
-    return this._http.get<any>(`${API_BASE_URL}/products/category/${cateId}`).pipe(
-      catchError(this.handleError)
-    );
+    return this._http
+      .get<any>(`${API_BASE_URL}/products/category/${cateId}`)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {
@@ -34,8 +40,8 @@ export class ProductService extends ApiService {
     } else {
       // Xử lý lỗi trả về từ API
       console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+      );
     }
     // Trả về một observable với một thông điệp lỗi
     return throwError('Something bad happened; please try again later.');
@@ -69,13 +75,11 @@ export class ProductService extends ApiService {
 
   getProductById(productId: string): Observable<Product> {
     const url = `${API_BASE_URL}${API_ENDPOINT.product.get}/${productId}`;
-    return this._http
-      .get<Product>(url)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          return this.handleError(error);
-        })
-      );
+    return this._http.get<Product>(url).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return this.handleError(error);
+      })
+    );
   }
 
   // handleError(error: HttpErrorResponse): Observable<never> {
