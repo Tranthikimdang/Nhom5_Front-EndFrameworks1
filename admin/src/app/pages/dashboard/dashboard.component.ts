@@ -74,7 +74,44 @@ export class DashboardComponent implements OnInit {
     this.formData.reset();
   }
 
-  
+
+  addProduct(): void {
+    if (this.formData.valid) {
+      const product: Product = {
+        productType: this.formData.value.productType,
+        productName: this.formData.value.productName,
+        imageURL: this.formData.value.imageURL,
+        price: this.formData.value.price,
+        expiryDate: this.formData.value.expiryDate,
+        quantity: this.formData.value.quantity,
+        productID: this.editProductId ?? 0,
+      };
+
+      if (!this.isEdit) {
+        this.productService.createProduct(product).subscribe({
+          next: () => {
+            this.loadProduct();
+            this.closeDialog(); // Đóng dialog và reset form sau khi thêm mới thành công
+          },
+          error: (err) => {
+            console.error('Error adding product', err);
+          },
+        });
+      } else if (this.editProductId) {
+        this.productService.updateProduct(product).subscribe({
+          next: () => {
+            this.loadProduct();
+            this.closeDialog(); // Đóng dialog và reset form sau khi chỉnh sửa thành công
+          },
+          error: (err) => {
+            console.error('Error editing product', err);
+          },
+        });
+      }
+    } else {
+      console.error('Form data invalid');
+    }
+  }
 
   filter() {
     const filterText = this.filterValue.trim().toLowerCase();
@@ -95,7 +132,23 @@ export class DashboardComponent implements OnInit {
   }
 
 
+  handleDelete() {
+    if (this.dataProduct && this.dataProduct.productID) {
+      this.isDeleteDialogOpen = false;
+      this.productService.deleteProduct(this.dataProduct.productID).subscribe({
+        next: () => {
+          this.dataProduct = null;
+          this.loadProduct();
+        },
+        error: (err: any) => {
+          console.error('Error deleting product', err);
+        },
+      });
+    }
+  }
+
   close() {
     this.isDeleteDialogOpen = false;
   }
 }
+

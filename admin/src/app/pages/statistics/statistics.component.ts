@@ -9,56 +9,66 @@ import { ProductService } from 'app/@core/services/apis/product.service';
   styleUrls: ['./statistics.component.scss'],
 })
 export class StatisticsComponent implements OnInit {
-  categories: Category[] = []; // Khởi tạo mảng categories trống
-  statisticsData: any[] = []; // Đối tượng để lưu trữ dữ liệu thống kê
+  categories: Category[] = [];
+  statisticsData: any[] = [];
+  filteredStatisticsData: any[] = []; // Dữ liệu sau khi lọc
+  searchTerm: string = ''; // Biến để lưu giá trị tìm kiếm
 
   constructor(private categoryService: CategoryService, private productService: ProductService) { }
 
   ngOnInit(): void {
-    // Lấy danh sách các danh mục
-    this.categoryService.getCategory().subscribe(response => {
-      console.log('API Response:', response); // Kiểm tra phản hồi từ API
-  
-      // Kiểm tra xem phản hồi có chứa dữ liệu hợp lệ không
-      if (response && response.categories && response.categories.length > 0) {
-        // Gán trực tiếp mảng danh mục từ phản hồi API cho biến categories
-        this.categories = response.categories;
-        // Sau khi có danh sách danh mục, tiến hành tính toán dữ liệu thống kê
-        this.calculateStatistics();
-      } else {
-        console.error('API Response does not contain a valid list of categories:', response);
+    this.categoryService.getCategory().subscribe(
+      response => {
+        console.log('API Response:', response.data);
+        if (response && response.categories && response.categories.length > 0) {
+          this.categories = response.categories;
+          this.calculateStatistics();
+        } else {
+          console.error('API Response does not contain a valid list of categories:', response);
+        }
+      },
+      error => {
+        console.error('Error fetching categories:', error);
       }
-    });
+    );
   }
-  
-  
-  
+
   calculateStatistics(): void {
+    this.statisticsData = []; // Xóa dữ liệu cũ trước khi thêm dữ liệu mới
+  
     this.categories.forEach(category => {
       this.productService.getProductsByCategory(category.cateId).subscribe(
-        response => {
-          console.log('Products API Response:', response); // Log API response
-          const products = response.data; // Assuming API returns { data: [...] }
-          if (Array.isArray(products)) {
-            const quantity = products.length;
+        (response: any) => {
+          console.log(`Products API Response for category ${category.cateId}:`, response);
+          const products = response.data.products;
+  
+          if (Array.isArray(products) && products.length > 0) {
+            // Tính tổng số lượng sản phẩm trong danh mục
+            const totalQuantity = products.reduce((sum, product) => sum + product.quantity, 0);
+            
+            // Tính giá cao nhất, thấp nhất của danh mục
             const highestPrice = Math.max(...products.map(product => product.productPrice));
             const lowestPrice = Math.min(...products.map(product => product.productPrice));
-            const averagePrice = products.reduce((sum, product) => sum + product.productPrice, 0) / quantity;
+  
+            // Tính giá trung bình của danh mục
+            const averagePrice = products.reduce((sum, product) => sum + product.productPrice, 0) / products.length;
   
             const statsItem = {
+              categoryCode: category.cateId,
               categoryName: category.cateName,
-              quantity,
+              quantity: totalQuantity, // Sử dụng tổng số lượng sản phẩm
               highestPrice,
               lowestPrice,
               averagePrice
             };
   
             this.statisticsData.push(statsItem);
+            this.filteredStatisticsData = this.statisticsData; // Khởi tạo dữ liệu lọc ban đầu
           } else {
             console.error(`API response for category ${category.cateId} does not contain a valid product list:`, response);
           }
         },
-        error => {
+        (error: any) => {
           console.error(`Error fetching products for category ${category.cateId}:`, error);
         }
       );
@@ -66,4 +76,11 @@ export class StatisticsComponent implements OnInit {
   }
   
   
+  
+
+  filterData(): void {
+    this.filteredStatisticsData = this.statisticsData.filter(item =>
+      item.categoryName.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
 }

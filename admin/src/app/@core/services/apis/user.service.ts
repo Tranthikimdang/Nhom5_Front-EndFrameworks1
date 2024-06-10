@@ -22,8 +22,7 @@ export class UserService extends ApiService {
     return this.post(API_BASE_URL + API_ENDPOINT.user.create, user);
   }
   updateUser(user: User): Observable<any> {
-    const updateUrl = `${API_BASE_URL}${API_ENDPOINT.user.update}/${user.userId}`;
-    return this.put(updateUrl, user);
+    return this.put(API_BASE_URL + API_ENDPOINT.user.update, user);
   }
   deleteUser(id: string): Observable<any> {
     const deleteUrl = `${API_BASE_URL}${API_ENDPOINT.user.delete}/${id}`;

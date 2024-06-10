@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Category } from '../entities/categories';
+import { Component ,OnInit } from '@angular/core';
+import { Category } from '../entities/categories'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from 'app/@core/services/apis/category.service';
-
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-
+ 
   categories: Category[] = [];
   filterValue = '';
   title: string;
@@ -21,9 +20,8 @@ export class CategoriesComponent implements OnInit {
   isEdit = false;
   confirmationMessage: string;
   originalCategories: Category[]; 
-  editingCategory: Category | null = null;
 
-  constructor(private formBuilder: FormBuilder, private categoryService: CategoryService) {
+  constructor(private formBuilder: FormBuilder, private categoryService: CategoryService)  { // Thêm categoryService vào constructor
     this.formData = this.formBuilder.group({
       cateName: ['', Validators.required],      
     });
@@ -35,11 +33,11 @@ export class CategoriesComponent implements OnInit {
 
   loadCategory() {
     this.categoryService.getAllCategory().subscribe({
-      next: (res: any) => {
+      next: (res: any) => { // Sửa kiểu dữ liệu của res
         const { data, status } = res;
         if (status === 'success') {
           this.categories = data.categories;
-          this.originalCategories = data.categories;
+          this.originalCategories = data.categories; // Lưu trữ các ý kiến ​​​​ban đầu
         }
       },
       error: (err) => {
@@ -76,7 +74,7 @@ export class CategoriesComponent implements OnInit {
         };
 
         this.categoryService.createCategory(newCategory).subscribe({
-          next: () => {
+          next: () => { // Sửa kiểu dữ liệu của next
             this.isDialogOpen = false;
             this.loadCategory();
           },
@@ -85,13 +83,15 @@ export class CategoriesComponent implements OnInit {
           },
         });
       } else {
-        if (this.editingCategory) { 
-          const editedCategory: Category = {
-            cateId: this.editingCategory.cateId, 
+        if (this.editCategoryId) {
+          const editedCategories: Category = {
+            cateId: this.editCategoryId,
             cateName: this.formData.value.cateName,
+            
           };
-          this.categoryService.updateCategory(editedCategory).subscribe({
-            next: () => {
+
+          this.categoryService.updateCategory(editedCategories).subscribe({ // Sửa tên hàm từ updateCommennt thành updateComment
+            next: () => { // Sửa kiểu dữ liệu của next
               this.isDialogOpen = false;
               this.loadCategory();
             },
@@ -103,6 +103,7 @@ export class CategoriesComponent implements OnInit {
       }
       this.closeDialog();
     } else {
+      // Hiển thị thông báo lỗi
       console.log('Form không hợp lệ');
     }
   }
@@ -131,43 +132,22 @@ export class CategoriesComponent implements OnInit {
 
   handleDelete() {
     if (this.dataCategory && this.dataCategory.cateId) {
-      this.isDeleteDialogOpen = false;
-      this.categoryService.deleteCategory(this.dataCategory.cateId).subscribe({
-        next: () => {
-          this.isDeleteDialogOpen = false;
-          this.dataCategory = {};
-          this.loadCategory();
-        },
-        error: (err: any) => {
-          console.error('Lỗi khi xóa:', err);
-        },
-      });
+    this.isDeleteDialogOpen = false;
+    this.categoryService.deleteCategory(this.dataCategory.cateId).subscribe({
+    next: () => { // Sửa kiểu dữ liệu của next
+    this.isDeleteDialogOpen = false;
+    this.dataCategory = {};
+    this.loadCategory();
+    },
+    error: (err: any) => {
+    console.error('Lỗi khi xóa:', err);
+    },
+    });
     }
   }
 
   close() {
     this.isDeleteDialogOpen = false;
-  }
-
-  openEditDialog(cate: Category) {
-    this.isDialogOpen = true;
-    this.isEdit = true;
-    this.editCategoryId = cate.cateId;
-    this.formData.patchValue({
-      cateName: cate.cateName,
-    });
-  }
-
-  closeEditDialog() {
-    this.isDialogOpen = false;
-    this.isEdit = false;
-    this.editingCategory = null;
-    this.formData.reset();
-  }
-
-  editCategory(cate: Category) {
-    this.editingCategory = cate; 
-    this.openEditDialog(cate);
   }
   
 }

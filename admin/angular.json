@@ -39,8 +39,10 @@
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "node_modules/leaflet/dist/leaflet.css",
               "src/app/@theme/styles/styles.scss"
+              
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {

@@ -1,5 +1,6 @@
 const { User } = require("../models");
 
+
 exports.getAllUser = async (req, res) => {
   try {
     const users = await User.findAll(); // Lấy tất cả các bản ghi từ bảng users

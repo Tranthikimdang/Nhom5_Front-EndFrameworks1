@@ -30,11 +30,8 @@
           <tbody>
             <tr *ngFor="let cate of categories; trackBy: trackByCategory">
               <td>{{cate.cateId}}</td>
-              <td>{{cate.cateName}}</td>                
+              <td>{{cate.cateName}}</td>              
               <td>
-                <button type="button" class="btn btn-outline-warning" style="margin-right: 3px;" (click)="editCategory(cate)">
-                  Edit
-                </button>
                 <button type="button" class="btn btn-outline-danger" (click)="openDialogDelete(cate)">
                   Delete
                 </button>
@@ -63,20 +60,20 @@
   </div>
 </div>
 
-<!-- Thêm / Sửa -->
-<app-dialog [isOpen]="isDialogOpen" [title]="isEdit ? 'Edit' : 'Add'" (closeModal)="closeDialog()">
+<!-- Thêm -->
+<app-dialog [isOpen]="isDialogOpen" title="Thêm" (closeModal)="closeDialog()">
   <form [formGroup]="formData" (ngSubmit)="addCategory()">
     <div class="row">
-      <div class="col-md-12">
-        <div class="mb-3 form-group" [class.has-error]="formData.get('cateName').invalid && (formData.get('cateName').dirty || formData.get('cateName').touched)">
-          <label for="cateName" class="form-label">Tên danh mục:</label>
-          <input type="text" class="form-control" id="cateName" placeholder="Nhập tên" formControlName="cateName" />
-          <div class="text-danger" *ngIf="formData.get('cateName').invalid && (formData.get('cateName').dirty || formData.get('cateName').touched)">
-            Tên danh mục không được để trống.
-          </div>
-        </div>
+    <div class="col-md-12">
+    <div class="mb-3 form-group" [class.has-error]="formData.get('cateName').invalid && (formData.get('cateName').dirty || formData.get('cateName').touched)">
+      <label for="cateName" class="form-label">Tên danh mục:</label>
+      <input type="text" class="form-control" id="cateName" placeholder="Nhập tên" formControlName="cateName" />
+      <div class="text-danger" *ngIf="formData.get('cateName').invalid && (formData.get('cateName').dirty || formData.get('cateName').touched)">
+        Tên danh mục không được để trống.
       </div>
-    </div>
-    <button type="submit" class="btn btn-primary w-100">{{ isEdit ? 'Save' : 'Add' }}</button>
+    </div>        
+  </div>
+</div>
+<button type="submit" class="btn btn-primary w-100">Lưu</button>
   </form>
 </app-dialog>
