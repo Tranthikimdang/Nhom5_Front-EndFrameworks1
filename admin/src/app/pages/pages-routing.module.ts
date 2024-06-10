@@ -8,8 +8,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { CommentsComponent } from './comments/comments.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { CategoriesComponent } from './categories/categories.component';
-
-
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -52,6 +51,11 @@ const routes: Routes = [{
       path: 'statistics',
       component: StatisticsComponent,
       data: {breadcrumb: 'statistics'},
+    },
+    {
+      path: 'profile',
+      component: ProfileComponent,
+      data: {breadcrumb: 'profile'},
     },
   ],
 }];

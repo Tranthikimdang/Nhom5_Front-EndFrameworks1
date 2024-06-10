@@ -2,25 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../entities/product';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from 'app/@core/services/apis/product.service';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent implements OnInit{
+export class ProductsComponent implements OnInit {
   products: Product[] = [];
   filterValue = '';
-  title : string;
-  dataProduct: any;
+  title: string = '';
+  dataProduct: Product | null = null;
   isDeleteDialogOpen = false;
   isDialogOpen = false;
   formData: FormGroup;
-  editProductId: any = null;
+  editProductId: number | null = null;
   isEdit = false;
-  confirmationMessage: string;
-  originalProduct : Product[];
+  confirmationMessage: string = '';
+  originalProduct: Product[] = [];
 
-  constructor(private formBuilder : FormBuilder, private productService : ProductService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private productService: ProductService
+  ) {
     this.formData = this.formBuilder.group({
       productType: ['', Validators.required],
       productName: ['', Validators.required],
@@ -28,19 +32,20 @@ export class ProductsComponent implements OnInit{
       price: ['', Validators.required],
       expiryDate: ['', Validators.required],
       quantity: ['', Validators.required],
-    })
+    });
   }
+
   ngOnInit() {
     this.loadProduct();
   }
 
   loadProduct() {
     this.productService.getAllProducts().subscribe({
-      next: (res : any) => {
+      next: (res: any) => {
         const { data, status } = res;
-        if (status ==='success') {
+        if (status === 'success') {
           this.products = data.products;
-          this.originalProduct = data.products; // Lưu trữ các sản phẩm ban đầu
+          this.originalProduct = [...data.products]; // Lưu trữ sản phẩm ban đầu
         }
       },
       error: (err) => {
@@ -51,6 +56,7 @@ export class ProductsComponent implements OnInit{
 
   openDialog() {
     this.isDialogOpen = true;
+    this.formData.reset(); // Reset form khi mở dialog
   }
 
   openDialogDelete(product: Product) {
@@ -69,74 +75,59 @@ export class ProductsComponent implements OnInit{
     this.formData.reset();
   }
 
-  addProduct() : void {
+  addProduct(): void {
     if (this.formData.valid) {
+      const product: Product = {
+        productType: this.formData.value.productType,
+        productName: this.formData.value.productName,
+        imageURL: this.formData.value.imageURL,
+        price: this.formData.value.price,
+        expiryDate: this.formData.value.expiryDate,
+        quantity: this.formData.value.quantity,
+        productID: this.editProductId ?? 0,
+      };
+
       if (!this.isEdit) {
-        const newProduct: Product = {
-          productType: this.formData.value.productType,
-          productName: this.formData.value.productName,
-          imageURL: this.formData.value.imageURL,
-          price: this.formData.value.price,
-          expiryDate: this.formData.value.expiryDate,
-          quantity: this.formData.value.quantity,
-          productID: 0,
-        }
-        this.productService.createProduct(newProduct).subscribe({
+        this.productService.createProduct(product).subscribe({
           next: () => {
-            this.isDialogOpen = false;
             this.loadProduct();
+            this.closeDialog(); // Đóng dialog và reset form sau khi thêm mới thành công
           },
           error: (err) => {
             console.error('Error adding product', err);
           },
         });
-      } else {
-        if (this.editProductId) {
-          const editProduct : Product = {
-            productType: this.formData.value.productType,
-            productName: this.formData.value.productName,
-            imageURL: this.formData.value.imageURL,
-            price: this.formData.value.price,
-            expiryDate: this.formData.value.expiryDate,
-            quantity: this.formData.value.quantity,
-            productID: this.editProductId,
-          }
-          this.productService.updateProduct(editProduct).subscribe({
-            next: () => {
-              this.isDialogOpen = false;
-              this.loadProduct();
-            },
-            error: (err) => {
-              console.error('Error edit product', err);
-            },
-          });
-        }
+      } else if (this.editProductId) {
+        this.productService.updateProduct(product).subscribe({
+          next: () => {
+            this.loadProduct();
+            this.closeDialog(); // Đóng dialog và reset form sau khi chỉnh sửa thành công
+          },
+          error: (err) => {
+            console.error('Error editing product', err);
+          },
+        });
       }
-      this.closeDialog();
     } else {
       console.error('Form data invalid');
     }
   }
 
   filter() {
-    if (!this.originalProduct) {
-      return;
-    }
-
     const filterText = this.filterValue.trim().toLowerCase();
-    if (filterText === '') {
-      this.products = this.originalProduct;
+    if (!filterText) {
+      this.products = [...this.originalProduct]; // Reset lại danh sách sản phẩm khi không có bộ lọc
       return;
     }
-    this.products = this.originalProduct.filter(product => {
-      const productType = product.productType.trim().toLowerCase();
-      const productName = product.productName.trim().toLowerCase();
-      return productType.includes(filterText) ||
-            productName.includes(filterText);
+    this.products = this.originalProduct.filter((product) => {
+      return (
+        product.productType.toLowerCase().includes(filterText) ||
+        product.productName.toLowerCase().includes(filterText)
+      );
     });
   }
 
-  trackByProduct (index : number , product : Product) : number {
+  trackByProduct(index: number, product: any): number {
     return product.productID;
   }
 
@@ -145,11 +136,10 @@ export class ProductsComponent implements OnInit{
       this.isDeleteDialogOpen = false;
       this.productService.deleteProduct(this.dataProduct.productID).subscribe({
         next: () => {
-          this.isDeleteDialogOpen = false;
-          this.dataProduct = {};
+          this.dataProduct = null;
           this.loadProduct();
         },
-        error: (err : any) => {
+        error: (err: any) => {
           console.error('Error deleting product', err);
         },
       });

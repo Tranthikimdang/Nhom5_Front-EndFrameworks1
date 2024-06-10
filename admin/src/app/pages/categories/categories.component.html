@@ -3,7 +3,7 @@
     <div class="row mb-2 col-form-label">
       <nav class="navbar navbar-light bg-light">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+          <input type="text" class="form-control" placeholder="Search..." aria-label="" aria-describedby="button-addon2" [(ngModel)]='filterValue' (input)='filter()'>
           <div class="input-group-append" style="margin-right: 10px;">
             <button class="btn btn-primary" type="button" id="button-addon2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -12,7 +12,7 @@
             </button>
           </div>
           <div class="input-group-append">
-            <button type="button" class="btn btn-outline-primary">
+            <button type="button" class="btn btn-outline-primary" (click)="openDialog()">
               Add
             </button>
           </div>
@@ -22,24 +22,20 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Code category</th>
-              <th scope="col">Type name</th>
-              <th scope="col">Action</th>
+              <th>ID</th>
+              <th>Name</th>              
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let cate of categories">
+            <tr *ngFor="let cate of categories; trackBy: trackByCategory">
+              <td>{{cate.cateId}}</td>
+              <td>{{cate.cateName}}</td>                
               <td>
-                {{ cate.cateId }}
-              </td>
-              <td>
-                {{ cate.cateName }}
-              </td>
-              <td>
-                <button type="button" class="btn btn-outline-primary" style="margin-right: 10px;">
+                <button type="button" class="btn btn-outline-warning" style="margin-right: 3px;" (click)="editCategory(cate)">
                   Edit
                 </button>
-                <button type="button" class="btn btn-outline-danger">
+                <button type="button" class="btn btn-outline-danger" (click)="openDialogDelete(cate)">
                   Delete
                 </button>
               </td>
@@ -50,3 +46,37 @@
     </div>
   </div>
 </div>
+
+<!-- Xóa mềm -->
+<div class="dialog-backdrop d-flex align-items-center justify-content-center" *ngIf="isDeleteDialogOpen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);">
+  <div class="dialog p-4 bg-white rounded shadow-lg" style="max-width: 500px; width: 100%;">
+      <div class="dialog-header mb-3">
+          <h5 class="modal-title">{{ title }}</h5>
+      </div>
+      <div class="dialog-body">
+        <p>{{ confirmationMessage }}</p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="button" class="btn btn-primary me-md-2" (click)="handleDelete()">Yes</button>
+              <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Thêm / Sửa -->
+<app-dialog [isOpen]="isDialogOpen" [title]="isEdit ? 'Edit' : 'Add'" (closeModal)="closeDialog()">
+  <form [formGroup]="formData" (ngSubmit)="addCategory()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="mb-3 form-group" [class.has-error]="formData.get('cateName').invalid && (formData.get('cateName').dirty || formData.get('cateName').touched)">
+          <label for="cateName" class="form-label">Tên danh mục:</label>
+          <input type="text" class="form-control" id="cateName" placeholder="Nhập tên" formControlName="cateName" />
+          <div class="text-danger" *ngIf="formData.get('cateName').invalid && (formData.get('cateName').dirty || formData.get('cateName').touched)">
+            Tên danh mục không được để trống.
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">{{ isEdit ? 'Save' : 'Add' }}</button>
+  </form>
+</app-dialog>
