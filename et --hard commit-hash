@@ -1,0 +1,272 @@
+[33mcommit 7fecbd77f005aba704545d78305f345efd337429[m[33m ([m[1;36mHEAD -> [m[1;32mphinhpc05786[m[33m, [m[1;31morigin/phinhpc05786[m[33m)[m
+Merge: 76ab15c 6708e3a
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Tue Jun 11 00:59:03 2024 +0700
+
+    Merge remote-tracking branch 'origin/aithdpc05853' into phinhpc05786
+
+[33mcommit 76ab15c431d308d19e4b2cd3703c3b378ba467a4[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Tue Jun 11 00:54:55 2024 +0700
+
+    order
+
+[33mcommit 6708e3a97bb58b5a7ebdad540624275d3529e836[m[33m ([m[1;31morigin/aithdpc05853[m[33m)[m
+Author: GKAYDER724 <145838116+GKAYDER724@users.noreply.github.com>
+Date:   Tue Jun 11 00:33:48 2024 +0700
+
+    order
+
+[33mcommit fd5f0f20a24239f9e76639f2aee82af0e904f3db[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Tue Jun 11 00:07:25 2024 +0700
+
+    hoanthanhLogin
+
+[33mcommit 8ce941367eca9902d90658ee215e50d1a3e04da1[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Mon Jun 10 23:21:34 2024 +0700
+
+    push
+
+[33mcommit 4488f9a57ca43dd902b9271ccd818d360eaa2cab[m
+Merge: b2a9271 1962378
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Mon Jun 10 23:20:11 2024 +0700
+
+    Merge branch 'dangttkpc05468' into phinhpc05786
+
+[33mcommit b2a9271f12e71fcb17f1f9b97d19dd31ed83bfd8[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Mon Jun 10 23:19:50 2024 +0700
+
+    login
+
+[33mcommit 19623781e2c0ad3de9b9d15989fa688dcf92938a[m
+Author: Tranthikimdang <dangttkpc05468@fpt.edu.vn>
+Date:   Mon Jun 10 23:06:04 2024 +0700
+
+    phan trang
+
+[33mcommit 4d26865819cbf7662276f1faab18d40f7d9d9272[m
+Author: Tranthikimdang <dangttkpc05468@fpt.edu.vn>
+Date:   Mon Jun 10 19:53:32 2024 +0700
+
+    button
+
+[33mcommit c430f51a9e2f7f4b5ef7f4d12e09a4eb8922acfc[m
+Merge: 0fcaaa0 ab3e8eb
+Author: Tranthikimdang <dangttkpc05468@fpt.edu.vn>
+Date:   Mon Jun 10 15:45:01 2024 +0700
+
+    Merge remote-tracking branch 'origin/phinhpc05786' into dangttkpc05468
+
+[33mcommit 0fcaaa0e36f3ebb0117695cc06486f81698403e1[m
+Author: Tranthikimdang <dangttkpc05468@fpt.edu.vn>
+Date:   Mon Jun 10 15:42:14 2024 +0700
+
+    test
+
+[33mcommit ab3e8eb194d040ab37252a79c3d91bea9d616fea[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Mon Jun 10 13:56:07 2024 +0700
+
+    login loi
+
+[33mcommit e10e53c94150d447bac0dcce8bd766a0002ff45b[m
+Merge: 7a1f445 01b949e
+Author: GKAYDER724 <145838116+GKAYDER724@users.noreply.github.com>
+Date:   Mon Jun 10 13:48:44 2024 +0700
+
+    Merge remote-tracking branch 'origin/khiemddpc05680' into aithdpc05853
+
+[33mcommit 7a1f4454284c3084937de80d53640c849c8bef12[m
+Author: GKAYDER724 <145838116+GKAYDER724@users.noreply.github.com>
+Date:   Mon Jun 10 13:37:36 2024 +0700
+
+    demo
+
+[33mcommit 831b6962cd3d14311c798c5ff919041d19b81b0c[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Mon Jun 10 10:43:23 2024 +0700
+
+    statistics-detail
+
+[33mcommit 7ae7570328c96ac81fbff51ea7460fe673a6eb9b[m
+Author: Tranthikimdang <dangttkpc05468@fpt.edu.vn>
+Date:   Sun Jun 9 20:15:32 2024 +0700
+
+    search dashboard and fix product
+
+[33mcommit 6cf758cf577bbcb1865ea7fda12a7e82b4e2c70f[m
+Merge: 0efe3cd 01b949e
+Author: Tranthikimdang <dangttkpc05468@fpt.edu.vn>
+Date:   Sun Jun 9 19:32:17 2024 +0700
+
+    Merge remote-tracking branch 'origin/khiemddpc05680' into dangttkpc05468
+
+[33mcommit e0e3dbb037dc4dc18e8fbdcd4e2a240a6596e435[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Sun Jun 9 19:11:43 2024 +0700
+
+    search
+
+[33mcommit bc80b9d01c5eef518b6f7758263b0439c10e393d[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Sun Jun 9 19:05:14 2024 +0700
+
+    code zip
+
+[33mcommit 0efe3cd6a1f41725bd55e5378dde1df416e11a1b[m
+Author: Tranthikimdang <dangttkpc05468@fpt.edu.vn>
+Date:   Sun Jun 9 18:53:03 2024 +0700
+
+    dashboard
+
+[33mcommit c54c317741f3c79979308c873fe00360e0c0d54d[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Sun Jun 9 18:22:13 2024 +0700
+
+    ư
+
+[33mcommit e22fa7c0075282f9802ccfc7f34247dd1595a83f[m
+Merge: d55088a 76eab26
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Sun Jun 9 18:19:48 2024 +0700
+
+    Merge branch 'dangttkpc05468' into phinhpc05786
+
+[33mcommit d55088a597ddcc1a57a06b5e651c0694372aa500[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Sun Jun 9 18:19:08 2024 +0700
+
+    dung merch code nay
+
+[33mcommit 2a7c249b3d8d97fc9a45c72752dac1ba2fe82115[m
+Merge: 819ed94 01b949e
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Sun Jun 9 18:10:01 2024 +0700
+
+    Merge remote-tracking branch 'origin/khiemddpc05680' into phinhpc05786
+
+[33mcommit 819ed94697e1a949f11ce14fdb7df227a84c7c56[m
+Merge: 4507c9d c9909c6
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Sun Jun 9 18:09:38 2024 +0700
+
+    Merge remote-tracking branch 'origin/aithdpc05853' into phinhpc05786
+
+[33mcommit 4507c9d63a6042bdd2773dbded2a08c46da6fb76[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Sun Jun 9 18:04:12 2024 +0700
+
+    code con loi
+
+[33mcommit 76eab26b9a6a181257a5032780c3c9931489780f[m
+Author: Tranthikimdang <dangttkpc05468@fpt.edu.vn>
+Date:   Sat Jun 8 22:31:29 2024 +0700
+
+    fix product and fix hinh anh
+
+[33mcommit c9909c6a501851d452c8271d767df81f31bab621[m
+Author: GKAYDER724 <145838116+GKAYDER724@users.noreply.github.com>
+Date:   Sat Jun 8 19:10:37 2024 +0700
+
+    product and sever order
+
+[33mcommit 85dcc76101ac33335616e1565f4e0942cd1d7bc1[m
+Author: GKAYDER724 <145838116+GKAYDER724@users.noreply.github.com>
+Date:   Fri Jun 7 13:24:48 2024 +0700
+
+    product
+
+[33mcommit a25861d5c2e260512e4dc3a9d5a385331c94e4d7[m
+Merge: 2d78ac5 8e4e756
+Author: Tranthikimdang <dangttkpc05468@fpt.edu.vn>
+Date:   Fri Jun 7 13:16:23 2024 +0700
+
+    Merge remote-tracking branch 'origin/phinhpc05786' into dangttkpc05468
+
+[33mcommit 2d78ac5f334cf82424575228bdd9d231e06a4476[m
+Author: Tranthikimdang <dangttkpc05468@fpt.edu.vn>
+Date:   Fri Jun 7 13:16:09 2024 +0700
+
+    dashboard
+
+[33mcommit fff001ae76f82c70ab9d6139bea48568eb832625[m
+Author: GKAYDER724 <145838116+GKAYDER724@users.noreply.github.com>
+Date:   Fri Jun 7 12:41:01 2024 +0700
+
+    product
+
+[33mcommit 8e4e756f358dd7d11e5fe30ee017773d97cfa52c[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Fri Jun 7 12:38:41 2024 +0700
+
+    thongKe
+
+[33mcommit 2c201e3e1a95ba4ec0f88716377373bd7738e510[m
+Merge: d4a075d fbda86e
+Author: GKAYDER724 <145838116+GKAYDER724@users.noreply.github.com>
+Date:   Wed Jun 5 22:02:06 2024 +0700
+
+    code error not push
+
+[33mcommit d4a075da78f9728f355d7dcc5ff163dc3b47a0f5[m
+Author: GKAYDER724 <145838116+GKAYDER724@users.noreply.github.com>
+Date:   Wed Jun 5 21:35:33 2024 +0700
+
+    product
+
+[33mcommit 487a3dc047ffb1fa337a53e309c3870a9b01e328[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Wed Jun 5 13:33:45 2024 +0700
+
+    code product da fix
+
+[33mcommit 01b949ef68e64d81258219619556a085bede34c0[m[33m ([m[1;31morigin/khiemddpc05680[m[33m)[m
+Author: dinhkhiem <khiemddpc05680@fpt.edu.vn>
+Date:   Wed Jun 5 13:27:30 2024 +0700
+
+    updated
+
+[33mcommit e7fc70e1f9be30ba7e9f1a33e3566f1a363687e6[m
+Merge: 9e73d78 f89553e
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Wed Jun 5 12:19:05 2024 +0700
+
+    Merge remote-tracking branch 'origin/khiemddpc05680' into phinhpc05786
+
+[33mcommit 9e73d78b5b3b37658f3fddb08f520bf67bf1778c[m
+Merge: 8444936 e4c781d
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Wed Jun 5 12:14:32 2024 +0700
+
+    Merge remote-tracking branch 'origin/aithdpc05853' into phinhpc05786
+
+[33mcommit 8444936885f882fa6ab0ce16e3fb43ae33a44bf2[m
+Author: phinhpc05786 <phinhpc05786@fpt.edu.vn>
+Date:   Wed Jun 5 12:14:03 2024 +0700
+
+    profile
+
+[33mcommit e4c781d9a84c7fc1b5d01c370a9467dde37e03e5[m
+Author: GKAYDER724 <145838116+GKAYDER724@users.noreply.github.com>
+Date:   Wed Jun 5 10:05:26 2024 +0700
+
+    product
+
+[33mcommit f89553efe2d7e668b1bf40040db70aa2a7368bfc[m
+Author: dinhkhiem <khiemddpc05680@fpt.edu.vn>
+Date:   Wed Jun 5 09:11:11 2024 +0700
+
+    CRUD User
+
+[33mcommit 5840858c9e4edb122c286c6359da3526672c03a9[m
+Author: dinhkhiem <khiemddpc05680@fpt.edu.vn>
+Date:   Wed Jun 5 09:10:46 2024 +0700
+
+    CRUD Category
+
+[33mcommit 6d12426f31902423882d9d6fffe114787fda9dcd[m
+Author: 
