@@ -263,6 +263,12 @@
             </tr>
           </tbody>
         </table>
+        <ngx-paginator 
+            [apiUrl]="apiUrl" 
+            [currentPage]="currentPage" 
+            [lastPage]="lastPage" 
+            (dataList)="getPage($event)">
+        </ngx-paginator>
       </div>
     </div>
   </div>
