@@ -30,6 +30,7 @@ app.use(cors());
 //   optionsSuccessStatus: 204
 // }));
 
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/'); // Thư mục lưu trữ tệp
@@ -95,6 +96,9 @@ app.get('/products', async (req, res) => {
     res.status(500).json({ error: 'An error occurred' });
   }
 });
+app.use('/api/', commentRoute,);
+app.use('/api/', userRoute);
+app.use('/api/', categoryRoute);
 
 app.listen(port, async () => {
   await sequelize.sync();
