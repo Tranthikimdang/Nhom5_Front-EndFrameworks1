@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { Observable,catchError, map, throwError } from 'rxjs';
-
 import {ApiService} from "../common";
 import {API_BASE_URL,API_ENDPOINT} from "../../config/api-endpoint.config";
 import { Category } from 'app/pages/entities/categories';

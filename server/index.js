@@ -99,6 +99,24 @@ app.get('/products', async (req, res) => {
   }
 });
 
+app.use('/api/', commentRoute,);
+app.use('/api/', userRoute);
+app.use('/api/', categoryRoute);
+app.use('/api/', orderRoutes);
+
+app.put('/api/order', (req, res) => {
+  // Logic to update the order
+  const order = req.body;
+  // Assume you have a function to update order in your database
+  updateOrder(order).then(() => {
+    res.status(200).send({ status: 'success', data: order });
+  }).catch(err => {
+    res.status(500).send({ status: 'error', message: err.message });
+  });
+});
+
+
+
 app.listen(port, async () => {
   await sequelize.sync();
   console.log(`Server is running on http://localhost:${port}`);
