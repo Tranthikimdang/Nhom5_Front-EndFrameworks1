@@ -30,19 +30,23 @@ export class AuthService extends ApiService {
     super(_http);
   }
 
-  // login(form: ILogin): Observable<any>  {
-  //   return this.post<any>(API_BASE_URL + API_ENDPOINT.auth.login, {
-  //     idLogin: form.email.trim(),
-  //     password: form.password,
-  //   });
+  // login(email: string, password: string): Observable<any> {
+  //   console.log(API_ENDPOINT.auth.login);
+    
+  //   return this._http.post(API_BASE_URL+ API_ENDPOINT.auth.login, { email, password });
   // }
+
+  // checkUserExists(email: string): Observable<boolean> {
+  //   console.log(API_ENDPOINT.auth.login);
+    
+  //   return this._http.get<boolean>(`${API_BASE_URL + API_ENDPOINT.auth.checkUserExists}?email=${email.trim()}`);
+  // }
+
   login(email: string, password: string): Observable<any> {
-    return this._http.post(API_ENDPOINT.auth.login, { email, password });
+    return this._http.post<any>(API_BASE_URL + API_ENDPOINT.auth.login, { email, password });
   }
 
   checkUserExists(email: string): Observable<boolean> {
-    console.log(API_ENDPOINT.auth.login);
-    
     return this._http.get<boolean>(`${API_BASE_URL + API_ENDPOINT.auth.checkUserExists}?email=${email.trim()}`);
   }
 
