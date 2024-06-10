@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './@core/guards';
+import { LoginComponent } from './auth/login/login.component';
 
 
 export const routes: Routes = [
@@ -15,6 +16,7 @@ export const routes: Routes = [
       import('./pages/pages.module').then((m) => m.PagesModule),
     data: { breadcrumb: 'Home' },
   },
+  { path: 'login', component: LoginComponent },
   {
     path: 'error',
     loadChildren: () =>
