@@ -53,13 +53,19 @@ export class StatisticsComponent implements OnInit {
             // Tính giá trung bình của danh mục
             const averagePrice = products.reduce((sum, product) => sum + product.productPrice, 0) / products.length;
   
+            // Làm tròn và định dạng số liệu
+            const formattedTotalQuantity = totalQuantity.toLocaleString();
+            const formattedHighestPrice = Math.round(highestPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            const formattedLowestPrice = Math.round(lowestPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            const formattedAveragePrice = Math.round(averagePrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  
             const statsItem = {
               categoryCode: category.cateId,
               categoryName: category.cateName,
-              quantity: totalQuantity, // Sử dụng tổng số lượng sản phẩm
-              highestPrice,
-              lowestPrice,
-              averagePrice
+              quantity: formattedTotalQuantity, // Sử dụng tổng số lượng sản phẩm đã định dạng
+              highestPrice: formattedHighestPrice, // Sử dụng giá cao nhất đã định dạng và làm tròn
+              lowestPrice: formattedLowestPrice, // Sử dụng giá thấp nhất đã định dạng và làm tròn
+              averagePrice: formattedAveragePrice // Sử dụng giá trung bình đã định dạng và làm tròn
             };
   
             this.statisticsData.push(statsItem);
@@ -74,6 +80,8 @@ export class StatisticsComponent implements OnInit {
       );
     });
   }
+  
+  
   
   
   

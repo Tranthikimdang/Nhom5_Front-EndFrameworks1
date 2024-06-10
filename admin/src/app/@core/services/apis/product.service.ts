@@ -10,6 +10,9 @@ import { ApiService } from '../common';
   providedIn: 'root',
 })
 export class ProductService extends ApiService {
+  searchProductsByName(name: string) {
+    throw new Error('Method not implemented.');
+  }
   constructor(private _http: HttpClient) {
     super(_http);
   }
@@ -20,12 +23,6 @@ export class ProductService extends ApiService {
       .pipe(catchError(this.handleError));
   }
 
-  // getProductsByCategory(cateId: number): Observable<any> {
-
-  //   return this._http.get<any>(
-  //     `${API_BASE_URL}/products/category/${cateId}`
-  //   );
-  // }
 
   getProductsByCategory(cateId: number): Observable<any> {
     return this._http
@@ -82,16 +79,5 @@ export class ProductService extends ApiService {
     );
   }
 
-  // handleError(error: HttpErrorResponse): Observable<never> {
-  //   let errorMessage = 'Unknown error!';
-  //   if (error.error instanceof ErrorEvent) {
-  //     // Client-side errors
-  //     errorMessage = `Error: ${error.error.message}`;
-  //   } else {
-  //     // Server-side errors
-  //     errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-  //   }
-  //   console.error(errorMessage);
-  //   return throwError(errorMessage);
-  // }
+
 }
