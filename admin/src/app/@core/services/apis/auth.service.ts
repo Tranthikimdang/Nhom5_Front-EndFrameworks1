@@ -39,6 +39,12 @@ export class AuthService extends ApiService {
     return this._http.get<boolean>(`${API_BASE_URL + API_ENDPOINT.auth.checkUserExists}?email=${email.trim()}`);
   }
 
+  checkUserExists(email: string): Observable<boolean> {
+    console.log(API_ENDPOINT.auth.login);
+    
+    return this._http.get<boolean>(`${API_BASE_URL + API_ENDPOINT.auth.checkUserExists}?email=${email.trim()}`);
+  }
+
 
   requirePassword(form: ILogin): Observable<any> {
     return this.post(API_BASE_URL + API_ENDPOINT.auth.login, {
