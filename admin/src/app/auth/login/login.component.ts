@@ -35,22 +35,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.spinner.show(); // Hiển thị spinner khi form được gửi
-  
-      const { email, password } = this.loginForm.value; // Lấy email và password từ form
-  
-      this.auth.login(email, password).pipe( // Sử dụng email và password khi gọi phương thức login
-        switchMap((userExists: boolean) => {
-          if (userExists) {
-            
-            
-            return this.auth.login(email, password);
-          } else {
-            throw new Error('User does not exist');
-          }
-        }),
+      this.spinner.show(); // Show spinner when form is submitted
+
+      const { email, password } = this.loginForm.value;
+
+      
+      this.auth.login(email, password).pipe(
         finalize(() => {
-          this.spinner.hide(); // Ẩn spinner sau khi đăng nhập thử
+          this.spinner.hide(); // Hide spinner after login attempt
         })
       ).subscribe({
         next: (res) => {
@@ -63,16 +55,18 @@ export class LoginComponent implements OnInit {
     }
   }
   
-  
   protected handleLoginSuccess(res) {
-    this.storageService.setItem(LOCALSTORAGE_KEY.userInfo, res.name);
-    // this.storageService.setItem(LOCALSTORAGE_KEY.token, res.token);
+    console.log("hihi");
+    
+    const { user, token } = res.data;
+    this.storageService.setItem(LOCALSTORAGE_KEY.userInfo, JSON.stringify(user));
+    this.storageService.setItem(LOCALSTORAGE_KEY.token, token);
     this.router.navigate([ROUTER_CONFIG.pages]).then();
     this.spinner.hide();
   }
 
   protected handleLoginFailed() {
     this.spinner.hide();
-    this.alertMessages = [{status: 'danger', message: 'Tài khoản hoặc mật khẩu không chính xác'}];
+    this.alertMessages = [{ status: 'danger', message: 'Tài khoản hoặc mật khẩu không chính xác' }];
   }
 }

@@ -46,7 +46,14 @@ app.use("/api/", categoryRoute);
 app.use("/api", productRoutes);
 app.use("/api/auth", loginRoute); // Đường dẫn mới cho các tác vụ liên quan đến xác thực
 
-app.get("/api/auth/checkUserExists", (req, res) => {
+// app.get("/api/auth/checkUserExists", (req, res) => {
+//   const email = req.query.email;
+//   // Kiểm tra sự tồn tại của user với email
+//   const userExists = true; // Giả sử người dùng tồn tại
+//   res.json(userExists);
+// });
+
+app.get('/api/auth/checkUserExists', (req, res) => {
   const email = req.query.email;
   // Kiểm tra sự tồn tại của user với email
   const userExists = true; // Giả sử người dùng tồn tại
@@ -68,12 +75,12 @@ app.post("/upload", upload.single("image"), (req, res) => {
 });
 
 
-app.post("/api/auth/login", (req, res) => {
-  const { email, password } = req.body;
-  // Xử lý đăng nhập
-  const loginSuccess = true; // Giả sử đăng nhập thành công
-  res.json({ success: loginSuccess });
-});
+// app.post("/api/auth/login", (req, res) => {
+//   const { email, password } = req.body;
+//   // Xử lý đăng nhập
+//   const loginSuccess = true; // Giả sử đăng nhập thành công
+//   res.json({ success: loginSuccess });
+// });
 
 app.listen(port, async () => {
   await sequelize.sync();

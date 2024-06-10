@@ -42,6 +42,8 @@ export class ProductService extends ApiService {
   }
 
   getAllProducts(): Observable<any> {
+  console.log(API_BASE_URL);
+      
     return this.get(API_BASE_URL + API_ENDPOINT.product.get);
   }
 
