@@ -27,6 +27,7 @@ console.log(user.password, password);
     res.status(500).send({ status: 'error', message: err.message || 'Some error occurred while retrieving the user.' });
   }
 };
+// jjdsjkdkdf
 
 exports.getUserByEmail = async (req, res) => {
   try {
