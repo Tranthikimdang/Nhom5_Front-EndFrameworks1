@@ -51,8 +51,7 @@ export class ProductsComponent implements OnInit {
         const { data, status } = res;
         if (status === 'success') {
         this.products = data.products;
-        this.lastPage = res.meta ? res.meta.last_page : 1;
-        this.currentPage = res.meta.current_page;
+        
         }
       },
       error: (err) => {
@@ -157,7 +156,5 @@ export class ProductsComponent implements OnInit {
   close() {
     this.isDeleteDialogOpen = false;
   }
-  getPage(res: any) {
-    this.products = res.data;
-  }
+  
 }

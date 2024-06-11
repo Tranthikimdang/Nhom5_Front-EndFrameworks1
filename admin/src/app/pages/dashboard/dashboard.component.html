@@ -250,8 +250,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor='let p of products ; trackBy : trackByProduct'>
-              <td>{{p.productID}}</td>
+            <tr *ngFor='let p of products ; trackBy : trackByProduct; let i=index'>
+              <td>{{i+1}}</td>
               <td class="py-1">
                 <img src="{{p.productImage}}" alt="image" width="70px">
               </td>
@@ -263,12 +263,12 @@
             </tr>
           </tbody>
         </table>
-        <ngx-paginator 
+        <!-- <ngx-paginator 
             [apiUrl]="apiUrl" 
             [currentPage]="currentPage" 
             [lastPage]="lastPage" 
             (dataList)="getPage($event)">
-        </ngx-paginator>
+        </ngx-paginator> -->
       </div>
     </div>
   </div>

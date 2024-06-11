@@ -38,5 +38,10 @@ export const API_ENDPOINT: IAPIEndpoint = {
   login: {
     post: `${API_BASE_URL}/auth/login`
   },
-  order: undefined
+  order: {
+    get: '/orders',
+    create: '/order',
+    update: '/order',
+    delete: '/order',
+  },
 };

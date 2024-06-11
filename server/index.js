@@ -15,6 +15,7 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const authRoutes = require("./routes/loginRouter");
+const orderRoutes = require('./routes/orderRoutes')
 
 // Cấu hình body-parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -45,13 +46,19 @@ app.use("/api/", userRoute);
 app.use("/api/", categoryRoute);
 app.use("/api", productRoutes);
 app.use("/api/auth", loginRoute); // Đường dẫn mới cho các tác vụ liên quan đến xác thực
+app.use('/api/', orderRoutes);
 
-// app.get("/api/auth/checkUserExists", (req, res) => {
-//   const email = req.query.email;
-//   // Kiểm tra sự tồn tại của user với email
-//   const userExists = true; // Giả sử người dùng tồn tại
-//   res.json(userExists);
-// });
+app.put('/api/order', (req, res) => {
+  // Logic to update the order
+  const order = req.body;
+  // Assume you have a function to update order in your database
+  updateOrder(order).then(() => {
+    res.status(200).send({ status: 'success', data: order });
+  }).catch(err => {
+    res.status(500).send({ status: 'error', message: err.message });
+  });
+});
+
 
 app.get('/api/auth/checkUserExists', (req, res) => {
   const email = req.query.email;

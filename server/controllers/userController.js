@@ -81,10 +81,10 @@ exports.getAllUser = async (req, res) => {
 
 exports.createUser = async (req, res) => {
   try {
-    const { userName, userEmail , userPhone, userAddress} = req.body; // 
+    const { userName, userEmail , password, userPhone, userAddress} = req.body; // 
 
-    console.log(req.body);
-    const newUser = await User.create({ userName, userEmail , userPhone, userAddress });
+    console.log(userName, userEmail ,password, userPhone, userAddress);
+    const newUser = await User.create({ userName, userEmail ,password, userPhone, userAddress });
     res.status(201).json({ status: "success", data: { hotel: newUser } });
   } catch (err) {
     console.error("Error creating hotel:", err);
@@ -95,7 +95,7 @@ exports.createUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params; 
-    const { userName, userEmail , userPhone, userAddress} = req.body; // 
+    const { userName, userEmail ,password, userPhone, userAddress} = req.body; // 
     
     console.log(id);
 

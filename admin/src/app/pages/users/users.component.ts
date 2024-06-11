@@ -19,7 +19,8 @@ export class UsersComponent implements OnInit {
   editUserId: any = null;
   isEdit = false;
   confirmationMessage: string;
-  originalUsers: User[]; // Sửa kiểu dữ liệu của originalUsers
+  originalUsers: User[]; 
+  editingUser: User | null = null;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService)  { // Thêm UserService vào constructor
     this.formData = this.formBuilder.group({
@@ -78,7 +79,7 @@ export class UsersComponent implements OnInit {
           userPhone: this.formData.value.userPhone,            
           userAddress: this.formData.value.userAddress,   
         };
-
+        
         this.userService.createUser(newUser).subscribe({
           next: () => { // Sửa kiểu dữ liệu của next
             this.isDialogOpen = false;
@@ -162,5 +163,28 @@ export class UsersComponent implements OnInit {
 
   close() {
     this.isDeleteDialogOpen = false;
+  }
+  openEditDialog(user: User) {
+    this.isDialogOpen = true;
+    this.isEdit = true;
+    this.editUserId = user.userId;
+    this.formData.patchValue({
+      userName: user.userName,
+      userEmail: user.userEmail,
+      userPhone: user.userPhone,
+      userAddress: user.userAddress
+    });
+  }
+
+  closeEditDialog() {
+    this.isDialogOpen = false;
+    this.isEdit = false;
+    this.editingUser = null;
+    this.formData.reset();
+  }
+
+  editUser(user: User) {
+    this.editingUser = user; 
+    this.openEditDialog(user);
   }
 }

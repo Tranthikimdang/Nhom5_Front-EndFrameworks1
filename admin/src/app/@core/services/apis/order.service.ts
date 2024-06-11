@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 
 import { ApiService } from '../common';
-// import { OrderModel } from '../../model/order.model';
+import { OrderModel } from '../../model/order.model';
 import { API_BASE_URL, API_ENDPOINT } from '../../config/api-endpoint.config';
 import { Order } from 'app/pages/entities/order';
 
