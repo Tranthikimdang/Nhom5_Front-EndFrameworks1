@@ -5,55 +5,40 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { IAlertMessage } from '../../../@theme/components/alert/ngx-alerts.component';
-import { ApiService, LocalStorageService } from '../common';
-import { ILogin } from '../../interfaces/login.interface';
-import { API_BASE_URL, API_ENDPOINT } from '../../config/api-endpoint.config';
-import { UserInfoModel } from '../../model/user-info.model';
-import { LOCALSTORAGE_KEY } from '../../config';
+import {IAlertMessage} from "../../../@theme/components/alert/ngx-alerts.component";
+import {ApiService, LocalStorageService} from "../common";
+import {ILogin} from "../../interfaces/login.interface";
+import {API_BASE_URL, API_ENDPOINT} from "../../config/api-endpoint.config";
+import {UserInfoModel} from "../../model/user-info.model";
+import {LOCALSTORAGE_KEY} from "../../config";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService extends ApiService {
+
+
   private loginInfo: ILogin;
   private alertMessages: IAlertMessage;
   private jwtHelperService = new JwtHelperService();
 
   constructor(
-    private _http: HttpClient,
-    private router: Router,
-    private localStorageService: LocalStorageService
+      private _http: HttpClient,
+      private router: Router,
+      private localStorageService: LocalStorageService,
   ) {
     super(_http);
   }
 
-  // login(email: string, password: string): Observable<any> {
-  //   console.log(API_ENDPOINT.auth.login);
-
-  //   return this._http.post(API_BASE_URL+ API_ENDPOINT.auth.login, { email, password });
-  // }
-
-  // checkUserExists(email: string): Observable<boolean> {
-  //   console.log(API_ENDPOINT.auth.login);
-
-  //   return this._http.get<boolean>(`${API_BASE_URL + API_ENDPOINT.auth.checkUserExists}?email=${email.trim()}`);
-  // }
 
   login(email: string, password: string): Observable<any> {
-    return this._http.post<any>(API_BASE_URL + API_ENDPOINT.auth.login, {
-      email,
-      password,
-    });
+    return this._http.post<any>(API_BASE_URL + API_ENDPOINT.auth.login, { email, password });
   }
 
   checkUserExists(email: string): Observable<boolean> {
-    return this._http.get<boolean>(
-      `${
-        API_BASE_URL + API_ENDPOINT.auth.checkUserExists
-      }?email=${email.trim()}`
-    );
+    return this._http.get<boolean>(`${API_BASE_URL + API_ENDPOINT.auth.checkUserExists}?email=${email.trim()}`);
   }
+
 
   requirePassword(form: ILogin): Observable<any> {
     return this.post(API_BASE_URL + API_ENDPOINT.auth.login, {
@@ -103,15 +88,15 @@ export class AuthService extends ApiService {
   }
 
   cacheLoginInfo(value: ILogin) {
-    return (this.loginInfo = value);
+    return this.loginInfo = value;
   }
 
   cacheUpdateMessage(alertMessages: any) {
-    return (this.alertMessages = alertMessages);
+    return this.alertMessages = alertMessages;
   }
 
   clearMessage() {
-    return (this.alertMessages = null);
+    return this.alertMessages = null;
   }
 
   getUpdateMessage() {
@@ -122,10 +107,7 @@ export class AuthService extends ApiService {
   }
 
   logout() {
-    return this.post<any>(
-      API_BASE_URL + API_ENDPOINT.auth.logout,
-      this.getToken()
-    );
+    return this.post<any>(API_BASE_URL + API_ENDPOINT.auth.logout, this.getToken());
   }
 
   isLoggedIn(): boolean {
