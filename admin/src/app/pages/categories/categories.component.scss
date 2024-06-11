@@ -1,0 +1,73 @@
+@import '../../@theme/styles/themes';
+@import 'bootstrap/scss/mixins/breakpoints';
+@import '@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  .solar-card nb-card-header {
+    border: none;
+    padding-bottom: 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    ngx-traffic {
+      display: none;
+    }
+  }
+}
+.dialog-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Màu nền với độ mờ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng đổ */
+  max-width: 400px; /* Chiều rộng tối đa của dialog */
+  width: 80%; /* Chiều rộng mặc định */
+}
+
+.dialog-header {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.dialog-body {
+  margin-bottom: 20px;
+}
+
+.dialog-body button {
+  margin-right: 10px;
+}
+
+.dialog-footer {
+  text-align: right;
+}
+
+.confirm-btn {
+  background-color: green; /* Màu nền cho nút đồng ý */
+  color: white; /* Màu chữ cho nút đồng ý */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.cancel-btn {
+  background-color: red; /* Màu nền cho nút hủy */
+  color: white; /* Màu chữ cho nút hủy */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
