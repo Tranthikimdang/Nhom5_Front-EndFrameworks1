@@ -56,9 +56,6 @@ export class LoginComponent implements OnInit {
   }
   
   protected handleLoginSuccess(res) {
-
-    console.log("hihi");
-
     
     const { user, token } = res.data;
     this.storageService.setItem(LOCALSTORAGE_KEY.userInfo, JSON.stringify(user));
@@ -69,9 +66,6 @@ export class LoginComponent implements OnInit {
 
   protected handleLoginFailed() {
     this.spinner.hide();
-    this.alertMessages = [{ status: 'danger', message: 'Tài khoản hoặc mật khẩu không chính xác' }];
-
     this.alertMessages = [{ status: 'danger', message: 'Account or password is incorrect' }];
-
   }
 }

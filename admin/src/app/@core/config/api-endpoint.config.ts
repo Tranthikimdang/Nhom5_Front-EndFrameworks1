@@ -4,6 +4,7 @@ import { IAPIEndpoint } from '../interfaces';
 export const API_BASE_URL = APP_CONFIG.apiBaseUrl;
 
 export const API_ENDPOINT: IAPIEndpoint = {
+
   auth: {
     login: '/auth/login',
     checkUserExists: '/auth/checkUserExists',
@@ -38,7 +39,4 @@ export const API_ENDPOINT: IAPIEndpoint = {
     post: `${API_BASE_URL}/auth/login`
   },
   order: undefined
-},
-  order: undefined
-
 };
