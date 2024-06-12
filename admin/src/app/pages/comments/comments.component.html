@@ -33,8 +33,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let comment of comments; trackBy: trackByComment">
-              <td>{{comment.commentsId}}</td>
+            <tr *ngFor="let comment of comments; trackBy: trackByComment; let i=index">
+              <td>{{i+1}}</td>
               <td>{{comment.userName}}</td>
               <td>{{comment.commentsEmail}}</td>
               <td>{{comment.productName}}</td>

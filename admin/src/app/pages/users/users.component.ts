@@ -79,7 +79,7 @@ export class UsersComponent implements OnInit {
           userPhone: this.formData.value.userPhone,            
           userAddress: this.formData.value.userAddress,   
         };
-
+        
         this.userService.createUser(newUser).subscribe({
           next: () => { // Sửa kiểu dữ liệu của next
             this.isDialogOpen = false;

@@ -20,7 +20,12 @@ export class ProductsComponent implements OnInit {
   isEdit = false;
   confirmationMessage: string = '';
   originalProduct: Product[] = [];
-
+  currentPage: number = 1;
+  totalItems: number = 0;
+  totalPages: number = 0;
+  lastPage: number = 0;
+  apiUrl = 'http://localhost:3000/api/products';
+  pageSize: number = 10;
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService
@@ -36,23 +41,25 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadProduct();
+    this.loadProduct(this.currentPage);
   }
 
-  loadProduct() {
-    this.productService.getAllProducts().subscribe({
+  loadProduct(page: number) {
+    const pageSize = 10; // Số sản phẩm trên mỗi trang
+    this.productService.getProductsByPage(page, this.pageSize).subscribe({
       next: (res: any) => {
         const { data, status } = res;
         if (status === 'success') {
-          this.products = data.products;
-          this.originalProduct = [...data.products]; // Lưu trữ sản phẩm ban đầu
+        this.products = data.products;
+        
         }
       },
       error: (err) => {
         console.error('Error loading products', err);
-      },
+      }
     });
   }
+  
 
   openDialog() {
     this.isDialogOpen = true;
@@ -90,7 +97,7 @@ export class ProductsComponent implements OnInit {
       if (!this.isEdit) {
         this.productService.createProduct(product).subscribe({
           next: () => {
-            this.loadProduct();
+            
             this.closeDialog(); // Đóng dialog và reset form sau khi thêm mới thành công
           },
           error: (err) => {
@@ -100,7 +107,7 @@ export class ProductsComponent implements OnInit {
       } else if (this.editProductId) {
         this.productService.updateProduct(product).subscribe({
           next: () => {
-            this.loadProduct();
+            
             this.closeDialog(); // Đóng dialog và reset form sau khi chỉnh sửa thành công
           },
           error: (err) => {
@@ -137,7 +144,7 @@ export class ProductsComponent implements OnInit {
       this.productService.deleteProduct(this.dataProduct.productID).subscribe({
         next: () => {
           this.dataProduct = null;
-          this.loadProduct();
+          
         },
         error: (err: any) => {
           console.error('Error deleting product', err);
@@ -149,4 +156,5 @@ export class ProductsComponent implements OnInit {
   close() {
     this.isDeleteDialogOpen = false;
   }
+  
 }

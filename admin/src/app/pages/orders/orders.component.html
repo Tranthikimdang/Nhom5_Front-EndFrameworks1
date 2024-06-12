@@ -66,7 +66,7 @@
       <p>{{ confirmationMessage }}</p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button type="button" class="btn btn-primary me-md-2" (click)="handleDelete()">Yes</button>
-        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+<button type="button" class="btn btn-secondary" (click)="close()">Close</button>
       </div>
     </div>
   </div>
@@ -107,7 +107,7 @@
         <div class="mb-6 form-group" [class.has-error]="formData.get('payment').invalid && (formData.get('payment').dirty || formData.get('payment').touched)">
           <label for="payment" class="form-label">Payment:</label>
           <input type="text" class="form-control" id="payment" placeholder="Payment" formControlName="payment">
-          <div class="text-danger" *ngIf="formData.get('payment').invalid && (formData.get('payment').dirty || formData.get('payment').touched)">
+<div class="text-danger" *ngIf="formData.get('payment').invalid && (formData.get('payment').dirty || formData.get('payment').touched)">
             Payment cannot be empty.
           </div>
         </div>
