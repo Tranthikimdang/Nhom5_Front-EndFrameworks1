@@ -53,7 +53,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/', commentRoute,);
 app.use('/api/', userRoute);
 app.use('/api/', categoryRoute);
-app.use('/api', productRoutes);
+app.use('/api/', productRoutes);
 
 
 app.get('/api/auth/checkUserExists', (req, res) => {
@@ -101,16 +101,7 @@ app.use('/api/', userRoute);
 app.use('/api/', categoryRoute);
 app.use('/api/', orderRoutes);
 
-app.put('/api/order', (req, res) => {
-  // Logic to update the order
-  const order = req.body;
-  // Assume you have a function to update order in your database
-  updateOrder(order).then(() => {
-    res.status(200).send({ status: 'success', data: order });
-  }).catch(err => {
-    res.status(500).send({ status: 'error', message: err.message });
-  });
-});
+
 
 
 app.listen(port, async () => {

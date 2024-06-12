@@ -11,6 +11,7 @@ import { ApiService } from '../common';
 })
 export class ProductService extends ApiService{
 
+
   constructor(private _http: HttpClient) {
     super(_http);
   }
@@ -27,7 +28,8 @@ export class ProductService extends ApiService{
   }
 
   updateProduct(product: Product): Observable<any> {
-    return this.put(API_BASE_URL + API_ENDPOINT.product.update, )
+    const updateUrl = `${API_BASE_URL}${API_ENDPOINT.product.update}/${product.productID}`;
+    return this.put(updateUrl, product)
   }
 
   deleteProduct(productId: number): Observable<any> {

@@ -25,7 +25,6 @@
               <th>ID</th>
               <th>Type</th>
               <th>Product</th>
-              <th>Images</th>
               <th>Price</th>
               <th>Date</th>
               <th>Quantity</th>
@@ -33,21 +32,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let p of products; trackBy: trackByProduct">
-              <td>{{p.productID}}</td>
-              <td>{{p.productType}}</td>
-              <td>{{p.productName}}</td>
-              <td class="py-1">
-                <img src="{{p.productImage}}" alt="image" width="70px">
-              </td>
-              <td>&dollar;{{p.productPrice}}</td>
-              <td>{{p.expiryDate}}</td>
-              <td>{{p.quantity}}</td>
+            <tr *ngFor="let product of products; trackBy: trackByProduct">
+              <td>{{product.productID}}</td>
+              <td>{{product.productType}}</td>
+              <td>{{product.productName}}</td>
+              <td>&dollar;{{product.price}}</td>
+              <td>{{product.expiryDate}}</td>
+              <td>{{product.quantity}}</td>
               <td>
-                <button type="button" class="btn btn-outline-primary" style="margin-right: 10px;" (click)="editProductId(products)">
+                <button type="button" class="btn btn-outline-primary" style="margin-right: 10px;" (click)="editProduct(product)">
                   Edit
                 </button>
-                <button type="button" class="btn btn-outline-danger" (click)="openDialogDelete(products)">
+                <button type="button" class="btn btn-outline-danger" (click)="openDialogDelete(product)">
                   Delete
                 </button>
               </td>
@@ -78,63 +74,51 @@
   </div>
 </div>
 
-<app-dialog [isOpen]="isDialogOpen" title="Thêm" (closeModal)="closeDialog()">
+<app-dialog [isOpen]="isDialogOpen" title="Add" (closeModal)="closeDiaLog()">
   <form [formGroup]="formData" (ngSubmit)="addProduct()">
     <div class="row">
       <div class="col-md-6">
         <div class="mb-3 form-group" [class.has-error]="formData.get('productName').invalid && (formData.get('productName').dirty || formData.get('productName').touched)">
-          <label for="productName" class="form-label">Tên sản phẩm:</label>
-          <input type="text" class="form-control" id="productName" placeholder="Tên sản phẩm" formControlName="productName">
+          <label for="productName" class="form-label">Product Name:</label>
+          <input type="text" class="form-control" id="productName" placeholder="Product Name" formControlName="productName">
           <div class="text-danger" *ngIf="formData.get('productName').invalid && (formData.get('productName').dirty || formData.get('productName').touched)">
-            Tên sản phẩm không được để trống.
+            Product name is required.
           </div>
         </div>
         <div class="mb-3 form-group" [class.has-error]="formData.get('productType').invalid && (formData.get('productType').dirty || formData.get('productType').touched)">
-          <label for="productType" class="form-label">Loại sản phẩm:</label>
-          <input type="text" class="form-control" id="productType" placeholder="Loại sản phẩm" formControlName="productType">
-          <!-- <select class="form-select" id="productType" formControlName="productType">
-            <option selected>Chọn loại sản phẩm</option>
-            <option *ngFor="let p of products" [ngValue]="p">{{p}}</option>
-          </select> -->
+          <label for="productType" class="form-label">Product Type:</label>
+          <input type="number" class="form-control" id="productType" placeholder="Product Type" formControlName="productType">
           <div class="text-danger" *ngIf="formData.get('productType').invalid && (formData.get('productType').dirty || formData.get('productType').touched)">
-            Loại sản phẩm không được để trống.
+            Product type is required.
           </div>
         </div>
         <div class="mb-3 form-group" [class.has-error]="formData.get('price').invalid && (formData.get('price').dirty || formData.get('price').touched)">
-          <label for="price" class="form-label">Giá sản phẩm:</label>
-          <input type="number" class="form-control" id="price" placeholder="Giá sản phẩm" formControlName="price">
+          <label for="price" class="form-label">Price:</label>
+          <input type="number" class="form-control" id="price" placeholder="Price" formControlName="price">
           <div class="text-danger" *ngIf="formData.get('price').invalid && (formData.get('price').dirty || formData.get('price').touched)">
-            Giá sản phẩm không được để trống.
+            Price is required and must be a positive number.
           </div>
         </div>
       </div>
-        <div class="col-md-6">
-        
+      <div class="col-md-6">
         <div class="mb-3 form-group" [class.has-error]="formData.get('quantity').invalid && (formData.get('quantity').dirty || formData.get('quantity').touched)">
-          <label for="quantity" class="form-label">Số lượng:</label>
-          <input type="number" class="form-control" id="quantity" placeholder="Số lượng" formControlName="quantity">
+          <label for="quantity" class="form-label">Quantity:</label>
+          <input type="number" class="form-control" id="quantity" placeholder="Quantity" formControlName="quantity">
           <div class="text-danger" *ngIf="formData.get('quantity').invalid && (formData.get('quantity').dirty || formData.get('quantity').touched)">
-            Số lượng không được để trống.
+            Quantity is required and must be a positive number.
           </div>
         </div>
         <div class="mb-3 form-group" [class.has-error]="formData.get('expiryDate').invalid && (formData.get('expiryDate').dirty || formData.get('expiryDate').touched)">
-          <label for="expiryDate" class="form-label">Ngày hết hạn:</label>
-          <input type="date" class="form-control" id="expiryDate" placeholder="Ngày hết hạn" formControlName="expiryDate">
+          <label for="expiryDate" class="form-label">Expiry Date:</label>
+          <input type="date" class="form-control" id="expiryDate" placeholder="Expiry Date" formControlName="expiryDate">
           <div class="text-danger" *ngIf="formData.get('expiryDate').invalid && (formData.get('expiryDate').dirty || formData.get('expiryDate').touched)">
-            Ngày hết hạn không được để trống.
-          </div>
-        </div>
-        <div class="mb-3 form-group" [class.has-error]="formData.get('imageURL').invalid && (formData.get('imageURL').dirty || formData.get('imageURL').touched)">
-          <label for="imageURL" class="form-label">Link ảnh:</label>
-          <input type="text" class="form-control" id="imageURL" placeholder="Link ảnh" formControlName="imageURL">
-          <div class="text-danger" *ngIf="formData.get('imageURL').invalid && (formData.get('imageURL').dirty || formData.get('imageURL').touched)">
-            Link ảnh không được để trống.
+            Expiry date is required.
           </div>
         </div>
       </div>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button type="submit" class="btn btn-primary">Add</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </div>
   </form>
 </app-dialog>
