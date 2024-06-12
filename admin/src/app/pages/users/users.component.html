@@ -30,7 +30,6 @@
             <tr>
               <th>ID</th>
               <th>Username</th>
-              <th>Password</th>
               <th>Email</th>
               <th>Phone</th>
               <th>Address</th>
@@ -41,7 +40,6 @@
             <tr *ngFor="let user of users; trackBy: trackByUser; let i=index">
               <td>{{i+1}}</td>
               <td>{{user.userName}}</td>
-              <td>{{user.password}}</td>
               <td>{{user.userEmail}}</td>
               <td>{{user.userPhone}}</td>
               <td>{{user.userAddress}}</td>
