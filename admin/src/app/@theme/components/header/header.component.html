@@ -1,5 +1,5 @@
 <div class="header-container">
-  <div class="logo-container">
+  <div class="logo-container" (click)="toggleDropdown()">
     <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
       <nb-icon icon="menu-2-outline"></nb-icon>
     </a>
@@ -25,6 +25,14 @@
       <nb-icon icon="chevron-down-outline" class="text-primary fs-4"></nb-icon>
     </nb-action>
   </nb-action>
+  
+  <ng-template #contextMenu *ngIf="isUserMenuOpen">
+    <nb-menu>
+      <nb-menu-item (click)="onOptionSelected('Profile')" title="Profile" icon="book-outline" link="/pages/profile"></nb-menu-item>
+      <nb-menu-item (click)="onOptionSelected('Log out')" title="Log out" icon="repeat-outline" link="/"></nb-menu-item>
+    </nb-menu>
+  </ng-template>
+
+  <!-- Include dropdown component -->
+  <app-dropdown *ngIf="isDropdownOpen" (optionSelected)="onOptionSelected($event)"></app-dropdown>
 </div>
-
-

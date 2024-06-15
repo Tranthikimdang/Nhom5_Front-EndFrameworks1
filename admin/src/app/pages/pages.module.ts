@@ -16,6 +16,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { CommentsComponent } from './comments/comments.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -25,7 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PaginatorModule,
     // CommentsModule,
     ReactiveFormsModule,
-    FormsModule,
+    FormsModule
   ],
   declarations: [
     PagesComponent,
