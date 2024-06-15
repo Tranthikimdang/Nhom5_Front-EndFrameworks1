@@ -49,11 +49,7 @@ const Products = sequelize.define('Products', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  productImage: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  productPrice: {
+  price: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
@@ -80,3 +76,5 @@ const Products = sequelize.define('Products', {
 Products.belongsTo(Category, { foreignKey: 'cateID' });
 
 module.exports = Products;
+
+

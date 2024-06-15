@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ProductModel } from '../../model/product.model';
 import { API_BASE_URL, API_ENDPOINT } from '../../config/api-endpoint.config';
@@ -9,7 +9,9 @@ import { ApiService } from '../common';
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService extends ApiService {
+export class ProductService extends ApiService{
+
+
   searchProductsByName(name: string) {
     throw new Error('Method not implemented.');
   }
@@ -45,17 +47,22 @@ export class ProductService extends ApiService {
   }
 
   getAllProducts(): Observable<any> {
-  console.log(API_BASE_URL);
-      
+    // let params = new HttpParams()
+    // .set('page', page.toString())
+    // .set('pageSize', pageSize.toString())
+    // if(filter){
+    //   params = params.set('filter', filter)
+    // }
     return this.get(API_BASE_URL + API_ENDPOINT.product.get);
   }
 
   createProduct(products: Product): Observable<any> {
-    return this.post(API_BASE_URL + API_ENDPOINT.product.create, products);
+    return this.post(API_BASE_URL + API_ENDPOINT.product.create, products)
   }
 
   updateProduct(product: Product): Observable<any> {
-    return this.put(API_BASE_URL + API_ENDPOINT.product.update);
+    const updateUrl = `${API_BASE_URL}${API_ENDPOINT.product.update}/${product.productID}`;
+    return this.put(updateUrl, product)
   }
 
   deleteProduct(productId: number): Observable<any> {
@@ -67,17 +74,6 @@ export class ProductService extends ApiService {
         console.error('Error occurred while deleting product:', error);
         return throwError(error);
       })
-    );
+    )
   }
-
-  getProductById(productId: string): Observable<Product> {
-    const url = `${API_BASE_URL}${API_ENDPOINT.product.get}/${productId}`;
-    return this._http.get<Product>(url).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return this.handleError(error);
-      })
-    );
-  }
-
-
 }

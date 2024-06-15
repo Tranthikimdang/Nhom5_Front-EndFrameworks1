@@ -15,7 +15,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { CommentsComponent } from './comments/comments.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { StatisticsDetailComponent } from './statistics-detail/statistics-detail.component';
 
 
 @NgModule({
@@ -39,7 +38,6 @@ import { StatisticsDetailComponent } from './statistics-detail/statistics-detail
     StatisticsComponent,
     DashboardComponent,
     DialogComponent,
-    StatisticsDetailComponent,
   ],
   providers: [],
 })

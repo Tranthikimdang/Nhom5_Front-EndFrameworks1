@@ -16,9 +16,6 @@
           </div>
           <div class="input-group-append">
             <button type="button" class="btn btn-outline-primary" (click)="openDialog()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 1.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0v-5a.5.5 0 0 1 .5-.5zM1.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zM8 14.5a.5.5 0 0 1-.5-.5v-5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-.5.5zM14.5 8a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5z"/>
-              </svg>
               Add
             </button>
           </div>
@@ -37,23 +34,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of users; trackBy: trackByUser; let i=index">
-              <td>{{i+1}}</td>
+            <tr *ngFor="let user of users; trackBy: trackByUser">
+              <td>{{user.userId}}</td>
               <td>{{user.userName}}</td>
               <td>{{user.userEmail}}</td>
               <td>{{user.userPhone}}</td>
               <td>{{user.userAddress}}</td>
               <td>
                 <button type="button" class="btn btn-outline-warning" style="margin-right: 3px;" (click)="editUser(user)">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
-                  </svg>
+                  Edit
                 </button>
                 <button type="button" class="btn btn-outline-danger" (click)="openDialogDelete(user)">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                  </svg>
+                  Delete
                 </button>
               </td>
             </tr>
@@ -88,7 +80,7 @@
       <div class="col-md-6">
         <div class="mb-3 form-group"
           [class.has-error]="formData.get('userName').invalid && (formData.get('userName').dirty || formData.get('userName').touched)">
-          <label for="userName" class="form-label">Name:</label>
+          <label for="userName" class="form-label">Tên:</label>
           <input type="text" class="form-control" id="userName" placeholder="Nhập tên" formControlName="userName" />
           <div class="text-danger"
             *ngIf="formData.get('userName').invalid && (formData.get('userName').dirty || formData.get('userName').touched)">
@@ -113,18 +105,18 @@
       <div class="col-md-6">
         <div class="mb-3 form-group"
           [class.has-error]="formData.get('userPhone').invalid && (formData.get('userPhone').dirty || formData.get('userPhone').touched)">
-          <label for="userPhone" class="form-label">Phone:</label>
+          <label for="userPhone" class="form-label">Số điện thoại:</label>
           <input class="form-control" id="userPhone" rows="3" placeholder="Số điện thoại" formControlName="userPhone">
           <span class="text-danger"
             *ngIf="formData.controls.userPhone.invalid && (formData.controls.userPhone.dirty || formData.controls.userPhone.touched)">
-            <span *ngIf="formData.controls.userPhone.errors?.required">Vui lòng nhập số điện thoại</span>
+            <span *ngIf="formData.controls.userPhone.errors?.required">Vui lòng nhập email</span>
             <span *ngIf="formData.controls.userPhone.errors?.maxlength">Tối đa 10 số</span>
           </span>
         </div>
         <div class="col-md-12">
           <div class="mb-3 form-group"
             [class.has-error]="formData.get('userAddress').invalid && (formData.get('userAddress').dirty || formData.get('userAddress').touched)">
-            <label for="userAddress" class="form-label">Address:</label>
+            <label for="userAddress" class="form-label">Địa chỉ:</label>
             <textarea class="form-control" id="userAddress" rows="3" placeholder="Địa chỉ"
               formControlName="userAddress"></textarea>
             <div class="text-danger"
@@ -133,18 +125,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-md-12">
-          <div class="mb-3 form-group"
-            [class.has-error]="formData.get('password').invalid && (formData.get('password').dirty || formData.get('password').touched)">
-            <label for="password" class="form-label">Password:</label>
-            <textarea class="form-control" id="password" rows="3" placeholder="Địa chỉ"
-              formControlName="password"></textarea>
-            <div class="text-danger"
-              *ngIf="formData.get('password').invalid && (formData.get('password').dirty || formData.get('password').touched)">
-              Password không được để trống.
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
     <button type="submit" class="btn btn-primary w-100">Lưu</button>
