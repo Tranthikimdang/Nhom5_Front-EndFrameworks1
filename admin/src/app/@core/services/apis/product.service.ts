@@ -10,6 +10,9 @@ import { ApiService } from '../common';
   providedIn: 'root',
 })
 export class ProductService extends ApiService{
+  getProductsByPage(page: number, pageSize: number) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private _http: HttpClient) {
     super(_http);

@@ -41,24 +41,24 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadProduct(this.currentPage);
+    this.loadProduct();
   }
 
-  loadProduct(page: number) {
-    const pageSize = 10; // Số sản phẩm trên mỗi trang
-    this.productService.getProductsByPage(page, this.pageSize).subscribe({
+  loadProduct() {
+    this.productService.getAllProducts().subscribe({
       next: (res: any) => {
         const { data, status } = res;
         if (status === 'success') {
-        this.products = data.products;
-        
+          this.products = data.products;
+          this.originalProduct = [...data.products];
         }
       },
       error: (err) => {
         console.error('Error loading products', err);
-      }
+      },
     });
   }
+
   
 
   openDialog() {

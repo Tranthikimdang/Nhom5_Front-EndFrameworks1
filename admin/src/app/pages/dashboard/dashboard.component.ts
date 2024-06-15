@@ -40,38 +40,30 @@ export class DashboardComponent implements OnInit {
       quantity: ['', Validators.required],
     });
   }
-
   ngOnInit() {
-    this.loadProducts(this.currentPage);
+    this.loadProduct();
   }
-  
-  loadProducts(page: number) {
-    const pageSize = 10; // Số sản phẩm trên mỗi trang
-    this.productService.getProductsByPage(page, this.pageSize).subscribe({
+
+  loadProduct() {
+    this.productService.getAllProducts().subscribe({
       next: (res: any) => {
         const { data, status } = res;
         if (status === 'success') {
-        this.products = data.products;
-        // this.lastPage = res.meta ? res.meta.last_page : 1;
-        // this.currentPage = res.meta.current_page;
+          this.products = data.products;
+          this.originalProduct = [...data.products];
         }
       },
       error: (err) => {
         console.error('Error loading products', err);
-      }
+      },
     });
   }
+
   
-
-
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.loadProducts(page);
-  }
 
   openDialog() {
     this.isDialogOpen = true;
-    this.formData.reset();
+    this.formData.reset(); // Reset form khi mở dialog
   }
 
   openDialogDelete(product: Product) {
@@ -79,7 +71,7 @@ export class DashboardComponent implements OnInit {
       this.isDeleteDialogOpen = true;
       this.dataProduct = product;
       this.title = 'Confirm Delete';
-      this.confirmationMessage = `Are you sure you want to delete product ${product.productName}?`;
+      this.confirmationMessage = `Bạn có chắc chắn muốn xóa sản phẩm ${product.productName}?`;
     }
   }
 
@@ -105,8 +97,8 @@ export class DashboardComponent implements OnInit {
       if (!this.isEdit) {
         this.productService.createProduct(product).subscribe({
           next: () => {
-            this.loadProducts(this.currentPage);
-            this.closeDialog();
+            
+            this.closeDialog(); // Đóng dialog và reset form sau khi thêm mới thành công
           },
           error: (err) => {
             console.error('Error adding product', err);
@@ -115,8 +107,8 @@ export class DashboardComponent implements OnInit {
       } else if (this.editProductId) {
         this.productService.updateProduct(product).subscribe({
           next: () => {
-            this.loadProducts(this.currentPage);
-            this.closeDialog();
+            
+            this.closeDialog(); // Đóng dialog và reset form sau khi chỉnh sửa thành công
           },
           error: (err) => {
             console.error('Error editing product', err);
@@ -131,7 +123,7 @@ export class DashboardComponent implements OnInit {
   filter() {
     const filterText = this.filterValue.trim().toLowerCase();
     if (!filterText) {
-      this.products = [...this.originalProduct];
+      this.products = [...this.originalProduct]; // Reset lại danh sách sản phẩm khi không có bộ lọc
       return;
     }
     this.products = this.originalProduct.filter((product) => {
@@ -142,7 +134,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  trackByProduct(index: number, product: Product): number {
+  trackByProduct(index: number, product: any): number {
     return product.productID;
   }
 
@@ -152,7 +144,7 @@ export class DashboardComponent implements OnInit {
       this.productService.deleteProduct(this.dataProduct.productID).subscribe({
         next: () => {
           this.dataProduct = null;
-          this.loadProducts(this.currentPage);
+          
         },
         error: (err: any) => {
           console.error('Error deleting product', err);
@@ -164,4 +156,5 @@ export class DashboardComponent implements OnInit {
   close() {
     this.isDeleteDialogOpen = false;
   }
+  
 }

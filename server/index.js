@@ -89,22 +89,7 @@ app.post("/upload", upload.single("image"), (req, res) => {
 //   res.json({ success: loginSuccess });
 // });
 
-// lấy dữ liệu sản phẩm cùng với tên danh mục.
-app.get('/products', async (req, res) => {
-  try {
-    const products = await Products.findAll({
-      include: [{
-        model: Category,
-        attributes: ['categoryName'] // Chỉ lấy tên danh mục
-      }]
-    });
 
-    res.json(products);
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).json({ error: 'An error occurred' });
-  }
-});
 
 app.listen(port, async () => {
   await sequelize.sync();
