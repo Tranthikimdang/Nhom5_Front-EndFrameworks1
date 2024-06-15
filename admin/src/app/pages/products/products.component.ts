@@ -21,11 +21,6 @@ export class ProductsComponent implements OnInit {
   confirmationMessage: string = '';
   originalProduct: Product[];
   editingProduct: Product | null = null;
-  currentPage: number = 1;
-  totalItems: number = 0;
-  totalPages: number = 0;
-  lastPage: number = 0;
-  pageSize: number = 10;
 
   constructor(private formBuilder: FormBuilder,private productService: ProductService) {
     this.formData = this.formBuilder.group({
@@ -41,8 +36,7 @@ export class ProductsComponent implements OnInit {
     this.loadProduct();
   }
 
-  loadProduct(page: number){
-    const pageSize = 10;
+  loadProduct(){
     this.productService.getAllProducts().subscribe({
       next: (res: any) => {
         const { data, status } = res;
@@ -56,12 +50,6 @@ export class ProductsComponent implements OnInit {
       },
     });
   }
-
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.loadProduct(page);
-  }
-
 
   openDialog(){
     this.isDialogOpen = true;
@@ -97,7 +85,7 @@ export class ProductsComponent implements OnInit {
       this.productService.createProduct(newProduct).subscribe({
         next: () => {
           this.isDialogOpen = false;
-          this.loadProduct(this.currentPage);
+          this.loadProduct();
         },
         error: (err: any) => {
           console.error(err);
@@ -117,7 +105,7 @@ export class ProductsComponent implements OnInit {
         this.productService.updateProduct(editProduct).subscribe({
           next: () => {
             this.isDialogOpen=false;
-            this.loadProduct(this.currentPage);
+              this.loadProduct();
           },
           error: (err: any) => {
             console.error(err);
@@ -161,7 +149,7 @@ export class ProductsComponent implements OnInit {
           // Sửa kiểu dữ liệu của next
           this.isDeleteDialogOpen = false;
           this.dataProduct = {};
-          this.loadProduct(this.currentPage);
+          this.loadProduct();
         },
         error: (err: any) => {
           console.error('Lỗi khi xóa:', err);
@@ -175,10 +163,13 @@ export class ProductsComponent implements OnInit {
   }
 
   openEditDialog(product: Product) {
+    console.log("aaaaa");
+
     if (product) {
       this.isDialogOpen = true;
       this.isEdit = true;
       this.editProductId = product.productID;
+      console.log(product)
       this.formData.patchValue({
         productType: product.productType,
         productName: product.productName,

@@ -5,17 +5,16 @@ const userRoute = require('./routes/userRoutes');
 const categoryRoute = require('./routes/categoryRoutes');
 const loginRoute = require('./routes/loginRouter');
 const productRoutes = require('./routes/productRoutes');
+const orderRoutes = require('./routes/orderRoutes')
 const { sequelize } = require('./models');
 // const Products = require('./models/productModel');
 // const Category = require('./models/categoryModel');
-const cors = require("cors");
+const cors = require('cors');
 const app = express();
 const port = 3000;
-const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
-const authRoutes = require("./routes/loginRouter");
-const orderRoutes = require('./routes/orderRoutes')
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
 // Cấu hình body-parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,30 +22,31 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
+// Hoặc cấu hình CORS chi tiết hơn nếu cần
+// app.use(cors({
+//   origin: 'http://your-frontend-url.com', // Chỉ cho phép từ domain cụ thể
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true, // Cho phép gửi cookies nếu cần
+//   optionsSuccessStatus: 204
+// }));
+
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/"); // Thư mục lưu trữ tệp
+    cb(null, 'uploads/'); // Thư mục lưu trữ tệp
   },
   filename: function (req, file, cb) {
     console.log(file);
     console.log(path.extname(file.originalname));
     cb(null, file.originalname); // Đặt tên tệp
-  },
+  }
 });
 
 const upload = multer({ storage: storage });
-const uploadDir = "uploads";
+const uploadDir = 'uploads';
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
 }
-
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use("/api/", commentRoute);
-app.use("/api/", userRoute);
-app.use("/api/", categoryRoute);
-app.use("/api", productRoutes);
-app.use("/api/auth", loginRoute); // Đường dẫn mới cho các tác vụ liên quan đến xác thực
-app.use('/api/', orderRoutes);
 
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -54,16 +54,6 @@ app.use('/api/', commentRoute,);
 app.use('/api/', userRoute);
 app.use('/api/', categoryRoute);
 app.use('/api/', productRoutes);
-app.put('/api/order', (req, res) => {
-  // Logic to update the order
-  const order = req.body;
-  // Assume you have a function to update order in your database
-  updateOrder(order).then(() => {
-    res.status(200).send({ status: 'success', data: order });
-  }).catch(err => {
-    res.status(500).send({ status: 'error', message: err.message });
-  });
-});
 
 
 app.get('/api/auth/checkUserExists', (req, res) => {
@@ -73,27 +63,22 @@ app.get('/api/auth/checkUserExists', (req, res) => {
   res.json(userExists);
 });
 
-app.post("/upload", upload.single("image"), (req, res) => {
+app.post('/upload', upload.single('image'), (req, res) => {
   if (req.file) {
     // Trả về đường dẫn của ảnh
     const imagePath = `http://localhost:${port}/uploads/${req.file.filename}`;
-    res.status(201).json({
-      status: 201,
-      message: "Tải lên thành công!",
-      imagePath: imagePath,
-    });
+    res.status(201).json({status:201, message: 'Tải lên thành công!', imagePath: imagePath });
   } else {
-    res.status(400).json({ message: "Tải lên thất bại!" });
+    res.status(400).json({ message: 'Tải lên thất bại!' });
   }
 });
 
-
-// app.post("/api/auth/login", (req, res) => {
-//   const { email, password } = req.body;
-//   // Xử lý đăng nhập
-//   const loginSuccess = true; // Giả sử đăng nhập thành công
-//   res.json({ success: loginSuccess });
-// });
+app.post('/api/auth/login', (req, res) => {
+  const { email, password } = req.body;
+  // Xử lý đăng nhập
+  const loginSuccess = true; // Giả sử đăng nhập thành công
+  res.json({ success: loginSuccess });
+});
 
 // lấy dữ liệu sản phẩm cùng với tên danh mục.
 app.get('/products', async (req, res) => {
@@ -111,12 +96,10 @@ app.get('/products', async (req, res) => {
     res.status(500).json({ error: 'An error occurred' });
   }
 });
-
 app.use('/api/', commentRoute,);
 app.use('/api/', userRoute);
 app.use('/api/', categoryRoute);
 app.use('/api/', orderRoutes);
-
 
 
 
