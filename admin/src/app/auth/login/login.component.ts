@@ -39,8 +39,6 @@ export class LoginComponent implements OnInit {
       this.spinner.show(); // Show spinner when form is submitted
 
       const { email, password } = this.loginForm.value;
-
-      console.log("asdasđ:", this.auth.login(email, password));
       
       this.auth.login(email, password).pipe(
         finalize(() => {
