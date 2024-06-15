@@ -2,7 +2,7 @@ export interface Product {
     productID?: number;
     productType: string;
     productName: string;
-    price: number;
+    productPrice: number;
     expiryDate: string;
     quantity: number;
 }

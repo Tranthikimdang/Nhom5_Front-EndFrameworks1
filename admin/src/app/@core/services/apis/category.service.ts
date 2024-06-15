@@ -22,7 +22,7 @@ export class CategoryService extends ApiService {
     return this._http.get<any>(`${API_BASE_URL}${API_ENDPOINT.category.get}`).pipe(
       map(response => {
         // Kiểm tra phản hồi từ API
-        console.log('API Response:', response);
+        // console.log('API Response:', response);
 
         if (response && response.status === 'success' && response.data) {
           // Trả về dữ liệu danh mục từ phản hồi API

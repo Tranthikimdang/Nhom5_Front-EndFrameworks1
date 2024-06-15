@@ -36,7 +36,7 @@
               <td>{{product.productID}}</td>
               <td>{{product.productType}}</td>
               <td>{{product.productName}}</td>
-              <td>&dollar;{{product.price}}</td>
+              <td>&dollar;{{product.productPrice}}</td>
               <td>{{product.expiryDate}}</td>
               <td>{{product.quantity}}</td>
               <td>
@@ -92,10 +92,10 @@
             Product type is required.
           </div>
         </div>
-        <div class="mb-3 form-group" [class.has-error]="formData.get('price').invalid && (formData.get('price').dirty || formData.get('price').touched)">
-          <label for="price" class="form-label">Price:</label>
-          <input type="number" class="form-control" id="price" placeholder="Price" formControlName="price">
-          <div class="text-danger" *ngIf="formData.get('price').invalid && (formData.get('price').dirty || formData.get('price').touched)">
+        <div class="mb-3 form-group" [class.has-error]="formData.get('productPrice').invalid && (formData.get('productPrice').dirty || formData.get('productPrice').touched)">
+          <label for="productPrice" class="form-label">Price:</label>
+          <input type="number" class="form-control" id="productPrice" placeholder="productPrice" formControlName="productPrice">
+          <div class="text-danger" *ngIf="formData.get('productPrice').invalid && (formData.get('productPrice').dirty || formData.get('productPrice').touched)">
             Price is required and must be a positive number.
           </div>
         </div>

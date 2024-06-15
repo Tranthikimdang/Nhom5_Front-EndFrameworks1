@@ -27,7 +27,6 @@ export class OrderService extends ApiService {
   }
   deleteOrder(id: string): Observable<any> {
     const deleteUrl = `${API_BASE_URL}${API_ENDPOINT.order.delete}/${id}`;
-    console.log(deleteUrl); // Log URL để debug
     return this.delete(deleteUrl).pipe(
       catchError((error) => {
         console.error('Error occurred while deleting comment:', error); // Log lỗi để debug

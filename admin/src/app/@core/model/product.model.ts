@@ -5,5 +5,6 @@ export class ProductModel {
   price: number;
   view: number;
   expiryDate: string;
+  cateID: string;
   quantity: number;
 }
