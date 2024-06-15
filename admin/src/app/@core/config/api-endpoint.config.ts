@@ -4,11 +4,12 @@ import { IAPIEndpoint } from '../interfaces';
 export const API_BASE_URL = APP_CONFIG.apiBaseUrl;
 
 export const API_ENDPOINT: IAPIEndpoint = {
+
   auth: {
-    base: API_BASE_URL + '/' + 'auth',
     login: '/auth/login',
+    checkUserExists: '/auth/checkUserExists',
     logout: '/auth/logout',
-    checkUserExists: '/checkUserExists'
+    getUserByEmail: '/auth/users',
   },
   comment: {
     get: '/comments',
@@ -34,13 +35,13 @@ export const API_ENDPOINT: IAPIEndpoint = {
     update: '/product',
     delete: '/product',
   },
+  login: {
+    post: `${API_BASE_URL}/auth/login`
+  },
   order: {
     get: '/orders',
     create: '/order',
     update: '/order',
     delete: '/order',
   },
-  login: {
-    get: `${API_BASE_URL}/login`
-  }
 };
