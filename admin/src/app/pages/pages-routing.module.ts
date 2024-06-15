@@ -9,6 +9,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ProfileComponent } from './profile/profile.component';
+import { StatisticsDetailComponent } from './statistics-detail/statistics-detail.component';
 
 
 
@@ -51,6 +52,16 @@ const routes: Routes = [{
       path: 'statistics',
       component: StatisticsComponent,
       data: {breadcrumb: 'statistics'},
+    },
+    {
+      path: 'statistics-detail',
+      component: StatisticsDetailComponent,
+      data: {breadcrumb: 'statistics-detail'},
+    },
+    {
+      path: 'statistics-detail/:id',
+      component: StatisticsDetailComponent,
+      data: {breadcrumb: 'statistics-detail'},
     },
     {
       path: 'profile',

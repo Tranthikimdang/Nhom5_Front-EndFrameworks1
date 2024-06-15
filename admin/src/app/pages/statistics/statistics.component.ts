@@ -60,7 +60,7 @@ export class StatisticsComponent implements OnInit {
             const formattedAveragePrice = Math.round(averagePrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   
             const statsItem = {
-              categoryCode: category.cateId,
+categoryCode: category.cateId,
               categoryName: category.cateName,
               quantity: formattedTotalQuantity, // Sử dụng tổng số lượng sản phẩm đã định dạng
               highestPrice: formattedHighestPrice, // Sử dụng giá cao nhất đã định dạng và làm tròn
