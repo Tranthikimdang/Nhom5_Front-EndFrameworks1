@@ -35,11 +35,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.router.navigate([ROUTER_CONFIG.pages]).then();
+      // this.router.navigate([ROUTER_CONFIG.pages]).then();
       this.spinner.show(); // Show spinner when form is submitted
 
       const { email, password } = this.loginForm.value;
 
+      console.log("asdasđ:", this.auth.login(email, password));
       
       this.auth.login(email, password).pipe(
         finalize(() => {

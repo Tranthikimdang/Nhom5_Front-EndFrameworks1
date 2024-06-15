@@ -13,6 +13,7 @@ import {
   NbWindowModule,
   NbToastrModule,
   NbChatModule,
+  NbThemeModule,
 } from '@nebular/theme';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
@@ -21,6 +22,7 @@ import { ThemeModule } from './@theme/theme.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    NbThemeModule.forRoot({ name: 'default' }),
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
