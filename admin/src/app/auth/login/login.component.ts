@@ -35,38 +35,39 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.router.navigate([ROUTER_CONFIG.pages]).then();
-    //   this.spinner.show(); // Show spinner when form is submitted
+      // this.router.navigate([ROUTER_CONFIG.pages]).then();
+      this.spinner.show(); // Show spinner when form is submitted
 
-    //   const { email, password } = this.loginForm.value;
+      const { email, password } = this.loginForm.value;
 
+      console.log("asdasđ:", this.auth.login(email, password));
       
-    //   this.auth.login(email, password).pipe(
-    //     finalize(() => {
-    //       this.spinner.hide(); // Hide spinner after login attempt
-    //     })
-    //   ).subscribe({
-    //     next: (res) => {
-    //       this.handleLoginSuccess(res);
-    //     },
-    //     error: (error) => {
-    //       this.handleLoginFailed();
-    //     }
-    //   });
-    // }
+      this.auth.login(email, password).pipe(
+        finalize(() => {
+          this.spinner.hide(); // Hide spinner after login attempt
+        })
+      ).subscribe({
+        next: (res) => {
+          this.handleLoginSuccess(res);
+        },
+        error: (error) => {
+          this.handleLoginFailed();
+        }
+      });
+    }
   }
   
-  // protected handleLoginSuccess(res) {
+  protected handleLoginSuccess(res) {
     
-  //   const { user, token } = res.data;
-  //   this.storageService.setItem(LOCALSTORAGE_KEY.userInfo, JSON.stringify(user));
-  //   this.storageService.setItem(LOCALSTORAGE_KEY.token, token);
-  //   this.router.navigate([ROUTER_CONFIG.pages]).then();
-  //   this.spinner.hide();
-  // }
+    const { user, token } = res.data;
+    this.storageService.setItem(LOCALSTORAGE_KEY.userInfo, JSON.stringify(user));
+    this.storageService.setItem(LOCALSTORAGE_KEY.token, token);
+    this.router.navigate([ROUTER_CONFIG.pages]).then();
+    this.spinner.hide();
+  }
 
-  // protected handleLoginFailed() {
-  //   this.spinner.hide();
-  //   this.alertMessages = [{ status: 'danger', message: 'Account or password is incorrect' }];
+  protected handleLoginFailed() {
+    this.spinner.hide();
+    this.alertMessages = [{ status: 'danger', message: 'Account or password is incorrect' }];
   }
 }

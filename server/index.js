@@ -5,7 +5,7 @@ const userRoute = require('./routes/userRoutes');
 const categoryRoute = require('./routes/categoryRoutes');
 const loginRoute = require('./routes/loginRouter');
 const productRoutes = require('./routes/productRoutes');
-const { sequelize } = require('./models');
+const { sequelize, UserAdmin } = require('./models');
 // const Products = require('./models/productModel');
 // const Category = require('./models/categoryModel');
 const cors = require("cors");
@@ -15,7 +15,8 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const authRoutes = require("./routes/loginRouter");
-const orderRoutes = require('./routes/orderRoutes')
+const orderRoutes = require('./routes/orderRoutes');
+const adminRoutes = require("./routes/adminRoutes");
 
 // Cấu hình body-parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -47,6 +48,7 @@ app.use("/api/", categoryRoute);
 app.use("/api", productRoutes);
 app.use("/api/auth", loginRoute); // Đường dẫn mới cho các tác vụ liên quan đến xác thực
 app.use('/api/', orderRoutes);
+app.use('/api/', adminRoutes);
 
 app.put('/api/order', (req, res) => {
   // Logic to update the order
@@ -82,14 +84,21 @@ app.post("/upload", upload.single("image"), (req, res) => {
 });
 
 
-// app.post("/api/auth/login", (req, res) => {
-//   const { email, password } = req.body;
-//   // Xử lý đăng nhập
-//   const loginSuccess = true; // Giả sử đăng nhập thành công
-//   res.json({ success: loginSuccess });
-// });
+app.get('/products', async (req, res) => {
+  try {
+    const products = await Products.findAll({
+      include: [{
+        model: Category,
+        attributes: ['categoryName'] // Chỉ lấy tên danh mục
+      }]
+    });
 
-
+    res.json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
 
 app.listen(port, async () => {
   await sequelize.sync();

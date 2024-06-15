@@ -1,7 +1,14 @@
+
 const express = require('express');
 const router = express.Router();
-const productController = require('../controllers/productController');
+const loginController = require('../controllers/AdminController');
 
-router.get('/auth/login', productController.getAllProduct);
-
+router.post('auth/login', loginController.getUserByEmail);
+router.get('/users', loginController.getAllUser);
+router.get('/users/:email', loginController.getUserByEmail);
+router.post('/login', loginController.getUserByEmailAndPassword);
 module.exports = router;
+
+
+
+
