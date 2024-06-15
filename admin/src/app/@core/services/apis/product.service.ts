@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ProductModel } from '../../model/product.model';
 import { API_BASE_URL, API_ENDPOINT } from '../../config/api-endpoint.config';
@@ -19,7 +19,13 @@ export class ProductService extends ApiService{
   getProductsByCategory(cateId: number): Observable<any> {
     return this._http.get<any>(`${API_BASE_URL}${API_ENDPOINT.product.get}?cateID=${cateId}`);
   }
-  getAllProducts(): Observable<any> {
+  getAllProducts(page: number, pageSize: number, filter?: string): Observable<any> {
+    // let params = new HttpParams()
+    // .set('page', page.toString())
+    // .set('pageSize', pageSize.toString())
+    // if(filter){
+    //   params = params.set('filter', filter)
+    // }
     return this.get(API_BASE_URL + API_ENDPOINT.product.get);
   }
 
