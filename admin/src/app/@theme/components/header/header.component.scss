@@ -2,6 +2,17 @@
 @import '@nebular/theme/styles/global/breakpoints';
 @import '../../styles/themes';
 
+
+.dropdown-container {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 9999; // Đảm bảo menu con nằm trên các phần tử khác
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
 .btn-group {
   &:hover {
 
@@ -9,14 +20,10 @@
       display: block;
     }
   }
-
   .dropdown-menu {
-    top: 100%;
-
-    .dropdown-item {
-      text-decoration: none;
-    }
+    z-index: 9999; /* Thiết lập z-index cao hơn để dropdown nằm trên các phần tử khác */
   }
+  
 }
 .font-sans-serif:hover {
   color: #8B4513;
