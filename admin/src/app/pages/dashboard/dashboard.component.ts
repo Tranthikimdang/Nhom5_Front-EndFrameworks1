@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.loadProducts(this.currentPage);
   }
-  
+
   loadProducts(page: number) {
     const pageSize = 10; // Số sản phẩm trên mỗi trang
     this.productService.getProductsByPage(page, this.pageSize).subscribe({
@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-  
+
 
 
   onPageChange(page: number) {
@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit {
       const product: Product = {
         productType: this.formData.value.productType,
         productName: this.formData.value.productName,
-        imageURL: this.formData.value.imageURL,
+        // imageURL: this.formData.value.imageURL,
         price: this.formData.value.price,
         expiryDate: this.formData.value.expiryDate,
         quantity: this.formData.value.quantity,

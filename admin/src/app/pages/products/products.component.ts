@@ -19,17 +19,15 @@ export class ProductsComponent implements OnInit {
   editProductId: any = null;
   isEdit = false;
   confirmationMessage: string = '';
-  originalProduct: Product[] = [];
+  originalProduct: Product[];
+  editingProduct: Product | null = null;
   currentPage: number = 1;
   totalItems: number = 0;
   totalPages: number = 0;
   lastPage: number = 0;
-  apiUrl = 'http://localhost:3000/api/products';
   pageSize: number = 10;
-  constructor(
-    private formBuilder: FormBuilder,
-    private productService: ProductService
-  ) {
+
+  constructor(private formBuilder: FormBuilder,private productService: ProductService) {
     this.formData = this.formBuilder.group({
       productType: ['', Validators.required],
       productName: ['', Validators.required],
@@ -38,24 +36,30 @@ export class ProductsComponent implements OnInit {
       quantity: ['', Validators.required],
     });
   }
-  ngOnInit() {
-    this.loadProduct(this.currentPage);
+
+  ngOnInit(): void {
+    this.loadProduct();
   }
 
-  loadProduct(page: number) {
-    const pageSize = 10; // Số sản phẩm trên mỗi trang
-    this.productService.getProductsByPage(page, this.pageSize).subscribe({
+  loadProduct(page: number){
+    const pageSize = 10;
+    this.productService.getAllProducts().subscribe({
       next: (res: any) => {
         const { data, status } = res;
         if (status === 'success') {
-        this.products = data.products;
-
+          this.products = data.products;
+          this.originalProduct = data.products;
         }
       },
       error: (err) => {
-        console.error('Error loading products', err);
-      }
+        console.error(err);
+      },
     });
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.loadProduct(page);
   }
 
 
@@ -90,29 +94,15 @@ export class ProductsComponent implements OnInit {
         expiryDate: this.formData.value.expiryDate,
         quantity: this.formData.value.quantity,
       };
-
-
-      if (!this.isEdit) {
-        this.productService.createProduct(product).subscribe({
-          next: () => {
-
-            this.closeDiaLog(); // Đóng dialog và reset form sau khi thêm mới thành công
-          },
-          error: (err) => {
-            console.error('Error adding product', err);
-          },
-        });
-      } else if (this.editProductId) {
-        this.productService.updateProduct(product).subscribe({
-          next: () => {
-
-            this.closeDiaLog(); // Đóng dialog và reset form sau khi chỉnh sửa thành công
-          },
-          error: (err) => {
-            console.error('Error editing product', err);
-          },
-        });
-      }
+      this.productService.createProduct(newProduct).subscribe({
+        next: () => {
+          this.isDialogOpen = false;
+          this.loadProduct(this.currentPage);
+        },
+        error: (err: any) => {
+          console.error(err);
+        },
+      });
     } else {
       if (this.editProductId) {
 
@@ -127,7 +117,7 @@ export class ProductsComponent implements OnInit {
         this.productService.updateProduct(editProduct).subscribe({
           next: () => {
             this.isDialogOpen=false;
-              this.loadProduct();
+            this.loadProduct(this.currentPage);
           },
           error: (err: any) => {
             console.error(err);
@@ -168,10 +158,10 @@ export class ProductsComponent implements OnInit {
       this.isDeleteDialogOpen = false;
       this.productService.deleteProduct(this.dataProduct.productID).subscribe({
         next: () => {
-
-          this.dataProduct = null;
-
-
+          // Sửa kiểu dữ liệu của next
+          this.isDeleteDialogOpen = false;
+          this.dataProduct = {};
+          this.loadProduct(this.currentPage);
         },
         error: (err: any) => {
           console.error('Lỗi khi xóa:', err);
@@ -185,12 +175,10 @@ export class ProductsComponent implements OnInit {
   }
 
   openEditDialog(product: Product) {
-
     if (product) {
       this.isDialogOpen = true;
       this.isEdit = true;
       this.editProductId = product.productID;
-      console.log(product)
       this.formData.patchValue({
         productType: product.productType,
         productName: product.productName,
@@ -211,7 +199,7 @@ export class ProductsComponent implements OnInit {
   }
 
   editProduct(product: Product) {
-    this.editProduct = product;
+    this.editingProduct = product;
     this.openEditDialog(product);
   }
 }
