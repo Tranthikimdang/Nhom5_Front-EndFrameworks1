@@ -105,7 +105,7 @@ export class OrdersComponent implements OnInit {
             date: this.formData.value.date,
             valueOrder: this.formData.value.valueOrder,
             payment: this.formData.value.payment,
-orderID: this.editOrderId
+            orderID: this.editOrderId
           };
           this.orderService.updateOrder(editedOrder).subscribe({
             next: () => {

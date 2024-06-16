@@ -11,6 +11,7 @@ router.put('/product/:id', productController.updateProduct);
 
 router.delete('/product/:id', productController.deleteProduct);
 
+
 router.get('/', async (req, res) => {
     const { cateID } = req.query;
   

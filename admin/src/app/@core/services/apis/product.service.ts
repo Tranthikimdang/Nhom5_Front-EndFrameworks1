@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ProductModel } from '../../model/product.model';
 import { API_BASE_URL, API_ENDPOINT } from '../../config/api-endpoint.config';
@@ -10,18 +10,19 @@ import { ApiService } from '../common';
   providedIn: 'root',
 })
 export class ProductService extends ApiService{
-  getProductsByPage(page: number, pageSize: number) {
-    throw new Error('Method not implemented.');
-  }
+
 
   constructor(private _http: HttpClient) {
     super(_http);
   }
 
-  getProductsByCategory(cateId: number): Observable<any> {
-    return this._http.get<any>(`${API_BASE_URL}${API_ENDPOINT.product.get}?cateID=${cateId}`);
-  }
   getAllProducts(): Observable<any> {
+    // let params = new HttpParams()
+    // .set('page', page.toString())
+    // .set('pageSize', pageSize.toString())
+    // if(filter){
+    //   params = params.set('filter', filter)
+    // }
     return this.get(API_BASE_URL + API_ENDPOINT.product.get);
   }
 
@@ -30,7 +31,8 @@ export class ProductService extends ApiService{
   }
 
   updateProduct(product: Product): Observable<any> {
-    return this.put(API_BASE_URL + API_ENDPOINT.product.update, )
+    const updateUrl = `${API_BASE_URL}${API_ENDPOINT.product.update}/${product.productID}`;
+    return this.put(updateUrl, product)
   }
 
   deleteProduct(productId: number): Observable<any> {

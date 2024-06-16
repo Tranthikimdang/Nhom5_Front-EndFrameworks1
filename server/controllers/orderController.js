@@ -3,6 +3,7 @@ const { Order } = require('../models');
 exports.getAllOrder = async (req, res) => {
     try {
         const orders = await Order.findAll();
+        console.log(orders);
         res.status(200).json({
             status: 'success',
             results: orders.length,

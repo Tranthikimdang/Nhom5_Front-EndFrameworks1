@@ -49,10 +49,6 @@ const Products = sequelize.define('Products', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  productImage: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
   productPrice: {
     type: DataTypes.INTEGER,
     allowNull: false
@@ -70,6 +66,10 @@ const Products = sequelize.define('Products', {
     references: {
       model: 'categories', // Đặt mối quan hệ với mô hình Category
       key: 'cateId'
+    },
+    productImage: {
+      type: DataTypes.STRING,
+      allowNull: true // Allow null values
     }
   }
 }, {
@@ -80,3 +80,5 @@ const Products = sequelize.define('Products', {
 Products.belongsTo(Category, { foreignKey: 'cateID' });
 
 module.exports = Products;
+
+

@@ -78,7 +78,7 @@ export class CommentsComponent implements OnInit {
     this.editCommentId = null;
     this.formData.reset();
   }
-// them
+
   async addComment(): Promise<void> {
     console.log(this.formData);
 
