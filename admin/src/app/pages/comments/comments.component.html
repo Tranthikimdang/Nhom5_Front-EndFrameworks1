@@ -90,10 +90,10 @@
     <div class="row">
       <div class="col-md-6">
         <div class="mb-3 form-group" [class.has-error]="formData.get('userName').invalid && (formData.get('userName').dirty || formData.get('userName').touched)">
-          <label for="userName" class="form-label">Tên:</label>
-          <input type="text" class="form-control" id="userName" placeholder="Nhập tên" formControlName="userName" />
+          <label for="userName" class="form-label">Name:</label>
+          <input type="text" class="form-control" id="userName" placeholder="Enter name" formControlName="userName" />
           <div class="text-danger" *ngIf="formData.get('userName').invalid && (formData.get('userName').dirty || formData.get('userName').touched)">
-            Tên không được để trống.
+            Name is required.
           </div>
         </div>
         <div class="mb-3 form-group" [class.has-error]="formData.get('commentsEmail').invalid && (formData.get('commentsEmail').dirty || formData.get('commentsEmail').touched)">
@@ -101,43 +101,46 @@
           <input type="text" class="form-control" id="commentsEmail" placeholder="Email" formControlName="commentsEmail" />
           <div class="text-danger" *ngIf="formData.get('commentsEmail').invalid && (formData.get('commentsEmail').dirty || formData.get('commentsEmail').touched)">
             <div *ngIf="formData.get('commentsEmail').errors?.required">
-              Email không được để trống.
+              Email is required.
             </div>
             <div *ngIf="formData.get('commentsEmail').errors?.email">
-              Email không hợp lệ.
+              Email is invalid.
             </div>
           </div>
         </div>
         <div class="mb-3 form-group" [class.has-error]="formData.get('imageUrl').invalid && (formData.get('imageUrl').dirty || formData.get('imageUrl').touched)">
-          <label for="imageUpload" class="form-label">Hình ảnh:</label>
+          <label for="imageUpload" class="form-label">Image:</label>
           <input type="file" class="form-control" id="imageUpload" (change)="onImageSelected($event)" formControlName="imageUrl">
 
           <div class="text-danger" *ngIf="formData.get('imageUrl').invalid && (formData.get('imageUrl').dirty || formData.get('imageUrl').touched)">
             <div *ngIf="formData.get('imageUrl').errors?.required">
-              Ảnh không được để trống.
+              Image is required.
             </div>
           </div>
         </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3 form-group" [class.has-error]="formData.get('productName').invalid && (formData.get('productName').dirty || formData.get('productName').touched)">
-          <label for="productName" class="form-label">Tên sản phẩm:</label>
-          <textarea class="form-control" id="productName" rows="3" placeholder="Tên sản phẩm" formControlName="productName"></textarea>
+          <label for="productName" class="form-label">Product name:</label>
+          <textarea class="form-control" id="productName" rows="3" placeholder="Enter product name" formControlName="productName"></textarea>
           <div class="text-danger" *ngIf="formData.get('productName').invalid && (formData.get('productName').dirty || formData.get('productName').touched)">
-            Tên sản phẩm không được để trống.
+            Product name is required.
           </div>
         </div>
 
         <div class="mb-3 form-group" [class.has-error]="formData.get('commentsContent').invalid && (formData.get('commentsContent').dirty || formData.get('commentsContent').touched)">
-          <label for="commentsContent" class="form-label">Bình luận:</label>
-          <textarea class="form-control" id="commentsContent" rows="3" placeholder="Bình luận" formControlName="commentsContent"></textarea>
+          <label for="commentsContent" class="form-label">Comment:</label>
+          <textarea class="form-control" id="commentsContent" rows="3" placeholder="Enter comment" formControlName="commentsContent"></textarea>
           <div class="text-danger" *ngIf="formData.get('commentsContent').invalid && (formData.get('commentsContent').dirty || formData.get('commentsContent').touched)">
-            Nội dung bình luận không được để trống.
+            Comment content is required.
           </div>
         </div>
-
       </div>
     </div>
-    <button type="submit" class="btn btn-primary w-100">Lưu</button>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    
   </form>
 </app-dialog>
