@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '../entities/categories';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from 'app/@core/services/apis/category.service';
+import { IAlertMessage } from 'app/@theme/components/alert/ngx-alerts.component';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+  styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent implements OnInit {
-
+  alertMessages: IAlertMessage[] = []; // thông báo lỗi
   categories: Category[] = [];
   filterValue = '';
   title: string;
@@ -20,12 +21,15 @@ export class CategoriesComponent implements OnInit {
   editCategoryId: any = null;
   isEdit = false;
   confirmationMessage: string;
-  originalCategories: Category[]; 
+  originalCategories: Category[];
   editingCategory: Category | null = null;
 
-  constructor(private formBuilder: FormBuilder, private categoryService: CategoryService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private categoryService: CategoryService
+  ) {
     this.formData = this.formBuilder.group({
-      cateName: ['', Validators.required],      
+      cateName: ['', Validators.required],
     });
   }
 
@@ -52,7 +56,7 @@ export class CategoriesComponent implements OnInit {
     this.isDialogOpen = true;
   }
 
-  openDialogDelete(cate: Category) { 
+  openDialogDelete(cate: Category) {
     if (cate) {
       this.isDeleteDialogOpen = true;
       this.dataCategory = cate;
@@ -72,7 +76,7 @@ export class CategoriesComponent implements OnInit {
     if (this.formData.valid) {
       if (!this.isEdit) {
         const newCategory: Category = {
-          cateName: this.formData.value.cateName,          
+          cateName: this.formData.value.cateName,
         };
 
         this.categoryService.createCategory(newCategory).subscribe({
@@ -85,9 +89,9 @@ export class CategoriesComponent implements OnInit {
           },
         });
       } else {
-        if (this.editingCategory) { 
+        if (this.editingCategory) {
           const editedCategory: Category = {
-            cateId: this.editingCategory.cateId, 
+            cateId: this.editingCategory.cateId,
             cateName: this.formData.value.cateName,
           };
           this.categoryService.updateCategory(editedCategory).subscribe({
@@ -102,6 +106,7 @@ export class CategoriesComponent implements OnInit {
         }
       }
       this.closeDialog();
+      this.alertMessages = [{ status: 'success', message: 'Successful!' }]; // hiện thông báo submit thành công
     } else {
       console.log('Form không hợp lệ');
     }
@@ -118,9 +123,9 @@ export class CategoriesComponent implements OnInit {
       return;
     }
 
-    this.categories = this.originalCategories.filter(cate => {
+    this.categories = this.originalCategories.filter((cate) => {
       const cateName = cate.cateName.trim().toLowerCase();
-      
+
       return cateName.includes(filterText);
     });
   }
@@ -137,6 +142,7 @@ export class CategoriesComponent implements OnInit {
           this.isDeleteDialogOpen = false;
           this.dataCategory = {};
           this.loadCategory();
+          this.alertMessages = [{ status: 'success', message: 'Successful!' }];
         },
         error: (err: any) => {
           console.error('Lỗi khi xóa:', err);
@@ -166,8 +172,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   editCategory(cate: Category) {
-    this.editingCategory = cate; 
+    this.editingCategory = cate;
     this.openEditDialog(cate);
   }
-  
 }

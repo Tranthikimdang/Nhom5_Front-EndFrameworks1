@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Thêm Fo
 import { Icomments } from '../entities/comments';
 import { CommentService } from 'app/@core/services/apis/comment.service';
 import { ImageUploadService } from 'app/@core/services/apis/upload.service';
+import { IAlertMessage } from 'app/@theme/components/alert/ngx-alerts.component';
 
 @Component({
   selector: 'app-comments',
@@ -22,7 +23,7 @@ export class CommentsComponent implements OnInit {
   confirmationMessage: string;
   file: any = null;
   originalComments: Icomments[]; // Sửa kiểu dữ liệu của originalComments
-
+  alertMessages: IAlertMessage[] = [];
   constructor(
     private formBuilder: FormBuilder,
     private commentService: CommentService,
@@ -141,6 +142,7 @@ export class CommentsComponent implements OnInit {
       }
 
       this.closeDialog();
+      this.alertMessages = [{ status: 'success', message: 'Successful!' }]; // hiện thông báo submit thành công 
     } else {
       console.log('Form không hợp lệ');
     }
@@ -185,6 +187,7 @@ export class CommentsComponent implements OnInit {
           this.isDeleteDialogOpen = false;
           this.dataComment = {};
           this.loadComment();
+          this.alertMessages = [{ status: 'success', message: 'Successful!' }]; // hiện thông báo submit thành công 
         },
         error: (err: any) => {
           console.error('Lỗi khi xóa:', err);

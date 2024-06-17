@@ -1,14 +1,15 @@
-import { Component , OnInit } from '@angular/core';
-import { User } from '../entities/user'
+import { Component, OnInit } from '@angular/core';
+import { User } from '../entities/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Thêm FormBuilder và Validators vào imports
 import { UserService } from 'app/@core/services/apis/user.service';
+import { IAlertMessage } from 'app/@theme/components/alert/ngx-alerts.component';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-
+  alertMessages: IAlertMessage[] = []; // thông báo lỗi
   users: User[] = [];
   filterValue = '';
   title: string;
@@ -19,10 +20,14 @@ export class UsersComponent implements OnInit {
   editUserId: any = null;
   isEdit = false;
   confirmationMessage: string;
-  originalUsers: User[]; 
+  originalUsers: User[];
   editingUser: User | null = null;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService)  { // Thêm UserService vào constructor
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService
+  ) {
+    // Thêm UserService vào constructor
     this.formData = this.formBuilder.group({
       userName: ['', Validators.required],
       userEmail: ['', [Validators.required, Validators.email]],
@@ -33,12 +38,12 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUser();
-    
   }
 
   loadUser() {
     this.userService.getAllUser().subscribe({
-      next: (res: any) => { // Sửa kiểu dữ liệu của res
+      next: (res: any) => {
+        // Sửa kiểu dữ liệu của res
         const { data, status } = res;
         if (status === 'success') {
           this.users = data.users;
@@ -55,7 +60,8 @@ export class UsersComponent implements OnInit {
     this.isDialogOpen = true;
   }
 
-  openDialogDelete(user: User) { // Sửa kiểu dữ liệu của User
+  openDialogDelete(user: User) {
+    // Sửa kiểu dữ liệu của User
     if (user) {
       this.isDeleteDialogOpen = true;
       this.dataUser = user;
@@ -76,15 +82,19 @@ export class UsersComponent implements OnInit {
       if (!this.isEdit) {
         const newUser: User = {
           userName: this.formData.value.userName,
-          userEmail: this.formData.value.userEmail,      
-          userPhone: this.formData.value.userPhone,            
-          userAddress: this.formData.value.userAddress,   
+          userEmail: this.formData.value.userEmail,
+          userPhone: this.formData.value.userPhone,
+          userAddress: this.formData.value.userAddress,
         };
 
         this.userService.createUser(newUser).subscribe({
-          next: () => { // Sửa kiểu dữ liệu của next
+          next: () => {
+            // Sửa kiểu dữ liệu của next
             this.isDialogOpen = false;
             this.loadUser();
+            this.alertMessages = [
+              { status: 'success', message: 'Successful!' },
+            ]; // hiện thông báo submit thành công
           },
           error: (err) => {
             console.error('Lỗi khi thêm:', err);
@@ -95,15 +105,20 @@ export class UsersComponent implements OnInit {
           const editedUser: User = {
             userId: this.editUserId,
             userName: this.formData.value.userName,
-            userEmail: this.formData.value.userEmail,      
-            userPhone: this.formData.value.userPhone,            
-            userAddress: this.formData.value.userAddress,            
+            userEmail: this.formData.value.userEmail,
+            userPhone: this.formData.value.userPhone,
+            userAddress: this.formData.value.userAddress,
           };
 
-          this.userService.updateUser(editedUser).subscribe({ // Sửa tên hàm từ updateCommennt thành updateUser
-            next: () => { // Sửa kiểu dữ liệu của next
+          this.userService.updateUser(editedUser).subscribe({
+            // Sửa tên hàm từ updateCommennt thành updateUser
+            next: () => {
+              // Sửa kiểu dữ liệu của next
               this.isDialogOpen = false;
               this.loadUser();
+              this.alertMessages = [
+                { status: 'success', message: 'Successful!' },
+              ]; // hiện thông báo submit thành công
             },
             error: (err) => {
               console.error('Lỗi khi sửa:', err);
@@ -129,16 +144,18 @@ export class UsersComponent implements OnInit {
       return;
     }
 
-    this.users = this.originalUsers.filter(user => {
+    this.users = this.originalUsers.filter((user) => {
       const userName = user.userName.trim().toLowerCase();
       const userEmail = user.userEmail.trim().toLowerCase();
       const userPhone = user.userPhone.trim().toLowerCase();
       const userAddress = user.userAddress.trim().toLowerCase();
-      
-      return userName.includes(filterText) ||
-             userEmail.includes(filterText) ||
-             userPhone.includes(filterText) ||
-             userAddress.includes(filterText);
+
+      return (
+        userName.includes(filterText) ||
+        userEmail.includes(filterText) ||
+        userPhone.includes(filterText) ||
+        userAddress.includes(filterText)
+      );
     });
   }
 
@@ -148,17 +165,19 @@ export class UsersComponent implements OnInit {
 
   handleDelete() {
     if (this.dataUser && this.dataUser.userId) {
-    this.isDeleteDialogOpen = false;
-    this.userService.deleteUser(this.dataUser.userId).subscribe({
-    next: () => { // Sửa kiểu dữ liệu của next
-    this.isDeleteDialogOpen = false;
-    this.dataUser = {};
-    this.loadUser();
-    },
-    error: (err: any) => {
-    console.error('Lỗi khi xóa:', err);
-    },
-    });
+      this.isDeleteDialogOpen = false;
+      this.userService.deleteUser(this.dataUser.userId).subscribe({
+        next: () => {
+          // Sửa kiểu dữ liệu của next
+          this.isDeleteDialogOpen = false;
+          this.dataUser = {};
+          this.loadUser();
+          this.alertMessages = [{ status: 'success', message: 'Successful!' }]; // hiện thông báo submit thành công
+        },
+        error: (err: any) => {
+          console.error('Lỗi khi xóa:', err);
+        },
+      });
     }
   }
 
@@ -173,7 +192,7 @@ export class UsersComponent implements OnInit {
       userName: user.userName,
       userEmail: user.userEmail,
       userPhone: user.userPhone,
-      userAddress: user.userAddress
+      userAddress: user.userAddress,
     });
   }
 
@@ -185,7 +204,7 @@ export class UsersComponent implements OnInit {
   }
 
   editUser(user: User) {
-    this.editingUser = user; 
+    this.editingUser = user;
     this.openEditDialog(user);
   }
 }
