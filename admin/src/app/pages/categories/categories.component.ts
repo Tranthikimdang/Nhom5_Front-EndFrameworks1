@@ -57,7 +57,7 @@ export class CategoriesComponent implements OnInit {
       this.isDeleteDialogOpen = true;
       this.dataCategory = cate;
       this.title = 'Confirm Delete';
-      this.confirmationMessage = `Are you sure you want to delete the category from ${cate.cateName}?`;
+      this.confirmationMessage = `Bạn có chắc chắn muốn xóa danh mục ${cate.cateName}?`;
     }
   }
 

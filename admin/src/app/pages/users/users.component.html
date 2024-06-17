@@ -89,8 +89,8 @@
     <div class="row">
       <div class="col-md-6">
         <div class="mb-3 form-group" [class.has-error]="formData.get('userName').invalid && (formData.get('userName').dirty || formData.get('userName').touched)">
-          <label for="userName" class="form-label">Tên:</label>
-          <input type="text" class="form-control" id="userName" placeholder="Nhập tên" formControlName="userName" />
+          <label for="userName" class="form-label">Name:</label>
+          <input type="text" class="form-control" id="userName" placeholder="Name" formControlName="userName" />
           <div class="text-danger" *ngIf="formData.get('userName').invalid && (formData.get('userName').dirty || formData.get('userName').touched)">
             Tên không được để trống.
           </div>
@@ -110,17 +110,17 @@
       </div>
       <div class="col-md-6">
         <div class="mb-3 form-group" [class.has-error]="formData.get('userPhone').invalid && (formData.get('userPhone').dirty || formData.get('userPhone').touched)">
-          <label for="userPhone" class="form-label">Số điện thoại:</label>
-          <input class="form-control" id="userPhone" rows="3" placeholder="Số điện thoại" formControlName="userPhone">
+          <label for="userPhone" class="form-label">Phone:</label>
+          <input class="form-control" id="userPhone" rows="3" placeholder="Phone" formControlName="userPhone">
           <span class="text-danger" *ngIf="formData.controls.userPhone.invalid && (formData.controls.userPhone.dirty || formData.controls.userPhone.touched)">
-            <span *ngIf="formData.controls.userPhone.errors?.required">Vui lòng nhập email</span>
+            <span *ngIf="formData.controls.userPhone.errors?.required">Vui lòng nhập số điện thoại</span>
             <span *ngIf="formData.controls.userPhone.errors?.maxlength">Tối đa 10 số</span>
           </span>
         </div>
         <div class="col-md-12">
           <div class="mb-3 form-group" [class.has-error]="formData.get('userAddress').invalid && (formData.get('userAddress').dirty || formData.get('userAddress').touched)">
-            <label for="userAddress" class="form-label">Địa chỉ:</label>
-            <textarea class="form-control" id="userAddress" rows="3" placeholder="Địa chỉ" formControlName="userAddress"></textarea>
+            <label for="userAddress" class="form-label">Address:</label>
+            <textarea class="form-control" id="userAddress" rows="3" placeholder="Address" formControlName="userAddress"></textarea>
             <div class="text-danger" *ngIf="formData.get('userAddress').invalid && (formData.get('userAddress').dirty || formData.get('userAddress').touched)">
               Địa chỉ không được để trống.
             </div>
