@@ -85,7 +85,12 @@
 </div>
 
 <!-- Thêm -->
-<app-dialog [isOpen]="isDialogOpen" title="Thêm" (closeModal)="closeDialog()">
+<app-dialog [isOpen]="isDialogOpen" [title]="isEdit ? 'Edit' : 'Add'" (closeModal)="closeDialog()">
+  <div class="dialog-header mb-3">
+    <h5 class="modal-title">
+      {{ isEdit ? 'Edit comments' : 'Add comments' }}
+    </h5>
+  </div>
   <form [formGroup]="formData" (ngSubmit)="addComment()">
     <div class="row">
       <div class="col-md-6">
@@ -138,9 +143,7 @@
       </div>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      
       <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-    
   </form>
 </app-dialog>

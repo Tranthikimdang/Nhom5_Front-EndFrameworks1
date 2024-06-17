@@ -84,7 +84,12 @@
   </div>
 </div>
 
-<app-dialog [isOpen]="isDialogOpen" title="Add" (closeModal)="closeDiaLog()">
+<app-dialog [isOpen]="isDialogOpen" [title]="isEdit ? 'Edit' : 'Add'" (closeModal)="closeDiaLog()">
+  <div class="dialog-header mb-3">
+    <h5 class="modal-title">
+      {{ isEdit ? 'Edit products' : 'Add products' }}
+    </h5>
+  </div>
   <form [formGroup]="formData" (ngSubmit)="addProduct()">
     <div class="row">
       <div class="col-md-6">
