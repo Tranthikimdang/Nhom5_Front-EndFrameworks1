@@ -64,6 +64,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
         )
         .subscribe(themeName => this.currentTheme = themeName);
   }
+  isUserMenuOpen: boolean = false;
+  isDropdownOpen: boolean = false;
+
+  onOptionSelected(option: string): void {
+    console.log('Selected option:', option);
+    console.log("dssccsđs");
+    
+  }
+  toggleUserMenu(): void {
+    this.isUserMenuOpen = !this.isUserMenuOpen;
+  }
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+
+
 
   ngOnDestroy() {
     this.destroy$.next();
@@ -74,7 +91,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.themeService.changeTheme(themeName);
   }
 
-  toggleSidebar(): boolean {
+  toggleSidebar(){
     this.sidebarService.toggle(true, 'menu-sidebar');
     this.layoutService.changeLayoutSize();
     return false;

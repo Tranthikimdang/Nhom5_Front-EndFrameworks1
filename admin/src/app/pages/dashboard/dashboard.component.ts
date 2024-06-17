@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../entities/product';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from 'app/@core/services/apis/product.service';
-
 @Component({
   selector: 'ngx-dashboard',
   styleUrls: ['./dashboard.component.scss'],
@@ -20,12 +19,6 @@ export class DashboardComponent implements OnInit {
   isEdit = false;
   confirmationMessage: string = '';
   originalProduct: Product[] = [];
-  currentPage: number = 1;
-  totalItems: number = 0;
-  totalPages: number = 0;
-  lastPage: number = 0;
-  apiUrl = 'http://localhost:3000/api/dashboard';
-  pageSize: number = 10;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,36 +35,27 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadProducts(this.currentPage);
+    this.loadProduct();
   }
-  
-  loadProducts(page: number) {
-    const pageSize = 10; // Số sản phẩm trên mỗi trang
-    this.productService.getProductsByPage(page, this.pageSize).subscribe({
+
+  loadProduct() {
+    this.productService.getAllProducts().subscribe({
       next: (res: any) => {
         const { data, status } = res;
         if (status === 'success') {
-        this.products = data.products;
-        // this.lastPage = res.meta ? res.meta.last_page : 1;
-        // this.currentPage = res.meta.current_page;
+          this.products = data.products;
+          this.originalProduct = [...data.products]; // Lưu trữ sản phẩm ban đầu
         }
       },
       error: (err) => {
         console.error('Error loading products', err);
-      }
+      },
     });
-  }
-  
-
-
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.loadProducts(page);
   }
 
   openDialog() {
     this.isDialogOpen = true;
-    this.formData.reset();
+    this.formData.reset(); // Reset form khi mở dialog
   }
 
   openDialogDelete(product: Product) {
@@ -79,7 +63,7 @@ export class DashboardComponent implements OnInit {
       this.isDeleteDialogOpen = true;
       this.dataProduct = product;
       this.title = 'Confirm Delete';
-      this.confirmationMessage = `Are you sure you want to delete product ${product.productName}?`;
+      this.confirmationMessage = `Bạn có chắc chắn muốn xóa sản phẩm ${product.productName}?`;
     }
   }
 
@@ -90,48 +74,12 @@ export class DashboardComponent implements OnInit {
     this.formData.reset();
   }
 
-  addProduct(): void {
-    if (this.formData.valid) {
-      const product: Product = {
-        productType: this.formData.value.productType,
-        productName: this.formData.value.productName,
-        imageURL: this.formData.value.imageURL,
-        price: this.formData.value.price,
-        expiryDate: this.formData.value.expiryDate,
-        quantity: this.formData.value.quantity,
-        productID: this.editProductId ?? 0,
-      };
-
-      if (!this.isEdit) {
-        this.productService.createProduct(product).subscribe({
-          next: () => {
-            this.loadProducts(this.currentPage);
-            this.closeDialog();
-          },
-          error: (err) => {
-            console.error('Error adding product', err);
-          },
-        });
-      } else if (this.editProductId) {
-        this.productService.updateProduct(product).subscribe({
-          next: () => {
-            this.loadProducts(this.currentPage);
-            this.closeDialog();
-          },
-          error: (err) => {
-            console.error('Error editing product', err);
-          },
-        });
-      }
-    } else {
-      console.error('Form data invalid');
-    }
-  }
+  
 
   filter() {
     const filterText = this.filterValue.trim().toLowerCase();
     if (!filterText) {
-      this.products = [...this.originalProduct];
+      this.products = [...this.originalProduct]; // Reset lại danh sách sản phẩm khi không có bộ lọc
       return;
     }
     this.products = this.originalProduct.filter((product) => {
@@ -146,20 +94,6 @@ export class DashboardComponent implements OnInit {
     return product.productID;
   }
 
-  handleDelete() {
-    if (this.dataProduct && this.dataProduct.productID) {
-      this.isDeleteDialogOpen = false;
-      this.productService.deleteProduct(this.dataProduct.productID).subscribe({
-        next: () => {
-          this.dataProduct = null;
-          this.loadProducts(this.currentPage);
-        },
-        error: (err: any) => {
-          console.error('Error deleting product', err);
-        },
-      });
-    }
-  }
 
   close() {
     this.isDeleteDialogOpen = false;

@@ -16,10 +16,7 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSecurityModule } from '@nebular/security';
 
-import {
-  FooterComponent,
-  HeaderComponent,
-} from './components';
+
 import {
   CapitalizePipe,
   PluralPipe,
@@ -38,6 +35,8 @@ import {AlertShowcaseComponent} from "./components/alert/ngx-alerts.component";
 import {DialogConfirmComponent} from "./components/dialog-confirm/dialog-confirm.component";
 import {BreadcrumbModule} from "xng-breadcrumb";
 import {RouterLink} from "@angular/router";
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components';
 
 const NB_MODULES = [
   NbCardModule,

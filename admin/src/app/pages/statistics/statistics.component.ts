@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../entities/categories';
 import { CategoryService } from 'app/@core/services/apis/category.service';
-import { ProductService } from 'app/@core/services/apis/product.service';
+import { StatictiscService } from 'app/@core/services/apis/statictisc.service';
 
 @Component({
   selector: 'app-statistics',
@@ -14,12 +14,11 @@ export class StatisticsComponent implements OnInit {
   filteredStatisticsData: any[] = []; // Dữ liệu sau khi lọc
   searchTerm: string = ''; // Biến để lưu giá trị tìm kiếm
 
-  constructor(private categoryService: CategoryService, private productService: ProductService) { }
+  constructor(private categoryService: CategoryService, private statictiscService: StatictiscService) { }
 
   ngOnInit(): void {
     this.categoryService.getCategory().subscribe(
       response => {
-        console.log('API Response:', response.data);
         if (response && response.categories && response.categories.length > 0) {
           this.categories = response.categories;
           this.calculateStatistics();
@@ -34,52 +33,60 @@ export class StatisticsComponent implements OnInit {
   }
 
   calculateStatistics(): void {
-    this.statisticsData = []; // Xóa dữ liệu cũ trước khi thêm dữ liệu mới
+    this.statisticsData = []; // Clear previous data
+    this.filteredStatisticsData = []; // Clear filtered data as well
   
     this.categories.forEach(category => {
-      this.productService.getProductsByCategory(category.cateId).subscribe(
+      this.statictiscService.getProductsByCategory(category.cateId).subscribe(
         (response: any) => {
-          console.log(`Products API Response for category ${category.cateId}:`, response);
           const products = response.data.products;
-  
+          
           if (Array.isArray(products) && products.length > 0) {
-            // Tính tổng số lượng sản phẩm trong danh mục
+            // Calculate total quantity of products in the category
             const totalQuantity = products.reduce((sum, product) => sum + product.quantity, 0);
             
-            // Tính giá cao nhất, thấp nhất của danh mục
-            const highestPrice = Math.max(...products.map(product => product.productPrice));
-            const lowestPrice = Math.min(...products.map(product => product.productPrice));
+            // Calculate highest and lowest prices within the category
+            const productPrices = products.map(product => Number(product.productPrice));
+            const highestPrice = Math.max(...productPrices);
+            const lowestPrice = Math.min(...productPrices);
   
-            // Tính giá trung bình của danh mục
-            const averagePrice = products.reduce((sum, product) => sum + product.productPrice, 0) / products.length;
+            // Calculate average price of products in the category
+            const averagePrice = products.length > 0 ? products.reduce((sum, product) => sum + Number(product.productPrice), 0) / products.length : 0;
   
-            // Làm tròn và định dạng số liệu
+            // Format the calculated values
             const formattedTotalQuantity = totalQuantity.toLocaleString();
-            const formattedHighestPrice = Math.round(highestPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-            const formattedLowestPrice = Math.round(lowestPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-            const formattedAveragePrice = Math.round(averagePrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            const formattedHighestPrice = !Number.isNaN(highestPrice) ? Math.round(highestPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 'N/A';
+            const formattedLowestPrice = !Number.isNaN(lowestPrice) ? Math.round(lowestPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 'N/A';
+            const formattedAveragePrice = !Number.isNaN(averagePrice) ? Math.round(averagePrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 'N/A';
   
+            // Create statistics item for the category
             const statsItem = {
               categoryCode: category.cateId,
               categoryName: category.cateName,
-              quantity: formattedTotalQuantity, // Sử dụng tổng số lượng sản phẩm đã định dạng
-              highestPrice: formattedHighestPrice, // Sử dụng giá cao nhất đã định dạng và làm tròn
-              lowestPrice: formattedLowestPrice, // Sử dụng giá thấp nhất đã định dạng và làm tròn
-              averagePrice: formattedAveragePrice // Sử dụng giá trung bình đã định dạng và làm tròn
+              quantity: formattedTotalQuantity,
+              highestPrice: formattedHighestPrice,
+              lowestPrice: formattedLowestPrice,
+              averagePrice: formattedAveragePrice
             };
   
+            // Push statsItem to statisticsData
             this.statisticsData.push(statsItem);
-            this.filteredStatisticsData = this.statisticsData; // Khởi tạo dữ liệu lọc ban đầu
+            
+            // Update filteredStatisticsData with initial data
+            this.filteredStatisticsData = [...this.statisticsData]; // Use spread operator to clone the array
           } else {
-            console.error(`API response for category ${category.cateId} does not contain a valid product list:`, response);
+            console.error("Danh mục không có sản phẩm");
+            // Optionally handle or log this error further
           }
         },
         (error: any) => {
           console.error(`Error fetching products for category ${category.cateId}:`, error);
+          // Optionally handle or log this error further
         }
       );
     });
   }
+  
   
   
   

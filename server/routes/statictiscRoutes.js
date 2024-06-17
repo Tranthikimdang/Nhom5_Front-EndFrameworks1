@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const statictiscController = require('../controllers/statictiscController');
+const Product = require('../models/productModel');
 
-// router.get('/products/category/:cateID', productController.getProductsByCategory);
+router.get('/products/category/:cateId', statictiscController.getProductsByCategory);
+
 // router.get('/', async (req, res) => {
 //     const { cateID } = req.query;
   

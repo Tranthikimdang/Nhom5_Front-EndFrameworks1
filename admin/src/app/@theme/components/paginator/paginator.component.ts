@@ -2,7 +2,6 @@ import {Component, ViewEncapsulation, Input, OnInit, Output, EventEmitter} from 
 import {ApiService} from "../../../@core/services/common";
 import {finalize, Observable} from "rxjs";
 import {SpinnerService} from "../spinner/spinner.service";
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'ngx-paginator',
@@ -10,51 +9,80 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss']
 })
-
 export class PaginatorComponent implements OnInit {
-  @Input() apiUrl!: string;
-  @Input() currentPage!: number;
-  @Input() lastPage!: number;
+  @Input() apiUrl: string;
+  @Input() current_page: number;
+  @Input() last_page: number;
   @Output() dataList: EventEmitter<any> = new EventEmitter();
-
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {}
+  indexPage: number = 1;
+  hasPreviousPage: boolean = true;
+  hasNextPage: boolean = false;
+  constructor(
+      private apiService: ApiService,
+      private spinner: SpinnerService,
+  ) {
+  }
+  ngOnInit() {}
 
   goFirstPage() {
-    this.changePage(1);
+    this.hasPreviousPage = true;
+    this.hasNextPage = false;
+    this.indexPage = 1;
+    this.getData();
   }
 
-  goPrevPage() {
-    if (this.currentPage > 1) {
-      this.changePage(this.currentPage - 1);
+  goLastPage() {
+    this.hasPreviousPage = false;
+    this.hasNextPage = true;
+    this.indexPage = this.last_page;
+    this.getData();
+  }
+
+  goPreviousPage() {
+    if (this.indexPage <= this.last_page && this.indexPage > 1) {
+      this.hasNextPage = false;
+      this.indexPage--;
+      if (this.indexPage === 1) {
+        this.hasPreviousPage = true;
+      }
+      this.getData();
     }
   }
 
   goNextPage() {
-    if (this.currentPage < this.lastPage) {
-      this.changePage(this.currentPage + 1);
+    if (this.indexPage < this.last_page) {
+      this.hasPreviousPage = false;
+      this.indexPage++;
+      if (this.indexPage === this.last_page) {
+        this.hasNextPage = true;
+      }
+      this.getData();
     }
   }
 
-  goLastPage() {
-    this.changePage(this.lastPage);
-  }
-
-  changePage(page: number) {
-    this.currentPage = page;
-    this.getData();
-  }
-
   getPaginator(): Observable<any> {
-    return this.http.get(`${this.apiUrl}?page=${this.currentPage}`);
+    return this.apiService.get(this.apiUrl + '?page=' + Number(this.indexPage));
   }
 
   getData() {
-    this.getPaginator().subscribe(res => {
-      this.dataList.emit(res);
-    }, err => {
-      this.dataList.emit(err);
-    });
+    this.spinner.show();
+    this.getPaginator()
+        .pipe(
+            finalize(() => {
+              this.spinner.hide();
+            }),
+        )
+        .subscribe({
+          next: this.handleSuccess.bind(this),
+          error: this.handleErrors.bind(this),
+        });
+  }
+
+  protected handleSuccess(res) {
+    this.dataList.emit(res);
+  }
+
+  protected handleErrors(res) {
+    this.dataList.emit(res);
   }
 }

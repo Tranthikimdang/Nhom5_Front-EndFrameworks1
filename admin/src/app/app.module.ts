@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './auth/login/login.component';
 import {
   NbSidebarModule,
   NbMenuModule,
@@ -13,6 +12,7 @@ import {
   NbWindowModule,
   NbToastrModule,
   NbChatModule,
+  NbThemeModule,
 } from '@nebular/theme';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
@@ -21,6 +21,7 @@ import { ThemeModule } from './@theme/theme.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    NbThemeModule.forRoot({ name: 'default' }),
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

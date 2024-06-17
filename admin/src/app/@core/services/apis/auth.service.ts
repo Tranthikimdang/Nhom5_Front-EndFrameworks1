@@ -106,8 +106,7 @@ export class AuthService extends ApiService {
     return null;
   }
 
-  logout() {
-    return this.post<any>(API_BASE_URL + API_ENDPOINT.auth.logout, this.getToken());
+  logout() {return this.post<any>(API_BASE_URL + API_ENDPOINT.auth.logout, this.getToken());
   }
 
   isLoggedIn(): boolean {

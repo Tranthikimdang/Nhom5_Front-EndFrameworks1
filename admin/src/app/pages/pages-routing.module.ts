@@ -57,13 +57,7 @@ const routes: Routes = [{
       path: 'profile',
       component: ProfileComponent,
       data: {breadcrumb: 'profile'},
-    },
-    {
-      path: 'statistics-detail',
-      component: StatisticsDetailComponent,
-      data: {breadcrumb: 'statistics-detail'},
-    },
-    {
+    },{
       path: 'statistics-detail/:id',
       component: StatisticsDetailComponent,
       data: {breadcrumb: 'statistics-detail'},
