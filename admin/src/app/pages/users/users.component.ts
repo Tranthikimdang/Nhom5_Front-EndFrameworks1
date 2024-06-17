@@ -60,7 +60,7 @@ export class UsersComponent implements OnInit {
       this.isDeleteDialogOpen = true;
       this.dataUser = user;
       this.title = 'Confirm Delete';
-      this.confirmationMessage = `Are you sure you want to delete the User from ${user.userName}?`;
+      this.confirmationMessage = `Bạn có chắc chắn muốn xóa người dùng ${user.userName}?`;
     }
   }
 

@@ -83,8 +83,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="mb-3 form-group" [class.has-error]="formData.get('cateName').invalid && (formData.get('cateName').dirty || formData.get('cateName').touched)">
-          <label for="cateName" class="form-label">Tên danh mục:</label>
-          <input type="text" class="form-control" id="cateName" placeholder="Nhập tên" formControlName="cateName" />
+          <label for="cateName" class="form-label">Name:</label>
+          <input type="text" class="form-control" id="cateName" placeholder="Name" formControlName="cateName" />
           <div class="text-danger" *ngIf="formData.get('cateName').invalid && (formData.get('cateName').dirty || formData.get('cateName').touched)">
             Tên danh mục không được để trống.
           </div>
