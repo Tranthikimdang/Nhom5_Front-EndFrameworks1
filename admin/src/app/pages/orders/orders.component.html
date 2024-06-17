@@ -3,17 +3,21 @@
         <div class="row mb-2 col-form-label">
           <nav class="navbar navbar-light bg-light">
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="button-addon2"
-                    [(ngModel)]="filterValue" (input)="filter()">
+              <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="button-addon2" [(ngModel)]="filterValue" (input)="filter()">
               <div class="input-group-append" style="margin-right: 10px;">
                 <button class="btn btn-primary" type="button" id="button-addon2">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                   </svg>
                 </button>
               </div>
               <div class="input-group-append">
-                <button type="button" class="btn btn-outline-primary" (click)="openDialog()">Add</button>
+                <button type="button" class="btn btn-primary" (click)="openDialog()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0v-5a.5.5 0 0 1 .5-.5zM1.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zM8 14.5a.5.5 0 0 1-.5-.5v-5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-.5.5zM14.5 8a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5z" />
+                  </svg>
+                  Add
+                </button>
               </div>
             </div>
           </nav>
@@ -27,16 +31,26 @@
                   <th>Price</th>
                   <th>Date</th>
                   <th>Payment</th>
-                  <th></th>
+                  <th>Antion</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let o of orders; trackBy: trackByOrder">
-                  <td>{{ o.orderID }}</td>
-                  <td>{{ o.client }}</td>
-                  <td>{{ o.quantity }}</td>
-                  <td>&dollar;{{ o.valueOrder }}</td>
-                  <td>{{ o.date }}</td>
+                <tr *ngFor="let o of orders; trackBy: trackByOrder; let i=index">
+                  <td>
+                    {{ i + 1 }}
+                  </td>
+                  <td>
+                    {{ o.client }}
+                  </td>
+                  <td>
+                    {{ o.quantity }}
+                  </td>
+                  <td>&dollar;
+                    {{ o.valueOrder }}
+                  </td>
+                  <td>
+                    {{ o.date }}
+                  </td>
                   <td>
                     <button type="button" class="btn btn-warning btn-sm d-flex align-items-center justify-content-center" style="margin-right: 10px;">
                       {{ o.payment }}
@@ -44,8 +58,11 @@
                     </button>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-outline-danger" (click)="openDialogDelete(o)">
-                      Delete
+                    <button type="button" class="btn btn-danger" (click)="openDialogDelete(o)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                      </svg>
                     </button>
                   </td>
                 </tr>
@@ -56,14 +73,17 @@
       </div>
     </div>
     <!-- Delete Dialog -->
-    <div class="dialog-backdrop d-flex align-items-center justify-content-center" *ngIf="isDeleteDialogOpen"
-        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);">
+    <div class="dialog-backdrop d-flex align-items-center justify-content-center" *ngIf="isDeleteDialogOpen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);">
       <div class="dialog p-4 bg-white rounded shadow-lg" style="max-width: 500px; width: 100%;">
         <div class="dialog-header mb-3">
-          <h5 class="modal-title">{{ title }}</h5>
+          <h5 class="modal-title">
+            {{ title }}
+          </h5>
         </div>
         <div class="dialog-body">
-          <p>{{ confirmationMessage }}</p>
+          <p>
+            {{ confirmationMessage }}
+          </p>
           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button type="button" class="btn btn-primary me-md-2" (click)="handleDelete()">Yes</button>
             <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
