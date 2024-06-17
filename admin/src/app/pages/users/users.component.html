@@ -22,6 +22,7 @@
         </div>
       </nav>
       <div class="table-responsive">
+        <ngx-alerts [messages]="alertMessages"></ngx-alerts>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -85,14 +86,19 @@
 
 <!-- Thêm -->
 <app-dialog [isOpen]="isDialogOpen" [title]="isEdit ? 'Edit' : 'Add'" (closeModal)="closeDialog()">
+  <div class="dialog-header mb-3">
+    <h5 class="modal-title">
+      {{ isEdit ? 'Edit users' : 'Add users' }}
+    </h5>
+  </div>
   <form [formGroup]="formData" (ngSubmit)="addUser()">
     <div class="row">
       <div class="col-md-6">
         <div class="mb-3 form-group" [class.has-error]="formData.get('userName').invalid && (formData.get('userName').dirty || formData.get('userName').touched)">
-          <label for="userName" class="form-label">Tên:</label>
-          <input type="text" class="form-control" id="userName" placeholder="Nhập tên" formControlName="userName" />
+          <label for="userName" class="form-label">Name:</label>
+          <input type="text" class="form-control" id="userName" placeholder="Name" formControlName="userName" />
           <div class="text-danger" *ngIf="formData.get('userName').invalid && (formData.get('userName').dirty || formData.get('userName').touched)">
-            Tên không được để trống.
+            Name is required..
           </div>
         </div>
         <div class="mb-3 form-group" [class.has-error]="formData.get('userEmail').invalid && (formData.get('userEmail').dirty || formData.get('userEmail').touched)">
@@ -100,34 +106,36 @@
           <input type="text" class="form-control" id="userEmail" placeholder="Email" formControlName="userEmail" />
           <div class="text-danger" *ngIf="formData.get('userEmail').invalid && (formData.get('userEmail').dirty || formData.get('userEmail').touched)">
             <div *ngIf="formData.get('userEmail').errors?.required">
-              Email không được để trống.
+              Email is required.
             </div>
             <div *ngIf="formData.get('userEmail').errors?.email">
-              Email không hợp lệ.
+              Email is invalid.
             </div>
           </div>
         </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3 form-group" [class.has-error]="formData.get('userPhone').invalid && (formData.get('userPhone').dirty || formData.get('userPhone').touched)">
-          <label for="userPhone" class="form-label">Số điện thoại:</label>
-          <input class="form-control" id="userPhone" rows="3" placeholder="Số điện thoại" formControlName="userPhone">
+          <label for="userPhone" class="form-label">Phone:</label>
+          <input class="form-control" id="userPhone" rows="3" placeholder="Phone" formControlName="userPhone">
           <span class="text-danger" *ngIf="formData.controls.userPhone.invalid && (formData.controls.userPhone.dirty || formData.controls.userPhone.touched)">
-            <span *ngIf="formData.controls.userPhone.errors?.required">Vui lòng nhập email</span>
-            <span *ngIf="formData.controls.userPhone.errors?.maxlength">Tối đa 10 số</span>
+            <span *ngIf="formData.controls.userPhone.errors?.required">Please enter your phone number</span>
+            <span *ngIf="formData.controls.userPhone.errors?.maxlength">Up to 10 digits.</span>
           </span>
         </div>
         <div class="col-md-12">
           <div class="mb-3 form-group" [class.has-error]="formData.get('userAddress').invalid && (formData.get('userAddress').dirty || formData.get('userAddress').touched)">
-            <label for="userAddress" class="form-label">Địa chỉ:</label>
-            <textarea class="form-control" id="userAddress" rows="3" placeholder="Địa chỉ" formControlName="userAddress"></textarea>
+            <label for="userAddress" class="form-label">Address:</label>
+            <textarea class="form-control" id="userAddress" rows="3" placeholder="Address" formControlName="userAddress"></textarea>
             <div class="text-danger" *ngIf="formData.get('userAddress').invalid && (formData.get('userAddress').dirty || formData.get('userAddress').touched)">
-              Địa chỉ không được để trống.
+              Address is required.
             </div>
           </div>
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary w-100">Lưu</button>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
   </form>
 </app-dialog>

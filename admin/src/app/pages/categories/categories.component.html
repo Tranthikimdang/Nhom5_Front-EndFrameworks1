@@ -22,6 +22,7 @@
         </div>
       </nav>
       <div class="table-responsive">
+        <ngx-alerts [messages]="alertMessages"></ngx-alerts>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -79,19 +80,27 @@
 
 <!-- Thêm / Sửa -->
 <app-dialog [isOpen]="isDialogOpen" [title]="isEdit ? 'Edit' : 'Add'" (closeModal)="closeDialog()">
+  <div class="dialog-header mb-3">
+    <h5 class="modal-title">
+      {{ isEdit ? 'Edit categories' : 'Add categories' }}
+    </h5>
+  </div>
   <form [formGroup]="formData" (ngSubmit)="addCategory()">
     <div class="row">
       <div class="col-md-12">
+
         <div class="mb-3 form-group" [class.has-error]="formData.get('cateName').invalid && (formData.get('cateName').dirty || formData.get('cateName').touched)">
-          <label for="cateName" class="form-label">Tên danh mục:</label>
-          <input type="text" class="form-control" id="cateName" placeholder="Nhập tên" formControlName="cateName" />
+          <label for="cateName" class="form-label">Name:</label>
+          <input type="text" class="form-control" id="cateName" placeholder="Name" formControlName="cateName" />
           <div class="text-danger" *ngIf="formData.get('cateName').invalid && (formData.get('cateName').dirty || formData.get('cateName').touched)">
-            Tên danh mục không được để trống.
+            Category name is required.
           </div>
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary w-100">
-      {{ isEdit ? 'Save' : 'Add' }}</button>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button type="submit" class="btn btn-primary">
+        {{ isEdit ? 'Save' : 'Submit' }}</button>
+    </div>
   </form>
 </app-dialog>

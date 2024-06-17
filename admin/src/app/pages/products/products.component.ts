@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../entities/product';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from 'app/@core/services/apis/product.service';
+import { IAlertMessage } from 'app/@theme/components/alert/ngx-alerts.component';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-
+  alertMessages: IAlertMessage[] = []; // thông báo lỗi 
   products : Product[] = [];
   filterValue = '';
   title: string = '';
@@ -90,6 +91,7 @@ export class ProductsComponent implements OnInit {
         next: () => {
           this.isDialogOpen = false;
           this.loadProduct();
+          this.alertMessages = [{ status: 'success', message: 'Successful!' }]; // hiện thông báo submit thành công
         },
         error: (err: any) => {
           console.error(err);
@@ -110,6 +112,7 @@ export class ProductsComponent implements OnInit {
           next: () => {
             this.isDialogOpen=false;
               this.loadProduct();
+              this.alertMessages = [{ status: 'success', message: 'Successful!' }]; // hiện thông báo submit thành công
           },
           error: (err: any) => {
             console.error(err);
@@ -154,6 +157,7 @@ export class ProductsComponent implements OnInit {
           this.isDeleteDialogOpen = false;
           this.dataProduct = {};
           this.loadProduct();
+          this.alertMessages = [{ status: 'success', message: 'Successful!' }]; // hiện thông báo submit thành công
         },
         error: (err: any) => {
           console.error('Lỗi khi xóa:', err);
