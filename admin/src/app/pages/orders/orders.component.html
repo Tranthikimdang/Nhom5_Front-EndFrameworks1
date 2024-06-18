@@ -22,6 +22,7 @@
             </div>
           </nav>
           <div class="table-responsive">
+            <ngx-alerts [messages]="alertMessages"></ngx-alerts>
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -92,10 +93,16 @@
       </div>
     </div>
     <!-- Add/Edit Dialog -->
-    <app-dialog [isOpen]="isDialogOpen" title="Add/Edit Order" (closeModal)="closeDialog()">
+    <app-dialog [isOpen]="isDialogOpen"  [title]="isEdit ? 'Edit' : 'Add'" (closeModal)="closeDialog()">
+      <div class="dialog-header mb-3">
+        <h5 class="modal-title">
+          {{ isEdit ? 'Edit orders' : 'Add orders' }}
+        </h5>
+      </div>
       <form [formGroup]="formData" (ngSubmit)="addOrder()">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
+            
             <div class="mb-6 form-group" [class.has-error]="formData.get('client').invalid && (formData.get('client').dirty || formData.get('client').touched)">
               <label for="client" class="form-label">Client:</label>
               <input type="text" class="form-control" id="client" placeholder="Client" formControlName="client">
@@ -117,6 +124,8 @@
                 Value Order cannot be empty.
               </div>
             </div>
+          </div>
+          <div class="col-md-6">
             <div class="mb-6 form-group" [class.has-error]="formData.get('date').invalid && (formData.get('date').dirty || formData.get('date').touched)">
               <label for="date" class="form-label">Date:</label>
               <input type="date" class="form-control" id="date" placeholder="Date" formControlName="date">
@@ -131,10 +140,10 @@
                 Payment cannot be empty.
               </div>
             </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <button type="submit" class="btn btn-primary me-md-2">Save</button>
             </div>
-          </div>
         </div>
       </form>
     </app-dialog>
