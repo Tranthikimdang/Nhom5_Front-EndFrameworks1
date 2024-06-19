@@ -244,6 +244,7 @@ export class CommentsComponent implements OnInit {
     const doc = new jsPDF('p', 'mm', 'a4'); // Tạo một tài liệu PDF mới với kích thước A4
     const exportData: any[] = [];
     const exportColumns = {
+      commentsId: 'ID',
       userName: 'Username',
       commentsEmail: 'Email',
       productName: 'Product name',
@@ -257,10 +258,16 @@ export class CommentsComponent implements OnInit {
       doc.setFont('Open Sans');
     }
 
+    // Thêm productID tự động tăng từ 1
+    for (let i = 0; i < this.comments.length; i++) {
+      this.comments[i].commentsId= i + 1;
+    }
+
     // Chuyển đổi URL hình ảnh sang Base64 trước khi thêm vào PDF
     for (const comment of this.comments) {
       const base64Image = await this.getBase64ImageFromURL(comment.imageUrl);
       const row = [
+        comment.commentsId,
         comment.userName,
         comment.commentsEmail,
         comment.productName,
@@ -293,28 +300,25 @@ export class CommentsComponent implements OnInit {
         textColor: [0, 0, 0],
         lineColor: [0, 0, 0],
         lineWidth: 0.1,
-        halign: 'left',
         valign: 'middle',
       },
       columnStyles: {
-        0: { cellWidth: 20 }, // Tên người dùng
-        1: { cellWidth: 35 }, // Email
-        2: { cellWidth: 30 }, // Tên sản phẩm
+      //   0: { cellWidth: 20 }, // Tên người dùng
+      //   1: { cellWidth: 35 }, // Email
+      //   2: { cellWidth: 30 }, // Tên sản phẩm
         3: { cellWidth: 30, minCellHeight: 30 }, // Hình ảnh (điều chỉnh chiều rộng nếu cần)
-        4: { cellWidth: 50 }, // Nội dung bình luận
-        5: { cellWidth: 30 }, // Thời gian
+      //   4: { cellWidth: 50 }, // Nội dung bình luận
+      //   5: { cellWidth: 30 }, // Thời gian
       },
       headStyles: {
         fillColor: [200, 200, 255], // Màu nền header
         textColor: [0, 0, 0], // Màu chữ header
         fontStyle: 'bold', // Kiểu chữ header
         halign: 'center', // Canh giữa header
-        valign: 'middle', // Canh giữa theo chiều dọc header
       },
       bodyStyles: {
         fillColor: [255, 255, 255], // Màu nền body
         textColor: [0, 0, 0], // Màu chữ body
-        halign: 'left', // Canh lề trái body
         valign: 'middle', // Canh giữa theo chiều dọc body
       },
       alternateRowStyles: {
