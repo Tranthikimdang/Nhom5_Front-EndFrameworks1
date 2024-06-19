@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order } from '../entities/order';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrderService } from 'app/@core/services/apis/order.service';
+import { IAlertMessage } from 'app/@theme/components/alert/ngx-alerts.component';
 
 @Component({
   selector: 'app-orders',
@@ -9,6 +10,7 @@ import { OrderService } from 'app/@core/services/apis/order.service';
   styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent implements OnInit {
+  alertMessages: IAlertMessage[] = []; // thông báo lỗi 
   orders: Order[] = [];
   filterValue = '';
   title: string;
@@ -91,6 +93,7 @@ export class OrdersComponent implements OnInit {
             if (status === 'success') {
               this.loadOrder();
               this.closeDialog();
+              this.alertMessages = [{ status: 'success', message: 'Successful!' }]; // hiện thông báo submit thành công 
             }
           },
           error: (err) => {
@@ -105,12 +108,13 @@ export class OrdersComponent implements OnInit {
             date: this.formData.value.date,
             valueOrder: this.formData.value.valueOrder,
             payment: this.formData.value.payment,
-orderID: this.editOrderId
+            orderID: this.editOrderId
           };
           this.orderService.updateOrder(editedOrder).subscribe({
             next: () => {
               this.loadOrder();
               this.closeDialog();
+              this.alertMessages = [{ status: 'success', message: 'Successful!' }]; // hiện thông báo submit thành công 
             },
             error: (err) => {
               console.error('Error updating order:', err);
@@ -149,6 +153,7 @@ orderID: this.editOrderId
           this.isDeleteDialogOpen = false;
           this.dataOrder = null;
           this.loadOrder();
+          this.alertMessages = [{ status: 'success', message: 'Successful!' }]; // hiện thông báo submit thành công 
         },
         error: (err: any) => {
           console.log(err);

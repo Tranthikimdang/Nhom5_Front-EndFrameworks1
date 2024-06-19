@@ -1,9 +1,9 @@
 export interface Product {
-    productID: number;
+    productID?: number;
     productType: string;
     productName: string;
-    imageURL: string;
-    price: number;
+    productImage: string;
+    productPrice: number;
     expiryDate: string;
     quantity: number;
 }

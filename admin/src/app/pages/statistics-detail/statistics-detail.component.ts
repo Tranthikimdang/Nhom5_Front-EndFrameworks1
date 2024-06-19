@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { ProductService } from '../../@core/services/apis/product.service';
+import { StatictiscService } from 'app/@core/services/apis/statictisc.service'
 import { ActivatedRoute } from '@angular/router';
 
 declare var CanvasJS: any;
@@ -12,7 +12,7 @@ export class StatisticsDetailComponent implements AfterViewInit {
   products: any[] = [];
   categoryId: number;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, // Inject ActivatedRoute
+  constructor(private statictiscService: StatictiscService, private route: ActivatedRoute, // Inject ActivatedRoute
     ) {}
 
   ngAfterViewInit(): void {
@@ -23,9 +23,8 @@ export class StatisticsDetailComponent implements AfterViewInit {
   }
 
   getProductData(categoryId: number): void {
-    this.productService.getProductsByCategory(categoryId).subscribe(
+    this.statictiscService.getProductsByCategory(categoryId).subscribe(
       (data: any) => {
-        console.log(data);
         
         this.products = data.data.products;
         // this.renderPieChart();

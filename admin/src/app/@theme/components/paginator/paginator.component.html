@@ -1,15 +1,18 @@
-<div class="custom-paginator pt-4 d-flex justify-content-center align-items-center">
-    <button class="btn btn-primary mr-1" [disabled]="currentPage === 1" (click)="goFirstPage()">
-        <nb-icon icon="skip-back-outline"></nb-icon>
-    </button>
-    <button class="btn btn-primary mr-1" [disabled]="currentPage === 1" (click)="goPrevPage()">
-        <nb-icon icon="arrow-left-outline"></nb-icon>
-    </button>
-    <p class="paginator-page mb-0 mr-1">{{currentPage}}/{{lastPage}}</p>
-    <button class="btn btn-primary mr-1" [disabled]="currentPage === lastPage" (click)="goNextPage()">
-        <nb-icon icon="arrow-right-outline"></nb-icon>
-    </button>
-    <button class="btn btn-primary" [disabled]="currentPage === lastPage" (click)="goLastPage()">
-        <nb-icon icon="skip-forward-outline"></nb-icon>
-    </button>
+<div class="custom-paginator pt-4">
+  <button nbButton status="primary" class="me-1" (click)="goFirstPage()" [disabled]="hasPreviousPage">
+    <nb-icon icon="skip-back-outline"></nb-icon>
+  </button>
+  <button nbButton status="primary" (click)="goPreviousPage()" [disabled]="hasPreviousPage">
+    <nb-icon icon="arrow-left-outline"></nb-icon>
+  </button>
+  <p class="paginator-page">
+    {{ current_page }}/
+    {{ last_page }}
+  </p>
+  <button nbButton status="primary" class="me-1" (click)="goNextPage()" [disabled]="hasNextPage">
+    <nb-icon icon="arrow-right-outline"></nb-icon>
+  </button>
+  <button nbButton status="primary" (click)="goLastPage()" [disabled]="hasNextPage">
+    <nb-icon icon="skip-forward-outline"></nb-icon>
+  </button>
 </div>

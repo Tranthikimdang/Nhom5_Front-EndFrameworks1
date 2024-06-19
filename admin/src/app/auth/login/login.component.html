@@ -24,15 +24,12 @@
               <input nbInput formControlName="password" required name="password" fullWidth status="success" id="password" placeholder="Mật khẩu" type="password" class="form-control">
               <div *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)">
                 <small *ngIf="loginForm.get('password').hasError('required')">
-                  <i class="text-danger">Please enter password.</i>
-                </small>
-                <small *ngIf="loginForm.get('password').hasError('minlength')">
-                  <i class="text-danger">Password must have at least 8 characters.</i>
+                  <i class="text-danger">Please enter a password.</i>
                 </small>
               </div>
             </div>
 
-            <div class="form-control-group remember accept-group mb-3">
+            <div class="form-control-group remember accept-group  mb-3">
               <nb-checkbox name="rememberMe" status="success">Remember me?</nb-checkbox>
             </div>
             <div class="d-flex justify-content-center">
@@ -41,7 +38,7 @@
             
           </form>
 
-          <div class="form-control-group accept-group">
+          <div class="form-control-group accept-group ">
             <a class="forgot-password" routerLink="../request-password">Forgot password?</a>
           </div>
         </div>

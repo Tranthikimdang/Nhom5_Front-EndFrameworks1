@@ -40,8 +40,6 @@ export class LoginComponent implements OnInit {
 
       const { email, password } = this.loginForm.value;
 
-      console.log("asdasđ:", this.auth.login(email, password));
-      
       this.auth.login(email, password).pipe(
         finalize(() => {
           this.spinner.hide(); // Hide spinner after login attempt
@@ -56,9 +54,9 @@ export class LoginComponent implements OnInit {
       });
     }
   }
-  
+
   protected handleLoginSuccess(res) {
-    
+
     const { user, token } = res.data;
     this.storageService.setItem(LOCALSTORAGE_KEY.userInfo, JSON.stringify(user));
     this.storageService.setItem(LOCALSTORAGE_KEY.token, token);

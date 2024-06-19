@@ -30,7 +30,6 @@ import {ThemeModule} from "../../@theme/theme.module";
     NbButtonModule,
     ReactiveFormsModule,
     ThemeModule,
-    FormsModule,
 
   ],
   declarations: [

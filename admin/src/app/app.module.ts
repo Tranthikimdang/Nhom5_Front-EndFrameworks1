@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './auth/login/login.component';
 import {
   NbSidebarModule,
   NbMenuModule,
@@ -14,6 +13,7 @@ import {
   NbToastrModule,
   NbChatModule,
   NbThemeModule,
+  
 } from '@nebular/theme';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
@@ -39,6 +39,7 @@ import { ThemeModule } from './@theme/theme.module';
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    
   ],
   providers: [],
   bootstrap: [AppComponent],
