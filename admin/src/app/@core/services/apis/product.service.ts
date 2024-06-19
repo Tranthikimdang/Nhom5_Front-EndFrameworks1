@@ -10,35 +10,22 @@ import { ApiService } from '../common';
   providedIn: 'root',
 })
 export class ProductService extends ApiService{
-
-
   constructor(private _http: HttpClient) {
     super(_http);
   }
-
   getAllProducts(): Observable<any> {
-    // let params = new HttpParams()
-    // .set('page', page.toString())
-    // .set('pageSize', pageSize.toString())
-    // if(filter){
-    //   params = params.set('filter', filter)
-    // }
     return this.get(API_BASE_URL + API_ENDPOINT.product.get);
   }
-
   createProduct(products: Product): Observable<any> {
     return this.post(API_BASE_URL + API_ENDPOINT.product.create, products)
   }
-
   updateProduct(product: Product): Observable<any> {
     const updateUrl = `${API_BASE_URL}${API_ENDPOINT.product.update}/${product.productID}`;
     return this.put(updateUrl, product)
   }
-
   deleteProduct(productId: number): Observable<any> {
     const deleteURL = `${API_BASE_URL}${API_ENDPOINT.product.delete}/${productId}`;
     console.log(deleteURL);
-
     return this.delete(deleteURL).pipe(
       catchError((error) => {
         console.error('Error occurred while deleting product:', error);
