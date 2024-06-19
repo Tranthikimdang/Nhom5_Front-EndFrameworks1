@@ -15,8 +15,9 @@ export class CommentService extends ApiService {
   constructor(private _http: HttpClient) {
     super(_http);
   }
-  getAllComment(): Observable<any> {
-    return this.get(API_BASE_URL + API_ENDPOINT.comment.get);
+  getAllComment(page: number = 1, _limit: number = 5): Observable<any> {
+    const url = `${API_BASE_URL}${API_ENDPOINT.comment.get}?page=${page}&limit=${_limit}`;
+    return this.get(url);
   }
   createComment(comment: Icomments): Observable<any> {
     return this.post(API_BASE_URL + API_ENDPOINT.comment.create, comment);

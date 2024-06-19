@@ -45,7 +45,7 @@
           <tbody>
             <tr *ngFor="let comment of comments; trackBy: trackByComment; let i=index">
               <td>
-                {{ i + 1 }}
+                {{ comment.index + 1 }}
               </td>
               <td>{{comment.userName}}</td>
               <td>{{comment.commentsEmail}}</td>
@@ -66,6 +66,7 @@
             </tr>
           </tbody>
         </table>
+        <ngx-paginator [current_page]="page" [last_page]="last_page" (page)="getPage($event)"></ngx-paginator>
       </div>
     </div>
   </div>

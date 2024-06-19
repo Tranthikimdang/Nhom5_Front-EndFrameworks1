@@ -22,9 +22,9 @@ exports.getAllProduct = async (req, res) => {
 
 exports.createProduct = async (req, res) => {
     try {
-        const { productType, productName, productPrice, expiryDate, quantity } = req.body;
+        const { productType, productName, productImage, productPrice, expiryDate, quantity } = req.body;
         const newProduct = await Products.create({
-            productType, productName, productPrice, expiryDate, quantity
+            productType, productName, productImage ,productPrice, expiryDate, quantity
         });
         console.log(newProduct);
         res.status(201).json({
@@ -45,7 +45,7 @@ exports.createProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
     try {
         const { id } = req.params;
-        const { productType, productName, productPrice, expiryDate, quantity } = req.body;
+        const { productType, productName, productPrice, productImage ,expiryDate, quantity } = req.body;
 
 
         const product = await Products.findByPk(id);
@@ -58,6 +58,7 @@ exports.updateProduct = async (req, res) => {
         }
         product.productType = productType;
         product.productName = productName;
+        product.productImage = productImage;
         product.productPrice = productPrice;
         product.expiryDate = expiryDate;
         product.quantity = quantity;
