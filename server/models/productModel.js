@@ -51,7 +51,7 @@ const Products = sequelize.define('Products', {
   },
   productImage: {
     type: DataTypes.STRING,
-    allowNull: true // Allow null values
+    allowNull: true 
   },
   productPrice: {
     type: DataTypes.INTEGER,

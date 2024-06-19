@@ -24,6 +24,11 @@ const routes: Routes = [{
       data: {breadcrumb: 'Dashboard'},
     },
     {
+      path: '',
+      component: DashboardComponent,
+      data: {breadcrumb: 'Dashboard'},
+    },
+    {
       path: 'products',
       component: ProductsComponent,
       data: {breadcrumb: 'products'},
