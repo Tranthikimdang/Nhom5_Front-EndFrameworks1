@@ -36,7 +36,9 @@
     "sass-loader": "^13.3.2",
     "tslib": "^2.5.0",
     "xng-breadcrumb": "^9.0.0",
-    "zone.js": "~0.12.0"
+    "zone.js": "~0.12.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.2.6",

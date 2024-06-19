@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Thêm FormBuilder và Validators vào imports
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Icomments } from '../entities/comments';
 import { CommentService } from 'app/@core/services/apis/comment.service';
 import { ImageUploadService } from 'app/@core/services/apis/upload.service';
-import { IAlertMessage } from 'app/@theme/components/alert/ngx-alerts.component';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import 'assets/fonts/OpenSans-Regular-normal.js';
 
 @Component({
   selector: 'app-comments',
@@ -22,14 +24,14 @@ export class CommentsComponent implements OnInit {
   isEdit = false;
   confirmationMessage: string;
   file: any = null;
-  originalComments: Icomments[]; // Sửa kiểu dữ liệu của originalComments
-  alertMessages: IAlertMessage[] = [];
+  originalComments: Icomments[];
+  alertMessages: any[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private commentService: CommentService,
     private imageUploadService: ImageUploadService
   ) {
-    // Thêm commentService vào constructor
     this.formData = this.formBuilder.group({
       userName: ['', Validators.required],
       commentsEmail: ['', [Validators.required, Validators.email]],
@@ -46,11 +48,10 @@ export class CommentsComponent implements OnInit {
   loadComment() {
     this.commentService.getAllComment().subscribe({
       next: (res: any) => {
-        // Sửa kiểu dữ liệu của res
         const { data, status } = res;
         if (status === 'success') {
           this.comments = data.comments;
-          this.originalComments = data.comments; // Lưu trữ các ý kiến ​​​​ban đầu
+          this.originalComments = data.comments;
         }
       },
       error: (err) => {
@@ -64,7 +65,6 @@ export class CommentsComponent implements OnInit {
   }
 
   openDialogDelete(comment: Icomments) {
-    // Sửa kiểu dữ liệu của comment
     if (comment) {
       this.isDeleteDialogOpen = true;
       this.dataComment = comment;
@@ -81,8 +81,6 @@ export class CommentsComponent implements OnInit {
   }
 
   async addComment(): Promise<void> {
-    console.log(this.formData);
-
     if (this.formData.valid) {
       const formDataImg = new FormData();
       formDataImg.append('image', this.file);
@@ -101,6 +99,7 @@ export class CommentsComponent implements OnInit {
               imageUrl: imageUrl,
               commentsContent: this.formData.value.commentsContent,
               productName: this.formData.value.productName,
+              createdAt: undefined,
             };
 
             this.commentService.createComment(newComment).subscribe({
@@ -109,7 +108,7 @@ export class CommentsComponent implements OnInit {
                 this.loadComment();
               },
               error: (err) => {
-                console.error('Lỗi khi thêm:', err);
+                console.error('Error adding comment:', err);
               },
             });
           } else {
@@ -121,6 +120,7 @@ export class CommentsComponent implements OnInit {
                 imageUrl: imageUrl,
                 commentsContent: this.formData.value.commentsContent,
                 productName: this.formData.value.productName,
+                createdAt: undefined,
               };
 
               this.commentService.updateCommennt(editedComment).subscribe({
@@ -129,22 +129,22 @@ export class CommentsComponent implements OnInit {
                   this.loadComment();
                 },
                 error: (err) => {
-                  console.error('Lỗi khi sửa:', err);
+                  console.error('Error updating comment:', err);
                 },
               });
             }
           }
         } else {
-          console.error('Lỗi khi tải ảnh:', res);
+          console.error('Error uploading image:', res);
         }
       } catch (error) {
-        console.error('Lỗi khi tải ảnh:', error);
+        console.error('Error uploading image:', error);
       }
 
       this.closeDialog();
-      this.alertMessages = [{ status: 'success', message: 'Successful!' }]; // hiện thông báo submit thành công 
+      this.alertMessages = [{ status: 'success', message: 'Successful!' }];
     } else {
-      console.log('Form không hợp lệ');
+      console.log('Form is invalid');
     }
   }
 
@@ -183,14 +183,13 @@ export class CommentsComponent implements OnInit {
       this.isDeleteDialogOpen = false;
       this.commentService.deleteComment(this.dataComment.commentsId).subscribe({
         next: () => {
-          // Sửa kiểu dữ liệu của next
           this.isDeleteDialogOpen = false;
           this.dataComment = {};
           this.loadComment();
-          this.alertMessages = [{ status: 'success', message: 'Successful!' }]; // hiện thông báo submit thành công 
+          this.alertMessages = [{ status: 'success', message: 'Successful!' }];
         },
         error: (err: any) => {
-          console.error('Lỗi khi xóa:', err);
+          console.error('Error deleting comment:', err);
         },
       });
     }
@@ -202,5 +201,112 @@ export class CommentsComponent implements OnInit {
 
   close() {
     this.isDeleteDialogOpen = false;
+  }
+
+  // Hàm chuyển đổi URL hình ảnh thành Base64
+  private getBase64ImageFromURL(url: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'Anonymous';
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const dataURL = canvas.toDataURL('image/png');
+        resolve(dataURL);
+      };
+      img.onerror = (error) => reject(error);
+      img.src = url;
+    });
+  }
+
+  // xuất file pdf
+  public async exportPdf() {
+    const doc = new jsPDF('p', 'mm', 'a4'); // Tạo một tài liệu PDF mới với kích thước A4
+    const exportData: any[] = [];
+    const exportColumns = {
+      userName: 'Username',
+      commentsEmail: 'Email',
+      productName: 'Product name',
+      imageUrl: 'Image',
+      commentsContent: 'Comment content',
+      createdAt: 'Time',
+    };
+
+    // Đăng ký font trước khi sử dụng
+    if (doc.getFontList()['Open Sans']) {
+      doc.setFont('Open Sans');
+    }
+
+    // Chuyển đổi URL hình ảnh sang Base64 trước khi thêm vào PDF
+    for (const comment of this.comments) {
+      const base64Image = await this.getBase64ImageFromURL(comment.imageUrl);
+      const row = [
+        comment.userName,
+        comment.commentsEmail,
+        comment.productName,
+        { image: base64Image, width: 26, height: 20 },
+        comment.commentsContent,
+        comment.createdAt,
+      ];
+      exportData.push(row);
+    }
+
+    autoTable(doc, {
+      head: [Object.values(exportColumns)], // Mảng các tiêu đề cột
+      body: exportData, // Mảng các dòng dữ liệu
+      didDrawCell: (data) => {
+        if (data.column.index === 3 && data.cell.raw) {
+          const { image, width, height }: any = data.cell.raw;
+          if (width > 0 && height > 0) {
+            const xPos = data.cell.x + (data.cell.width - width) / 2; // Canh giữa hình ảnh theo chiều ngang trong ô
+            const yPos = data.cell.y + (data.cell.height - height) / 2; // Canh giữa hình ảnh theo chiều dọc trong ô
+
+            doc.addImage(image, xPos, yPos, width, height); // Thêm hình ảnh vào tài liệu PDF
+          } else {
+            console.error('Kích thước hình ảnh không hợp lệ:', width, height);
+          }
+        }
+      },
+      styles: {
+        font: 'OpenSans-Regular',
+        fontSize: 9,
+        textColor: [0, 0, 0],
+        lineColor: [0, 0, 0],
+        lineWidth: 0.1,
+        halign: 'left',
+        valign: 'middle',
+      },
+      columnStyles: {
+        0: { cellWidth: 20 }, // Tên người dùng
+        1: { cellWidth: 35 }, // Email
+        2: { cellWidth: 30 }, // Tên sản phẩm
+        3: { cellWidth: 30, minCellHeight: 30 }, // Hình ảnh (điều chỉnh chiều rộng nếu cần)
+        4: { cellWidth: 50 }, // Nội dung bình luận
+        5: { cellWidth: 30 }, // Thời gian
+      },
+      headStyles: {
+        fillColor: [200, 200, 255], // Màu nền header
+        textColor: [0, 0, 0], // Màu chữ header
+        fontStyle: 'bold', // Kiểu chữ header
+        halign: 'center', // Canh giữa header
+        valign: 'middle', // Canh giữa theo chiều dọc header
+      },
+      bodyStyles: {
+        fillColor: [255, 255, 255], // Màu nền body
+        textColor: [0, 0, 0], // Màu chữ body
+        halign: 'left', // Canh lề trái body
+        valign: 'middle', // Canh giữa theo chiều dọc body
+      },
+      alternateRowStyles: {
+        fillColor: [245, 245, 245], // Màu nền của các dòng xen kẽ
+      },
+      margin: { top: 20, right: 10, bottom: 20, left: 10 }, // Lề của trang PDF
+      pageBreak: 'auto', // Tự động ngắt trang nếu nội dung quá dài
+    });
+
+    doc.save('comments.pdf'); // Lưu tệp PDF
   }
 }
