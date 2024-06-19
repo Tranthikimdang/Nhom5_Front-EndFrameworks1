@@ -26,6 +26,9 @@ export class CommentsComponent implements OnInit {
   file: any = null;
   originalComments: Icomments[];
   alertMessages: any[] = [];
+  last_page: number = 1;
+  page: number = 1;
+  limit: number = 5;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,19 +48,33 @@ export class CommentsComponent implements OnInit {
     this.loadComment();
   }
 
-  loadComment() {
-    this.commentService.getAllComment().subscribe({
+  loadComment(page: number = 1) {
+    this.commentService.getAllComment(page, this.limit).subscribe({
       next: (res: any) => {
-        const { data, status } = res;
+        const { data, status, pagination } = res;
+
         if (status === 'success') {
-          this.comments = data.comments;
+          this.comments = data.comments?.map((comment: any, index: number) => ({
+            ...comment,
+            index: this.limit * (page - 1) + index,
+          }));
+          console.log(this.comments);
+
           this.originalComments = data.comments;
+          this.last_page = pagination.totalPages;
+          this.page = pagination.page;
         }
       },
       error: (err) => {
         console.error('Error loading comments', err);
       },
     });
+  }
+
+  getPage(currentPage: number) {
+    console.log('commentPage', currentPage);
+
+    this.loadComment(currentPage);
   }
 
   openDialog() {
