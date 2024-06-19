@@ -148,7 +148,7 @@ export class DashboardComponent implements OnInit {
       const row = [
         product.productName,
         product.productType,
-        product.productPrice.toString(),
+        product.productPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
         product.quantity.toString(),
       ];
       exportData.push(row);

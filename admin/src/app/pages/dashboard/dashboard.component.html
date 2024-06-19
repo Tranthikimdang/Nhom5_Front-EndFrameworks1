@@ -251,7 +251,7 @@
           <thead>
             <tr>
               <th>ID</th>
-              <!-- <th>Image</th> -->
+              <th>Image</th>
               <th>Name</th>
               <th>Price</th>
               <th>Qty</th>
@@ -260,9 +260,9 @@
           <tbody>
             <tr *ngFor='let p of products ; trackBy : trackByProduct; let i=index'>
               <td>{{ i + 1 }}</td>
-              <!-- <td class="py-1">
+              <td class="py-1">
                 <img src="{{p.productImage}}" alt="image" width="70px">
-              </td> -->
+              </td>
               <td>
                 <h5 class="font-weight-normal mb-0">{{p.productName}}</h5><small>{{p.productType}}</small>
               </td>

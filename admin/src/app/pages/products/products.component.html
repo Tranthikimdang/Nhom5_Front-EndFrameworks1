@@ -29,6 +29,7 @@
               <th>ID</th>
               <th>Type</th>
               <th>Product</th>
+              <th>Images</th>
               <th>Price</th>
               <th>Date</th>
               <th>Quantity</th>
@@ -42,6 +43,9 @@
               </td>
               <td>{{product.productType}}</td>
               <td>{{product.productName}}</td>
+              <td class="py-1">
+                <img [src]="product.productImage" width="80px" />
+              </td>
               <td>&dollar;{{product.productPrice}}</td>
               <td>{{product.expiryDate}}</td>
               <td>{{product.quantity}}</td>
@@ -103,7 +107,7 @@
         </div>
         <div class="mb-3 form-group" [class.has-error]="formData.get('productType').invalid && (formData.get('productType').dirty || formData.get('productType').touched)">
           <label for="productType" class="form-label">Product Type:</label>
-          <input type="number" class="form-control" id="productType" placeholder="Product Type" formControlName="productType">
+          <input type="text" class="form-control" id="productType" placeholder="Product Type" formControlName="productType">
           <div class="text-danger" *ngIf="formData.get('productType').invalid && (formData.get('productType').dirty || formData.get('productType').touched)">
             Product type is required.
           </div>
@@ -129,6 +133,16 @@
           <input type="date" class="form-control" id="expiryDate" placeholder="Expiry Date" formControlName="expiryDate">
           <div class="text-danger" *ngIf="formData.get('expiryDate').invalid && (formData.get('expiryDate').dirty || formData.get('expiryDate').touched)">
             Expiry date is required.
+          </div>
+        </div>
+        <div class="mb-3 form-group" [class.has-error]="formData.get('productImage').invalid && (formData.get('productImage').dirty || formData.get('productImage').touched)">
+          <label for="imageUpload" class="form-label">Image:</label>
+          <input type="file" class="form-control" id="imageUpload" (change)="onImageSelected($event)" formControlName="productImage">
+
+          <div class="text-danger" *ngIf="formData.get('productImage').invalid && (formData.get('productImage').dirty || formData.get('productImage').touched)">
+            <div *ngIf="formData.get('productImage').errors?.required">
+              Image is required.
+            </div>
           </div>
         </div>
       </div>
