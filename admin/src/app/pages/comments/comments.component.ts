@@ -238,7 +238,8 @@ export class CommentsComponent implements OnInit {
       img.src = url;
     });
   }
-
+  
+  
   // xuất file pdf
   public async exportPdf() {
     const doc = new jsPDF('p', 'mm', 'a4'); // Tạo một tài liệu PDF mới với kích thước A4
@@ -252,43 +253,62 @@ export class CommentsComponent implements OnInit {
       commentsContent: 'Comment content',
       createdAt: 'Time',
     };
-
+  
     // Đăng ký font trước khi sử dụng
     if (doc.getFontList()['Open Sans']) {
       doc.setFont('Open Sans');
     }
-
-    // Thêm productID tự động tăng từ 1
+  
+    // Thêm commentsId tự động tăng từ 1
     for (let i = 0; i < this.comments.length; i++) {
-      this.comments[i].commentsId= i + 1;
+      this.comments[i].commentsId = i + 1;
     }
-
+  
     // Chuyển đổi URL hình ảnh sang Base64 trước khi thêm vào PDF
     for (const comment of this.comments) {
-      const base64Image = await this.getBase64ImageFromURL(comment.imageUrl);
-      const row = [
-        comment.commentsId,
-        comment.userName,
-        comment.commentsEmail,
-        comment.productName,
-        { image: base64Image, width: 26, height: 20 },
-        comment.commentsContent,
-        comment.createdAt,
-      ];
-      exportData.push(row);
+      try {
+        console.log(`Đang xử lý hình ảnh cho bình luận: ${comment.commentsId}`);
+        const base64Image = await this.getBase64ImageFromURL(comment.imageUrl);
+        console.log(`Hình ảnh đã chuyển đổi thành Base64 cho bình luận: ${comment.commentsId}`);
+        const row = [
+          comment.commentsId,
+          comment.userName,
+          comment.commentsEmail,
+          comment.productName,
+          { image: base64Image, width: 26, height: 20 },
+          comment.commentsContent,
+          comment.createdAt,
+        ];
+        exportData.push(row);
+      } catch (error) {
+        console.error('Lỗi tải hình ảnh cho bình luận', comment.commentsId, error);
+        // Xử lý lỗi, có thể thêm hình ảnh hoặc văn bản thay thế
+        const row = [
+          comment.commentsId,
+          comment.userName,
+          comment.commentsEmail,
+          comment.productName,
+          { image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA' + // Hình ảnh thay thế dưới dạng base64
+                 'AAAFCAYAAACNbyblAAAAHElEQVQI12P4' +
+                 '//8/w38GIAXDIBKE0DHxgljNBAAO' +
+                 '9TXL0Y4OHwAAAABJRU5ErkJggg==', width: 26, height: 20 }, // Hình ảnh hoặc văn bản thay thế
+          comment.commentsContent,
+          comment.createdAt,
+        ];
+        exportData.push(row);
+      }
     }
-
+  
     autoTable(doc, {
       head: [Object.values(exportColumns)], // Mảng các tiêu đề cột
       body: exportData, // Mảng các dòng dữ liệu
       didDrawCell: (data) => {
-        if (data.column.index === 3 && data.cell.raw) {
+        if (data.column.index === 4 && typeof data.cell.raw === 'object') { // Đảm bảo chỉ số cột và loại dữ liệu đúng
           const { image, width, height }: any = data.cell.raw;
-          if (width > 0 && height > 0) {
+          if (image && width > 0 && height > 0) {
             const xPos = data.cell.x + (data.cell.width - width) / 2; // Canh giữa hình ảnh theo chiều ngang trong ô
             const yPos = data.cell.y + (data.cell.height - height) / 2; // Canh giữa hình ảnh theo chiều dọc trong ô
-
-            doc.addImage(image, xPos, yPos, width, height); // Thêm hình ảnh vào tài liệu PDF
+            doc.addImage(image, 'PNG', xPos, yPos, width, height); // Thêm hình ảnh vào tài liệu PDF với loại MIME đúng
           } else {
             console.error('Kích thước hình ảnh không hợp lệ:', width, height);
           }
@@ -303,12 +323,7 @@ export class CommentsComponent implements OnInit {
         valign: 'middle',
       },
       columnStyles: {
-      //   0: { cellWidth: 20 }, // Tên người dùng
-      //   1: { cellWidth: 35 }, // Email
-      //   2: { cellWidth: 30 }, // Tên sản phẩm
-        3: { cellWidth: 30, minCellHeight: 30 }, // Hình ảnh (điều chỉnh chiều rộng nếu cần)
-      //   4: { cellWidth: 50 }, // Nội dung bình luận
-      //   5: { cellWidth: 30 }, // Thời gian
+        4: { cellWidth: 30, minCellHeight: 30 }, // Hình ảnh (điều chỉnh chiều rộng nếu cần)
       },
       headStyles: {
         fillColor: [200, 200, 255], // Màu nền header
@@ -327,7 +342,8 @@ export class CommentsComponent implements OnInit {
       margin: { top: 20, right: 10, bottom: 20, left: 10 }, // Lề của trang PDF
       pageBreak: 'auto', // Tự động ngắt trang nếu nội dung quá dài
     });
-
+  
     doc.save('comments.pdf'); // Lưu tệp PDF
   }
+  
 }
